@@ -1,0 +1,207 @@
+<!-- 幻灯宽高设定 -->
+<script type="text/javascript">
+    (function () {
+        var slide_style = function () {
+            // var width = DeviceInfo.width / DeviceInfo.ratio - 8;
+            var width = $(window).width() * 0.65;
+            var height = 96 * width / 72;
+            var style = [
+                '<style type="text/css">',
+                '.slide_width{width:' + width + 'px !important;}',
+                '.slide_height{height:' + height + 'px !important;}',
+                '.slide_scroll_width{width:' + width * 4 + 'px !important;}',
+                '</style>'
+            ]
+            $('head').append(style.join(' '));
+        };
+
+        var add_ratio_class = function () {
+            var class_name = 'ratio' + DeviceInfo.ratio;
+            $('body').removeClass('ratio1').addClass(class_name.replace('.', '_'));
+        };
+
+        if (!(DeviceInfo.browser == 'firefox' || (DeviceInfo.os == 'wp' && DeviceInfo.browser == 'ie'))) {
+            slide_style();
+        } else {
+            $(function () {
+                DeviceInfo.ratio = DeviceInfo.width / window.innerWidth;
+                // 设置样式
+                slide_style();
+                // 更新cookie
+                set_cookie('ratio', DeviceInfo.ratio, 365);
+                // body上添加class
+                add_ratio_class();
+            });
+        }
+
+    })();
+</script>
+
+    <div class="conn">
+      <!-- 滑动大图 -->
+      <div class="slide_bar m_bg sshow">
+        <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
+          <div id='albums' style="-moz-transition-property: -moz-transform; -moz-transform-origin: 0pt 0pt; -moz-transform: translate(0px, 0px) scale(1);" class="img_wrap slide_scroll_width slide_height">
+            <!-- 首页图-->
+            <a class="slide_a slide_width slide_height">
+              <img class="slide_width slide_height" src="<%= @goods['detail_photo'] %>">
+            </a>
+
+            <!-- 详情图-->
+            <% @goods['goods_albums'].each do |album| %>
+                <a class="slide_a slide_width slide_height">
+                  <img class="slide_width slide_height" src="<%= album['photo'] %>">
+                </a>
+            <% end %>
+
+            <!--
+            <div class="bar left"></div>
+            <div class="bar right"></div> -->
+          </div>
+          <!-- active -->
+          <div class="slide margin5">
+            <li class="active"></li>
+            <% 0.upto(@goods['goods_albums'].length) do %>
+                <li></li>
+            <% end %>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+
+      <div class="det_xq">
+        <ul>
+          <li>
+            <img id='photo_pic'  src="<%= @goods['brand_photo'] %>"/>
+            <% if @goods['old_price'] %>
+                <span id='old_price' class="grey">原价:<%= @goods['old_price'] %></span>
+            <% else %>
+                <span id='old_price' class="grey"></span>
+            <% end %>
+            <span id='sale_price' class="mms">MM价:<%= @goods['sale_price'] %></span>
+          </li>
+          <!--<li class="size">可选尺码:-->
+            <!--<span>M</span>-->
+            <!--<span>L</span>-->
+            <!--<span>XL</span>-->
+          <!--</li>-->
+        </ul>
+      </div>
+      <div id="ss" class="songsm">
+        <div>送上门来试</div>
+      </div>
+    </div>
+
+
+<script type="text/javascript">
+  $('#id').click()
+
+    var idss=new Array();
+    var current_id = <%= @current_id %>
+    <% @ids.each do|id| %>
+    idss.push(<%= id%>)
+    <% end %>
+
+</script>
+
+<!--<script src="<%= asset_path('iscroll_page') %>"/>-->
+
+<script type="text/javascript">
+
+
+
+    (function () {
+
+        var
+                $wrapper = $('.scroll_box'),
+                $slide = $wrapper.children('.slide'),
+//      $left = $('.left.arrow'),
+//      $right = $('.right.arrow'),
+                auto_slide,
+//      $body = $('body'),
+                direction = 'landscape',
+
+                scroll = new iScroll($wrapper[0], {
+                    snap: true,
+                    momentum: false,
+                    vScroll: false,
+                    hScrollbar: false,
+                    onBeforeScrollStart: function () {
+                    },
+                    onBeforeScrollMove: function () {
+                        if (direction == 'portrait') {
+                            this._unbind('touchmove', window);
+                            this._unbind('touchend', window);
+                            this._unbind('touchcancel', window);
+                            return;
+                        }
+                    },
+                    onScrollMove: function (e) {
+                        if (this.dirY == 0) e.preventDefault();
+                    },
+                    onScrollEnd: function () {
+                        indicator_update(this.currPageX + 1);
+                    }
+                });
+
+//    $body.bind('touchstart', function(e){
+//      var point = e.touches[0],
+//        startPageX = point.pageX,
+//        startPageY = point.pageY;
+//      $body.bind('touchmove', function(e){
+//        var point = e.touches[0],
+//          movePageX = point.pageX,
+//          movePageY = point.pageY;
+//        if(Math.abs(movePageX - startPageX) < Math.abs(movePageY - startPageY)){
+//          direction = 'portrait';
+//        }else{
+//          direction = 'landscape';
+//        }
+//        $body.unbind('touchmove');
+//      });
+//    });
+
+        //幻灯提示点同步
+        function indicator_update(x) {
+            $slide.children('.active').removeClass('active');
+            $slide.find('li:nth-child(' + x + ')').addClass('active');
+//      $left.toggleClass('hide', x == 1);
+//      $right.toggleClass('hide', x == 4);
+        };
+
+        function scroll_to(x) {
+            var pageX = scroll.currPageX + x;
+            scroll.scrollToPage(pageX, 0, 500);
+        };
+
+//    $left.bind('itap', function(){
+//      scroll_to(-1);
+//    });
+//
+//    $right.bind('itap', function(){
+//      scroll_to(1);
+//    });
+
+        $wrapper.bind('touchstart', function () {
+            if (auto_slide) clearInterval(auto_slide);
+        });
+
+        $wrapper.bind('touchend', function () {
+            interval();
+        });
+
+//    $('.slide_a').bind('itap', function(e){
+//      var $this = $(this);
+//      window.location.href = $this.data('href');
+//    });
+
+        function interval() {
+//      if(auto_slide) clearInterval(auto_slide);
+//      auto_slide = setInterval(function(){
+//        scroll.scrollToPage((scroll.currPageX + 1) % 6, 0 , 500)
+//      }, 2000);
+        };
+//    interval();
+    })();
+</script>
+

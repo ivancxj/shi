@@ -1,0 +1,19 @@
+
+<div class="top_bar">宁波试衣MM</div>
+
+<div class="con_main">
+  <table class="list">
+    <tbody>
+    <% @goods_list.each_with_index  do |goods,index| %>
+        <% if index % 2 == 0 %>
+            <tr>
+              <td><div><a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>"><img src="<%= goods['photo_url'] %>" /></a></div></td>
+        <% else %>
+            <td><div><a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>"><img src="<%= goods['photo_url'] %>" /></a></div></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+  <div class="down"><a href="http://www.shiyimm.com">下载手机客户端</a></div>
+</div>

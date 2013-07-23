@@ -1,0 +1,111 @@
+<script src="<%= asset_path('iscroll_box') %>"/>
+<script src="<%= asset_path('iscroll_page') %>"/>
+
+<!-- 幻灯宽高设定 -->
+<script type="text/javascript">
+    (function () {
+        var slide_style = function () {
+            // var width = DeviceInfo.width / DeviceInfo.ratio - 8;
+            var width = $(window).width() * 0.95;
+            var height = 96 * width / 72;
+            var style = [
+                '<style type="text/css">',
+                '.slide_width{width:' + width + 'px !important;}',
+                '.slide_height{height:' + height + 'px !important;}',
+                '.slide_scroll_width{width:' + width * 4 + 'px !important;}',
+                '</style>'
+            ]
+            $('head').append(style.join(' '));
+        };
+
+        var add_ratio_class = function () {
+            var class_name = 'ratio' + DeviceInfo.ratio;
+            $('body').removeClass('ratio1').addClass(class_name.replace('.', '_'));
+        };
+
+        if (!(DeviceInfo.browser == 'firefox' || (DeviceInfo.os == 'wp' && DeviceInfo.browser == 'ie'))) {
+            slide_style();
+        } else {
+            $(function () {
+                DeviceInfo.ratio = DeviceInfo.width / window.innerWidth;
+                // 设置样式
+                slide_style();
+                // 更新cookie
+                set_cookie('ratio', DeviceInfo.ratio, 365);
+                // body上添加class
+                add_ratio_class();
+            });
+        }
+
+
+    })();
+</script>
+
+<div id="wrapper">
+  <div id="scroller">
+    <div id="pullDown">
+      <span class="pullDownIcon"></span>
+      <span class="pullDownLabel">下拉刷新</span>
+    </div>
+    <div class="conn">
+      <!-- 滑动大图 -->
+      <div class="slide_bar m_bg sshow">
+        <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
+          <div style="-moz-transition-property: -moz-transform; -moz-transform-origin: 0pt 0pt; -moz-transform: translate(0px, 0px) scale(1);" class="img_wrap slide_scroll_width slide_height">
+            <!-- 首页图-->
+            <a class="slide_a slide_width slide_height">
+              <img class="slide_width slide_height" src="<%= @goods['normal_photo'] %>">
+            </a>
+
+            <!-- 详情图-->
+            <% @goods['goods_albums'].each do |album| %>
+                <a class="slide_a slide_width slide_height">
+                  <img class="slide_width slide_height" src="<%= album['photo'] %>">
+                </a>
+            <% end %>
+
+            <!--
+            <div class="bar left"></div>
+            <div class="bar right"></div> -->
+          </div>
+          <!-- active -->
+          <div class="slide margin5">
+            <li class="active"></li>
+            <% 0.upto(@goods['goods_albums'].length) do %>
+                <li></li>
+            <% end %>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+
+
+      <div class="det_xq">
+        <ul>
+          <li class="changes"><a class="per" href="#">上一件</a><a class="next" href="#">下一件</a></li>
+          <li>
+            <img src="<%= @goods['brand_photo'] %>"/>
+            <% if @goods['old_price'] %>
+                <span class="grey">原价:<%= @goods['old_price'] %></span>
+            <% end %>
+            <span class="mms">MM价:<%= @goods['sale_price'] %></span>
+          </li>
+          <li class="size">可选尺码:
+            <span>M</span>
+            <span>L</span>
+            <span>XL</span>
+          </li>
+        </ul>
+      </div>
+      <div class="songsm">
+        <div>送上门来试</div>
+      </div>
+    </div>
+
+    <div id="pullUp">
+      <span class="pullUpIcon"></span>
+      <span class="pullUpLabel">上拉刷新</span>
+    </div>
+
+  </div>
+</div>
