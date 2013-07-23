@@ -12,3 +12,25 @@
  *= require css
  *= require_self
  */
+
+.classleft {
+    position: absolute;
+    float: left;
+    width: 60px;
+    height: 60px;
+    left: 0px;
+    top:30%;
+    vertical-align:middle;
+    z-index: 2;
+}
+
+.classright {
+    position: absolute;
+    float: right;
+    width: 60px;
+    height: 60px;
+    right: 0px;
+    top:30%;
+    vertical-align:middle;
+    z-index: 2;
+}

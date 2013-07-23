@@ -1,7 +1,7 @@
 .top_bar {
-	height: 42px;
+	height: 46px;
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#222));
-	line-height: 42px;
+	line-height: 46px;
 	font-size: 18px;
 	text-align: center;
 	color: #FFF;

@@ -98,13 +98,33 @@
         color:#666666;
     }
 
+    @media screen and (max-device-width: 480px){
+        img{max-width:100%;height:auto;}
+    }
+
 
 </style>
-<div class="top_bar">宁波试衣MM</div>
+
+<header class="top_bar">
+  <div class="navigation"><div></div></div>
+
+  <div class="title">宁波试衣MM</div>
+
+</header>
+
+<!--<div class="top_bar">宁波试衣MM</div>-->
 
 <div class="con_main">
   <section>
-
+    <% @goods_list.each  do |goods| %>
+        <div class="product">
+          <a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>">
+            <div class="img_wrap">
+              <img src="<%= goods['photo_url'] %>">
+            </div>
+          </a>
+        </div>
+    <% end %>
 
   <table class="list">
     <tbody>
