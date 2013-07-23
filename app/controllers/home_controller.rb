@@ -5,8 +5,8 @@ class HomeController < ApplicationController
   def index
     resp=shiyi_conn.get '/api/v2/brand/list'
     @result = ActiveSupport::JSON.decode(resp.body)
-
   end
+
   # 品牌下的商品列表
   def list
     if params[:page]

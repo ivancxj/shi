@@ -19,22 +19,13 @@ class ApplicationController < ActionController::Base
   end
 
   def get_next_brand (id)
-    array = []
-    array << 237
-    array << 238
-    array << 240
-    array << 232
-    array << 217
-    array << 239
-    array << 236
-    array << 239
-    array << 221
-    array << 148
-    array << 235
-    array << 75
-    array << 218
-    array << 215
 
-    id
+
+    2
+  end
+
+  # 首页上展示的品牌 ids
+  def get_brand_ids
+    array = [237,238,240,232,217,239,236,239,221,148,235,75,218,215]
   end
 end
