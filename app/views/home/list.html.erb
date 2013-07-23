@@ -67,7 +67,7 @@
     <div class="page">
       <div class="up_page left disables">
         <% if @page <= 1 %>
-            <a>上一页</a>
+            <a>上一个品牌</a>
         <% else %>
             <a href='/home/list?id=<%= @id%>&page=<%= (@page-1)%>'>上一页</a>
         <% end %>
@@ -75,7 +75,7 @@
       </div>
       <div class="down_page right">
         <% if @goods_list.length < 14 %>
-            <a>下一页12</a>
+            <a>下一个品牌</a>
         <% else %>
             <a href='/home/list?id=<%= (@id)%>&page=<%= (@page+1)%>'>下一页</a>
         <% end %>

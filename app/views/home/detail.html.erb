@@ -94,8 +94,11 @@
 
 
 <script type="text/javascript">
-  $('#id').click()
-
+  $('#ss').bind('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.href = '/home/orders';
+  });
     var idss=new Array();
     var current_id = <%= @current_id %>
     <% @ids.each do|id| %>

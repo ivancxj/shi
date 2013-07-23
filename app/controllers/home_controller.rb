@@ -43,6 +43,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def orders
+
+  end
+
   #def i
   #
   #end

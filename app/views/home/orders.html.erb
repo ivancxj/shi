@@ -1,0 +1,324 @@
+<style>
+    .account_box{
+        padding-bottom: 12px;
+        background: #ffffff;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    .txt{
+        height:81px;
+        border-bottom: 1px solid #f6f6f6;
+        font-size: 14px;
+        color: #333333;
+        font-weight: bold;
+        line-height: 1em;
+    }
+    .txt p{
+        padding-left: 18px;
+        padding-top: 15px;
+    }
+    .txt span,.txt em{
+        float:right;
+        padding-right: 12px;
+    }
+    .txt span{
+        color: #963b68;
+    }
+    .btn_wrap{
+        margin: 16px 31px 4px;
+        overflow: hidden;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+    }
+    .selected_pro{
+        margin-bottom: 25px;
+    }
+    .selected_pro li{
+        border-bottom: 1px solid #f7f6f6;
+        height:107px;
+        overflow: hidden;
+    }
+    .selected_pro li:last-child{
+        border: none;
+    }
+    .pro_img{
+        margin:12px 10px 11px -10px;
+        position: relative;
+        z-index: 1;
+    }
+    span.delete{
+        width:20px;
+        height:21px;
+        margin: 20px ;
+        background: url(/images/m_sprite.png?1305510283) no-repeat -60px -56px;
+    }
+    a.cancel{
+        width:60px;
+        height:60px;
+        position: relative;
+        top: 23px;
+        margin-left: -10px;
+        float: left;
+        z-index: 2;
+    }
+    .selected_pro div.content{
+        font-size: 12px;
+        display: table;
+        color: #666666;
+        height:100%;
+        text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        -webkit-text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        -moz-text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        position: relative;
+        top:-107px;
+        border-collapse: collapse;
+        width: calc(100% - 140px);
+        width: -webkit-calc(100% - 140px);
+        width: -moz-calc(100% - 140px);
+        width: -o-calc(100% - 140px);
+        margin-left: 130px;
+    }
+    .selected_pro div.content a{
+        display: table-cell;
+        vertical-align: middle;
+        color: #666666;
+        position: relative;
+        overflow: hidden;
+
+    }
+    span.price{
+        font-size: 13px;
+        color: #88166c;
+    }
+    p.name{
+
+        height: auto;
+        line-height: 18px;
+    }
+    p.name em{
+        max-height: 36px;
+        height: auto;
+        line-height: 18px;
+        overflow: hidden;
+        display: block;
+        padding-right: 10px;
+    }
+    .color{
+        margin: 0 15px;
+    }
+    .pro_img div{
+        display: none;
+        width: 80px;
+        height:80px;
+        overflow: hidden;
+        position: relative;
+        top:-84px;
+        background: rgba(255,255,255,0.35);
+    }
+    .pro_img div.sale_out {
+        display: block;
+    }
+    .pro_img div.vip_pro {
+        display: block;
+        background: transparent;
+    }
+    .sale_out span,
+    .vip_pro span{
+        width:83px;
+        height:20px;
+        background: #2f2f2f;
+        color: #ffffff;
+        font-size: 9px;
+        text-align: center;
+        position: relative;
+        transform:rotate(-45deg);
+        transform-origin:right top;
+        -webkit-transform-origin:right top;
+        -moz-transform-origin:right top;
+        -ms-transform-origin:right top;
+        -o-transform-origin:right top;
+        -webkit-transform:rotate(-45deg);
+        -moz-transform:rotate(-45deg);
+        -ms-transform:rotate(-45deg);
+        -o-transform:rotate(-45deg);
+        left: -40px;
+        top:-20px;
+        line-height: 20px;
+    }
+    .vip_pro span{
+        top:-18px;
+        left:-42px;
+        background: #a38a59;
+    }
+        /*****没有商品******/
+    p.sorry_txt{
+        text-align: center;
+        font-size: 15px;
+        color:#632243;
+        padding-top: 25px;
+    }
+    .empty_icon{
+        width:96px;
+        height:108px;
+        margin: 0 auto 20px;
+        background: url(/images/empty_cart.png?1305510283) no-repeat;
+    }
+    .go_on.btn_bg{
+        width:300px;
+        margin:26px auto 20px;
+    }
+    .go_on.btn_bg a{
+        color: #ffffff;
+    }
+    .no_brand{
+        width: 100%;
+        height:82px;
+        background: #eeeeee;
+        box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        -moz-box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    }
+    .sorry_txt{
+        width:250px;
+        height:50px;
+        margin: 0 auto;
+        padding-top: 16px;
+    }
+    .sorry_txt span{
+        float:left;
+        width:50px;
+        height:50px;
+        background:url(/images/notice.png?1305510283) no-repeat;
+    }
+    .sorry_txt p{
+        line-height: 25px;
+        text-align: left;
+        margin-left: 10px;
+        width: 190px;
+        float: right;
+        font-size: 16px;
+        color: #632243;
+        text-shadow:0 1px 0 #ffffff;
+        -webkit-text-shadow:0 1px 0 #ffffff;
+        -moz-text-shadow:0 1px 0 #ffffff;
+    }
+        /********* uc **********/
+    .uc .content a:visited em,
+    .uc .content a:visited span.color,
+    .uc .content a:visited span.size{
+        color:#666665;
+    }
+    .uc .content a:visited span.price{
+        color:#88166b;
+    }
+        /********* uc **********/
+    .firefox .content p em{
+        padding-right: 10px;
+        height: -moz-max(36px);
+    }
+    .opera .content p em{
+        padding-right: 130px;
+        height: -o-max(36px);
+    }
+    .ie .content p em{
+        padding-right: 130px;
+    }
+
+    @media only screen and (-webkit-device-pixel-ratio: 1.5),only screen and (-o-device-pixel-ratio: 3/2),only screen and (-moz-device-pixel-ratio: 1.5),only screen and (device-pixel-ratio: 1.5){
+        span.delete {
+            background:url(/images/m_sprite@1.5x.png?1305510283) no-repeat -60px -56px;
+            background-size: 110px 124px;
+        }
+        .empty_icon{
+            background:url(/images/empty_cart@1.5x.png?1305510283) no-repeat;
+            background-size: 96px 108px;
+        }
+        .sorry_txt span{
+            background:url(/images/notice@1.5x.png?1305510283) no-repeat;
+            background-size: 50px 50px;
+        }
+    }
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (-o-min-device-pixel-ratio: 2/1),only screen and (-moz-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2){
+        span.delete {
+            background:url(/images/m_sprite@2x.png?1305510283) no-repeat -60px -56px;
+            background-size: 110px 124px;
+        }
+        .empty_icon{
+            background:url(/images/empty_cart@2x.png?1305510283) no-repeat ;
+            background-size: 96px 108px;
+        }
+        .sorry_txt span{
+            background:url(/images/notice@2x.png?1305510283) no-repeat;
+            background-size: 50px 50px;
+        }
+    }
+        /************ firefox 中图的选择 begin*************/
+
+        /*****1.5倍图****/
+    .firefox.ratio1_5 span.delete,.qq.ratio1_5 span.delete {
+        background:url(/images/m_sprite@1.5x.png?1305510283) no-repeat -60px -56px;
+        background-size: 110px 124px;
+    }
+    .firefox.ratio1_5 .empty_icon,.qq.ratio1_5 .empty_icon{
+        background:url(/images/empty_cart@1.5x.png?1305510283) no-repeat;
+        background-size: 96px 108px;
+    }
+    .firefox.ratio1_5 .sorry_txt span,.qq.ratio1_5 .sorry_txt span{
+        background:url(/images/notice@1.5x.png?1305510283) no-repeat;
+        background-size: 50px 50px;
+    }
+
+        /*****2倍图****/
+    .firefox.ratio2 span.delete,.qq.ratio2 span.delete ,.qq.ratio3 span.delete {
+        background:url(/images/m_sprite@2x.png?1305510283) no-repeat -60px -56px;
+        background-size: 110px 124px;
+    }
+    .firefox.ratio2 .empty_icon,.qq.ratio2 .empty_icon, .qq.ratio3 .empty_icon{
+        background:url(/images/empty_cart@2x.png?1305510283) no-repeat ;
+        background-size: 96px 108px;
+    }
+    .firefox.ratio2  .sorry_txt span,.qq.ratio2  .sorry_txt span, .qq.ratio3 .sorry_txt span{
+        background:url(/images/notice@2x.png?1305510283) no-repeat;
+        background-size: 50px 50px;
+    }
+
+        /************ firefox 中图的选择 end*************/
+
+</style>
+<div class="top_bar">送上门来试</div>
+
+<section>
+  <div class="account_box">
+    <div class="txt">
+      <p>金额总计:<span>￥3400</span></p>
+      <p>商品数量:<em>1件</em></p>
+    </div>
+
+    <div class="btn_wrap"><div class="go_payment btn_bg"><a>快点联系我 </a></div></div>
+
+  </div>
+</section>
+
+
+
+<script type="text/javascript">
+    // push 效果
+    $('.go_on a, .account_box a, .selected_pro li, .go_payment').bind('click', function(){
+        $(this).addClass('push');
+    });
+
+    $('.go_payment').bind('click', function(e){
+        if($('.sale_out').length > 0){
+            alert('请先删除售完商品');
+        }else if($('.vip_pro').length > 0){
+            alert('请先删除专属商品');
+        }else{
+            window.location.href = '/trades/new';
+        }
+    });
+</script>
