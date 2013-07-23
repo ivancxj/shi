@@ -20,6 +20,16 @@ class HomeController < ApplicationController
 
     @ids = ''
 
+    # 第一页 则获取上一个品牌 id
+    if @page == 1
+      @pre_brand_id = get_pre_brand(@id)
+    end
+
+    # 获取下一个品牌 id
+    if @goods_list.blank?  or @goods_list.length == 0
+      @next_brand_id = get_next_brand(@id)
+    end
+
     @goods_list.each do|goods|
       @ids << goods['id'].to_s+' '
     end

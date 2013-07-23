@@ -9,7 +9,7 @@
                 '<style type="text/css">',
                 '.slide_width{width:' + width + 'px !important;}',
                 '.slide_height{height:' + height + 'px !important;}',
-                '.slide_scroll_width{width:' + width * 4 + 'px !important;}',
+                '.slide_scroll_width{width:' + width * <%= (@goods['goods_albums'].length + 1 ) %> + 'px !important;}',
                 '</style>'
             ]
             $('head').append(style.join(' '));
@@ -103,8 +103,10 @@
     <div class="conn">
       <!-- 滑动大图 -->
       <div class="slide_bar m_bg sshow">
+
         <img class='classleft' src='<%= asset_path('prev.png') %>' width="30px" height="30px" />
         <img class='classright' src='<%= asset_path('next.png') %>' width="30px" height="30px" />
+
         <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
           <div id='albums' style="-moz-transition-property: -moz-transform; -moz-transform-origin: 0pt 0pt; -moz-transform: translate(0px, 0px) scale(1);" class="img_wrap slide_scroll_width slide_height">
             <!-- 首页图-->

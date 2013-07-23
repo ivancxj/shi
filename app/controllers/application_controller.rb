@@ -11,4 +11,30 @@ class ApplicationController < ActionController::Base
       faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
     end
   end
+
+
+  def get_pre_brand(id)
+
+    1
+  end
+
+  def get_next_brand (id)
+    array = []
+    array << 237
+    array << 238
+    array << 240
+    array << 232
+    array << 217
+    array << 239
+    array << 236
+    array << 239
+    array << 221
+    array << 148
+    array << 235
+    array << 75
+    array << 218
+    array << 215
+
+    id
+  end
 end
