@@ -229,65 +229,6 @@
         padding-right: 130px;
     }
 
-    @media only screen and (-webkit-device-pixel-ratio: 1.5),only screen and (-o-device-pixel-ratio: 3/2),only screen and (-moz-device-pixel-ratio: 1.5),only screen and (device-pixel-ratio: 1.5){
-        span.delete {
-            background:url(/images/m_sprite@1.5x.png?1305510283) no-repeat -60px -56px;
-            background-size: 110px 124px;
-        }
-        .empty_icon{
-            background:url(/images/empty_cart@1.5x.png?1305510283) no-repeat;
-            background-size: 96px 108px;
-        }
-        .sorry_txt span{
-            background:url(/images/notice@1.5x.png?1305510283) no-repeat;
-            background-size: 50px 50px;
-        }
-    }
-    @media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (-o-min-device-pixel-ratio: 2/1),only screen and (-moz-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2){
-        span.delete {
-            background:url(/images/m_sprite@2x.png?1305510283) no-repeat -60px -56px;
-            background-size: 110px 124px;
-        }
-        .empty_icon{
-            background:url(/images/empty_cart@2x.png?1305510283) no-repeat ;
-            background-size: 96px 108px;
-        }
-        .sorry_txt span{
-            background:url(/images/notice@2x.png?1305510283) no-repeat;
-            background-size: 50px 50px;
-        }
-    }
-        /************ firefox 中图的选择 begin*************/
-
-        /*****1.5倍图****/
-    .firefox.ratio1_5 span.delete,.qq.ratio1_5 span.delete {
-        background:url(/images/m_sprite@1.5x.png?1305510283) no-repeat -60px -56px;
-        background-size: 110px 124px;
-    }
-    .firefox.ratio1_5 .empty_icon,.qq.ratio1_5 .empty_icon{
-        background:url(/images/empty_cart@1.5x.png?1305510283) no-repeat;
-        background-size: 96px 108px;
-    }
-    .firefox.ratio1_5 .sorry_txt span,.qq.ratio1_5 .sorry_txt span{
-        background:url(/images/notice@1.5x.png?1305510283) no-repeat;
-        background-size: 50px 50px;
-    }
-
-        /*****2倍图****/
-    .firefox.ratio2 span.delete,.qq.ratio2 span.delete ,.qq.ratio3 span.delete {
-        background:url(/images/m_sprite@2x.png?1305510283) no-repeat -60px -56px;
-        background-size: 110px 124px;
-    }
-    .firefox.ratio2 .empty_icon,.qq.ratio2 .empty_icon, .qq.ratio3 .empty_icon{
-        background:url(/images/empty_cart@2x.png?1305510283) no-repeat ;
-        background-size: 96px 108px;
-    }
-    .firefox.ratio2  .sorry_txt span,.qq.ratio2  .sorry_txt span, .qq.ratio3 .sorry_txt span{
-        background:url(/images/notice@2x.png?1305510283) no-repeat;
-        background-size: 50px 50px;
-    }
-
-        /************ firefox 中图的选择 end*************/
 
 </style>
 <div class="top_bar">送上门来试</div>
@@ -308,17 +249,5 @@
 
 <script type="text/javascript">
     // push 效果
-    $('.go_on a, .account_box a, .selected_pro li, .go_payment').bind('click', function(){
-        $(this).addClass('push');
-    });
 
-    $('.go_payment').bind('click', function(e){
-        if($('.sale_out').length > 0){
-            alert('请先删除售完商品');
-        }else if($('.vip_pro').length > 0){
-            alert('请先删除专属商品');
-        }else{
-            window.location.href = '/trades/new';
-        }
-    });
 </script>
