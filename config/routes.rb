@@ -8,7 +8,7 @@ Shiyimm::Application.routes.draw do
   get 'home/list' => 'home#list',:as => 'list_home'
   get 'home/detail' => 'home#detail',:as => 'detail_home'
   get 'home/next' => 'home#next'
-  get 'home/orders' => 'home#orders'
+  get 'home/simple_order' => 'home#simple_order'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

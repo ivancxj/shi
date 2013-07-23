@@ -47,12 +47,11 @@ class HomeController < ApplicationController
     end
   end
 
-  def orders
+  def simple_order
+
+    resp=shiyi_conn.get '/api/v2/order/simple_order',{:goods_id=>params[:goods_id],:mobile=>params[:mobile]}
+    @result=ActiveSupport::JSON.decode(resp.body)
 
   end
-
-  #def i
-  #
-  #end
 
 end

@@ -18,5 +18,5 @@
 //  不要一次全包含 require_tree .
 
 //隐藏头部地址栏
-addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-function hideURLbar(){ window.scrollTo(0,1);}
+//addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+//function hideURLbar(){ window.scrollTo(0,1);}
