@@ -165,7 +165,7 @@
   $('#ss').bind('click',function(e){
       e.preventDefault();
       e.stopPropagation();
-      window.location.href = '/home/simple_order';
+      window.location.href = '/home/order?id=<%= @current_id%>';
   });
     var idss=new Array();
     var current_id = <%= @current_id %>
