@@ -1,4 +1,57 @@
 <style>
+
+    .product{
+        font-size: 13px;
+        text-align: center;
+        overflow: hidden;
+        line-height: 15px;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        float: left;
+        width: 50%;
+        height:auto;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    /*.list {*/
+        /*margin: 0 4px 0 0;*/
+    /*}*/
+    /*.list td div {*/
+        /*margin: 3px;*/
+        /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);*/
+    /*}*/
+    /*.list td div img {*/
+        /*width: 100%;*/
+    /*}*/
+
+    .img_wrap{
+        width:100%;
+        height:auto;
+
+        /*margin: 0 auto;*/
+    }
+    /*.product p{*/
+        /*width:100%;*/
+        /*color:#666666;*/
+        /*white-space: nowrap;*/
+        /*overflow: hidden;*/
+        /*text-overflow:ellipsis;*/
+        /*min-height:15px;*/
+        /*line-height: 18px;*/
+        /*height:auto;*/
+    /*}*/
+    /*.product span{*/
+        /*color:#88166c;*/
+        /*min-height:15px;*/
+        /*height:auto;*/
+        /*font-size: 11px;*/
+        /*display: block;*/
+        /*text-align: center;*/
+    /*}*/
     /* 分页 */
     .page{
         text-align: center;
@@ -51,6 +104,8 @@
 
 <div class="con_main">
   <section>
+
+
   <table class="list">
     <tbody>
     <% @goods_list.each_with_index  do |goods,index| %>
