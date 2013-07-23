@@ -1,7 +1,56 @@
+<style>
+    /* 分页 */
+    .page{
+        text-align: center;
+        font-size: 15px;
+        color:#bfbfbf;
+        text-shadow:0 1px 0 rgba(255,255,255,0.26);
+        -webkit-text-shadow:0 1px 0 rgba(255,255,255,0.26);
+        -moz-text-shadow:0 1px 0 rgba(255,255,255,0.26);
+        margin:15px 0;
+        line-height: 1.8em;
+    }
+    .page .up_page,
+    .page .down_page{
+        width:30%;
+        height:25px;
+        line-height: 2.08em;
+        border: 1px solid rgba(153,153,153,0.5);
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        text-shadow:0 1px 0 rgba(255,255,255,0.26);
+        -moz-text-shadow:0 1px 0 rgba(255,255,255,0.26);
+        -webkit-text-shadow:0 1px 0 rgba(255,255,255,0.26);
+        font-size: 12px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        background: #eeeeee;
+    }
+    .up_page.disabled a,
+    .down_page.disabled a,
+    .uc .down_page.disabled a{
+        color:#cccccc !important;
+    }
+    .down_page a,
+    .up_page a,
+    .uc .down_page a{
+        color:#333333 !important;
+        text-shadow:0 1px 0 #ffffff;
+        -webkit-text-shadow:0 1px 0 #ffffff;
+        -moz-text-shadow:0 1px 0 #ffffff;
+    }
+    .page span{
+        color:#666666;
+    }
 
+
+</style>
 <div class="top_bar">宁波试衣MM</div>
 
 <div class="con_main">
+  <section>
   <table class="list">
     <tbody>
     <% @goods_list.each_with_index  do |goods,index| %>
@@ -15,5 +64,26 @@
     <% end %>
     </tbody>
   </table>
+    <div class="page">
+      <div class="up_page left disables">
+        <% if @page <= 1 %>
+            <a>上一页</a>
+        <% else %>
+            <a href='/home/list?id=<%= @id%>&page=<%= (@page-1)%>'>上一页</a>
+        <% end %>
+
+      </div>
+      <div class="down_page right">
+        <% if @goods_list.length < 14 %>
+            <a>下一页12</a>
+        <% else %>
+            <a href='/home/list?id=<%= (@id)%>&page=<%= (@page+1)%>'>下一页</a>
+        <% end %>
+
+      </div>
+      <div style="clear: both;"/>
+    </div>
+
+  </section>
   <div class="down"><a href="http://www.shiyimm.com">下载手机客户端</a></div>
 </div>

@@ -9,7 +9,9 @@ class HomeController < ApplicationController
   end
   # 品牌下的商品列表
   def list
-    resp=shiyi_conn.get '/api/v2/goods/brand_list',{:brand_id=>params[:id],:per_page => 14}
+    @page = params[:page].to_i || 1
+    @id = params[:id]
+    resp=shiyi_conn.get '/api/v2/goods/brand_list',{:brand_id=>@id,:page=>@page,:per_page => 14,:is_wifi=>false}
     @goods_list=ActiveSupport::JSON.decode(resp.body)
 
     @ids = ''
