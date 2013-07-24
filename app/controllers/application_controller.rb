@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def shiyi_conn
     @@shiyi_conn ||= Faraday.new(:url => 'http://api.shiyimm.com') do |faraday|
-      faraday.request :multipart
+      #faraday.request :multipart
       faraday.request  :url_encoded             # form-encode POST params
                                                 #faraday.response :logger                  # log requests to STDOUT
       faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP

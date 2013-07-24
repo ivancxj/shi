@@ -17,41 +17,15 @@
         margin-bottom: 10px;
     }
 
-    /*.list {*/
-        /*margin: 0 4px 0 0;*/
-    /*}*/
-    /*.list td div {*/
-        /*margin: 3px;*/
-        /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);*/
-    /*}*/
-    /*.list td div img {*/
-        /*width: 100%;*/
-    /*}*/
-
     .img_wrap{
         width:100%;
         height:auto;
+        margin: 3px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
         /*margin: 0 auto;*/
     }
-    /*.product p{*/
-        /*width:100%;*/
-        /*color:#666666;*/
-        /*white-space: nowrap;*/
-        /*overflow: hidden;*/
-        /*text-overflow:ellipsis;*/
-        /*min-height:15px;*/
-        /*line-height: 18px;*/
-        /*height:auto;*/
-    /*}*/
-    /*.product span{*/
-        /*color:#88166c;*/
-        /*min-height:15px;*/
-        /*height:auto;*/
-        /*font-size: 11px;*/
-        /*display: block;*/
-        /*text-align: center;*/
-    /*}*/
+
     /* 分页 */
     .page{
         text-align: center;
@@ -115,11 +89,11 @@
         left: 0;
     }
     .navigation>div{
-        width:25px;
-        height: 26px;
+        width:25px !important;
+        height: 26px !important;
         margin: 10px 18px;
-        background: url(/assets/home.png) no-repeat 0 0;
-        background-size: 300px 200px;
+        background: url(/assets/home.png) no-repeat;
+        background-size: 100%;
     }
     .title{
         width: 175px;
@@ -150,6 +124,14 @@
         window.location.href = '/';
     });
   })
+  var width = ($(window).width() - 10)/2;
+  var height = width*96 / 72;
+  var style = [
+      '<style type="text/css">',
+      '.img_wrap img{width:' + width + 'px !important;height:' + height + 'px !important;}',
+      '</style>'
+  ]
+  $('head').append(style.join(' '));
 </script>
 
 <header>
@@ -158,44 +140,20 @@
   </div>
 
   <div class="title">宁波试衣MM</div>
-
 </header>
 
-<style type="text/css">
+  <section style="margin-top: 10px;">
+    <% @goods_list.each  do |goods| %>
+        <div class="product">
+          <a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>">
+            <div class="img_wrap">
+              <img src="<%= goods['photo_url'] %>">
+            </div>
+          </a>
+        </div>
+    <% end %>
 
-    /*.thumbImage img{*/
-        /*MAX-WIDTH: 100%!important;*/
-        /*HEIGHT: auto!important;*/
-        /*width:expression(this.width > 175 ? "175px" : this.width)!important;*/
-    /*}*/
-    /*.thumbImage {MARGIN: auto;WIDTH: 175px;}*/
-    /**html.thumbImage img{*/
-        /*width:expression(this.width>300&&this.width>this.height?250:auto);*/
-        /*height:expresion(this.height>250?250:auto);*/
-    /*}*/
-    /*.mycode{ width:300px; height:74px; float:left;}*/
-    /*.mycode ul{ width:280px;}*/
-    /*.mycode li{ width:100px; float:left; display:block;}*/
-</style>
-
-<!--<DIV class="thumbImage" ><img src="<%= asset_path("d2.jpg")%>" border="0"></DIV>-->
-
-
-<div class="con_main">
-  <section>
-    <table class="list">
-      <tbody>
-      <% @goods_list.each_with_index  do |goods,index| %>
-          <% if index % 2 == 0 %>
-              <tr>
-                <td><div><a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>"><img src="<%= goods['photo_url'] %>" /></a></div></td>
-          <% else %>
-              <td class="sort"><div><a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>"><img src="<%= goods['photo_url'] %>" /></a></div></td>
-              </tr>
-          <% end %>
-      <% end %>
-      </tbody>
-    </table>
+    <div style="clear: both"></div>
 
     <div class="page">
       <div class="up_page left disables">
@@ -228,5 +186,4 @@
 
   </section>
   <div class="down"><a href="http://www.shiyimm.com">下载手机客户端</a></div>
-</div>
 
