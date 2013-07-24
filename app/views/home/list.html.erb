@@ -161,19 +161,41 @@
 
 </header>
 
-<!--<div class="top_bar">宁波试衣MM</div>-->
+<style type="text/css">
+
+    /*.thumbImage img{*/
+        /*MAX-WIDTH: 100%!important;*/
+        /*HEIGHT: auto!important;*/
+        /*width:expression(this.width > 175 ? "175px" : this.width)!important;*/
+    /*}*/
+    /*.thumbImage {MARGIN: auto;WIDTH: 175px;}*/
+    /**html.thumbImage img{*/
+        /*width:expression(this.width>300&&this.width>this.height?250:auto);*/
+        /*height:expresion(this.height>250?250:auto);*/
+    /*}*/
+    /*.mycode{ width:300px; height:74px; float:left;}*/
+    /*.mycode ul{ width:280px;}*/
+    /*.mycode li{ width:100px; float:left; display:block;}*/
+</style>
+
+<!--<DIV class="thumbImage" ><img src="<%= asset_path("d2.jpg")%>" border="0"></DIV>-->
+
 
 <div class="con_main">
   <section>
-    <% @goods_list.each  do |goods| %>
-        <div class="product">
-          <a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>">
-            <div class="img_wrap">
-              <img src="<%= goods['photo_url'] %>">
-            </div>
-          </a>
-        </div>
-    <% end %>
+    <table class="list">
+      <tbody>
+      <% @goods_list.each_with_index  do |goods,index| %>
+          <% if index % 2 == 0 %>
+              <tr>
+                <td><div><a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>"><img src="<%= goods['photo_url'] %>" /></a></div></td>
+          <% else %>
+              <td class="sort"><div><a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>"><img src="<%= goods['photo_url'] %>" /></a></div></td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
 
     <div class="page">
       <div class="up_page left disables">
