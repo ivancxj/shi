@@ -25,6 +25,10 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 gem 'thin'
+group :production do
+  gem 'dalli', '1.1.1'
+  gem 'unicorn'
+end
 # YAML 配置信息
 gem "settingslogic", '~> 2.0.9'
 gem 'quiet_assets'
