@@ -117,13 +117,18 @@
 
 
 <script type="text/javascript">
-  $(function(){
-        $('.navigation').bind('click',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        window.location.href = '/';
-    });
-  })
+
+  function home (){
+      window.location.href = '/';
+  }
+
+//  $(function(){
+//        $('.navigation').bind('click',function(e){
+//        e.preventDefault();
+//        e.stopPropagation();
+//        window.location.href = '/';
+//    });
+//  })
   var width = ($(window).width() - 10)/2;
   var height = width*96 / 72;
   var style = [
@@ -135,7 +140,7 @@
 </script>
 
 <header>
-  <div class="navigation">
+  <div class="navigation" onclick="home();">
     <div></div>
   </div>
 
