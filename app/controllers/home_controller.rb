@@ -77,8 +77,8 @@ class HomeController < ApplicationController
     end
 
     # TODO 手机号码验证
-    #params[:goods_id] = '735'
-    #params[:mobile] = '13958025410'
+    params[:goods_id] = '735'
+    params[:mobile] = '13958025410'
 
     resp=shiyi_conn.post '/api/v2/order/simple_order',{:goods_id=>params[:goods_id],:mobile=>params[:mobile]}
     @result=ActiveSupport::JSON.decode(resp.body)

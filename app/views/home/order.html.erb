@@ -24,6 +24,7 @@
         color: #333333;
         font-weight: bold;
         line-height: 1em;
+
     }
 
     .txt p {
@@ -166,7 +167,7 @@
 <section>
   <div class="contact_box">
     <div class="txt">
-      <p><span>联系电话:</span> <input placeholder="请输入您的联系电话" type="text"/></p>
+      <p><span style="height: 30px;text-align: center">联系电话:</span> <input placeholder="请输入您的联系电话" type="text"/></p>
     </div>
     <div class="btn_wrap">
       <div class="button pink"><a>快点联系我</a></div>
@@ -174,22 +175,23 @@
   </div>
 </section>
 
+
 <script>
     $(function(){
         $(".button").bind('click', function(){
             var phone = $('.txt input').val();
             if(phone.length > 0){
-                if(confirm("确认您的电话号码是" + phone)){
+//                if(confirm("确认您的电话号码是" + phone)){
                     $.getJSON('/home/confirm.json?mobile='+phone+'&goods_id='+"<%= @id%>", function(result){
                         if(result['result'] == 'ok') {
                             if(alert("提交成功~")){
                                 window.close();
                             }
                         }else {
-                            alert("提交失败~,请重新提交")
+                            alert("提交失败~,请重新试试")
                         }
                     });
-                }
+//                }
             }else {
                 alert("您的联系电话还没有填写哦~");
             }
