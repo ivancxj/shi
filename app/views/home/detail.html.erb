@@ -61,7 +61,7 @@
         height: 26px;
         margin: 10px 18px;
         background: url(/assets/home.png) no-repeat 0 0;
-        background-size: 300px 200px;
+        background-size: 100%;
     }
 
     .title {
@@ -267,6 +267,12 @@
 </style>
 
 <script type="text/javascript">
+    $('#ss').bind('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = '/home/order?id=<%= @current_id%>';
+    });
+
     $(function () {
         $('.navigation').bind('itap', function (e) {
             e.preventDefault();
