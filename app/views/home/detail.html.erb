@@ -267,11 +267,6 @@
 </style>
 
 <script type="text/javascript">
-    $('#ss').bind('click',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        window.location.href = '/home/order?id=<%= @current_id%>';
-    });
 
     $(function () {
         $('.navigation').bind('itap', function (e) {
@@ -295,15 +290,20 @@
   <!-- 滑动大图 -->
   <div class="slide_bar m_bg sshow">
 
-    <img class='classleft' src='<%= asset_path('prev.png') %>' width="30px" height="30px"/>
-    <img class='classright' src='<%= asset_path('next.png') %>' width="30px" height="30px"/>
+    <!--<img id='classleft' class='classleft' src='<%= asset_path('prev.png') %>' width="30px" height="30px"/>-->
+    <!--<img id='classright' class='classright' src='<%= asset_path('next.png') %>' width="30px" height="30px"/>-->
 
 
     <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
       <div id="wrapper" class="slide_width slide_height scroll_box"></div>
       <ul id="nav">
         <li class="selected"></li>
-        <% 0.upto(@goods['goods_albums'].length-1) do %>
+        <% lenght = @goods['goods_albums'].length %>
+        <% if lenght>=6 %>
+        <% lenght = 6 %>
+        <% end %>
+
+        <% 0.upto(lenght-1) do %>
             <li></li>
         <% end %>
       </ul>
@@ -315,13 +315,13 @@
         <li>
           <img id='photo_pic' src="<%= @goods['brand_photo'] %>"/>
           <% if @goods['old_price'] %>
-              <span id='old_price' class="grey">市场价:￥<%= @goods['old_price'] %></span>
+              <span id='old_price' class="grey">市场价:￥<%= @goods['old_price'].to_i  %></span>
           <% else %>
               <span id='old_price' class="grey"></span>
           <% end %>
-          <span id='sale_price' class="mms">mm价:<%= @goods['sale_price'] %></span>
+          <span id='sale_price' class="mms">mm价:￥<%= @goods['sale_price'].to_i  %></span>
         </li>
-        <li>
+        <li style="height: 25px;line-height: 25px;">
         <span id='mms_name' class="mms_name"><%= @goods['shop']['name'] %>  <%= @goods['shop']['address'] %>
           (<%= @goods['shop']['phone'] %>)</span>
         </li>
@@ -338,6 +338,13 @@
   </div>
 
   <script type="text/javascript">
+
+      $('#ss').bind('click',function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = '/home/order?id=<%= @current_id%>';
+      });
+
 
       function AutoResizeImage(objImg, maxWidth, maxHeight) {
           var img = new Image();

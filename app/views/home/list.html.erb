@@ -145,7 +145,7 @@
   <section style="margin-top: 10px;">
     <% @goods_list.each  do |goods| %>
         <div class="product">
-          <a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>">
+          <a href="/home/detail?id=<%= goods['id']%>&ids=<%= @ids%>&page=<%= @page%>&brand_id=<%= @id%>">
             <div class="img_wrap">
               <img src="<%= goods['photo_url'] %>">
             </div>

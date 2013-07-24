@@ -12,6 +12,33 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def shiyi_conn2
+    @@shiyi_conn2 ||= Faraday.new(:url => 'http://api.shiyimm.com') do |faraday|
+      #faraday.request :multipart
+      faraday.request  :url_encoded             # form-encode POST params
+                                                #faraday.response :logger                  # log requests to STDOUT
+      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+    end
+  end
+
+  def shiyi_conn3
+    @@shiyi_conn3 ||= Faraday.new(:url => 'http://api.shiyimm.com') do |faraday|
+      #faraday.request :multipart
+      faraday.request  :url_encoded             # form-encode POST params
+                                                #faraday.response :logger                  # log requests to STDOUT
+      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+    end
+  end
+
+  def shiyi_conn4
+    @@shiyi_conn4 ||= Faraday.new(:url => 'http://api.shiyimm.com') do |faraday|
+      #faraday.request :multipart
+      faraday.request  :url_encoded             # form-encode POST params
+                                                #faraday.response :logger                  # log requests to STDOUT
+      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+    end
+  end
+
   def get_pre_brand(id)
 
     1
