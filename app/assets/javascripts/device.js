@@ -1,10 +1,3 @@
-/**
- * Created with JetBrains WebStorm.
- * User: robin
- * Date: 13-7-22
- * Time: PM1:13
- * To change this template use File | Settings | File Templates.
- */
 
 var DeviceInfo = (function (ua) {
     var d = {
