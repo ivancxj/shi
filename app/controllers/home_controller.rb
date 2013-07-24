@@ -47,7 +47,7 @@ class HomeController < ApplicationController
     resp=shiyi_conn2.get '/api/v2/goods/detail',{:id=>params[:id],:is_wifi=>false}
     @goods=ActiveSupport::JSON.decode(resp.body)
 
-    p @goods['old_price'].class
+    #p @goods['old_price'].class
   end
 
   def next
@@ -85,7 +85,7 @@ class HomeController < ApplicationController
     resp=shiyi_conn4.post '/api/v2/order/simple_order',{:goods_id=>params[:goods_id],:mobile=>params[:mobile]}
     @result=ActiveSupport::JSON.decode(resp.body)
 
-    p @result
+    #p @result
     respond_to do |format|
       format.html
       format.json{

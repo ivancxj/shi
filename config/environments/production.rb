@@ -77,4 +77,7 @@ Shiyimm::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # 每天一份日志
+  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}#{Date.today.to_s}.log", 'daily')
 end
