@@ -15,6 +15,7 @@
 //= require device
 //= require fast_button
 //= require turbolinks
+//= require swipeview
 //  不要一次全包含 require_tree .
 
 //隐藏头部地址栏
