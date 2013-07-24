@@ -156,31 +156,27 @@
     <div style="clear: both"></div>
 
     <div class="page">
-      <div class="up_page left disables">
+
         <% if @page == 1 %>
-            <% if @pre_brand_id && @pre_brand_id != -1 %>
-                <a href='/home/list?id=<%= (@pre_brand_id)%>'>上一个品牌</a>
-            <% else %>
-                <a>没有了</a>
-            <% end %>
+
         <% else %>
+          <div class="up_page left disables">
             <a href='/home/list?id=<%= @id%>&page=<%= (@page-1)%>'>上一页</a>
+          </div>
         <% end %>
 
-      </div>
-      <div class="down_page right">
-        <% if @goods_list.length < 14 %>
-            <% if @next_brand_id && @next_brand_id != -1 %>
-                <a href='/home/list?id=<%= (@next_brand_id)%>'>下一个品牌</a>
-            <% else %>
-                <a>没有了</a>
-            <% end %>
+
+
+        <% if @goods_list.blank? or @goods_list.length < 14 %>
+
 
         <% else %>
+          <div class="down_page right">
             <a href='/home/list?id=<%= (@id)%>&page=<%= (@page+1)%>'>下一页</a>
+          </div>
         <% end %>
 
-      </div>
+
       <div style="clear: both;"/>
     </div>
 
