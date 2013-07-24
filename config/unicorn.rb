@@ -2,7 +2,7 @@
 module Rails
   class <<self
     def root
-      "/home/tat/work/shi"
+      File.expand_path("../..", __FILE__)
     end
   end
 end

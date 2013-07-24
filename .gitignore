@@ -14,6 +14,7 @@
 /structure.sql
 # /config/database.yml
 # Ignore all logfiles and tempfiles.
+/public/assets/*
 /.idea
 /log/*.log
 /tmp
