@@ -336,126 +336,127 @@
       <div>送上门来试</div>
     </div>
   </div>
+</div>
 
-  <script type="text/javascript">
+<script type="text/javascript">
 
-      $('#ss').bind('click',function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          window.location.href = '/home/order?id=<%= @current_id%>';
-      });
+    $('#ss').bind('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = '/home/order?id=<%= @current_id%>';
+    });
 
 
-      function AutoResizeImage(objImg, maxWidth, maxHeight) {
-          var img = new Image();
-          img.src = objImg.src;
-          var hRatio;
-          var wRatio;
-          var Ratio = 1;
-          var w = img.width;
-          var h = img.height;
-          wRatio = maxWidth / w;
-          hRatio = maxHeight / h;
-          if (maxWidth == 0 && maxHeight == 0) {
-              Ratio = 1;
-          } else if (maxWidth == 0) {//
-              if (hRatio < 1) Ratio = hRatio;
-          } else if (maxHeight == 0) {
-              if (wRatio < 1) Ratio = wRatio;
-          } else if (wRatio < 1 || hRatio < 1) {
-              Ratio = (wRatio <= hRatio ? wRatio : hRatio);
-          }
-          if (Ratio < 1) {
-              w = w * Ratio;
-              h = h * Ratio;
-              objImg.height = h;
-              objImg.width = w;
-          }
-      }
+    function AutoResizeImage(objImg, maxWidth, maxHeight) {
+        var img = new Image();
+        img.src = objImg.src;
+        var hRatio;
+        var wRatio;
+        var Ratio = 1;
+        var w = img.width;
+        var h = img.height;
+        wRatio = maxWidth / w;
+        hRatio = maxHeight / h;
+        if (maxWidth == 0 && maxHeight == 0) {
+            Ratio = 1;
+        } else if (maxWidth == 0) {//
+            if (hRatio < 1) Ratio = hRatio;
+        } else if (maxHeight == 0) {
+            if (wRatio < 1) Ratio = wRatio;
+        } else if (wRatio < 1 || hRatio < 1) {
+            Ratio = (wRatio <= hRatio ? wRatio : hRatio);
+        }
+        if (Ratio < 1) {
+            w = w * Ratio;
+            h = h * Ratio;
+            objImg.height = h;
+            objImg.width = w;
+        }
+    }
 
-      document.addEventListener('touchmove', function (e) {
-          e.preventDefault();
-      }, false);
-      var gallery,
-              el,
-              i,
-              page,
-              dots = document.querySelectorAll('#nav li'),
-              slides = [];
+    document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+    }, false);
+    var gallery,
+            el,
+            i,
+            page,
+            dots = document.querySelectorAll('#nav li'),
+            slides = [];
 
-      slides.push({
-          img: "<%= @goods['detail_photo'] %>",
-          width: <%= @goods['width'] %>,
-          height: <%= @goods['height'] %>
-      })
+    slides.push({
+        img: "<%= @goods['detail_photo'] %>",
+        width: <%= @goods['width'] %>,
+        height: <%= @goods['height'] %>
+    })
 
-      <% @goods['goods_albums'].each do |album| %>
+    <% @goods['goods_albums'].each do |album| %>
 
-      slides.push({
-          img: " <%= album['photo'] %>",
-          width: <%= album['width'] %>,
-          height: <%= album['height'] %>
-      })
-      <% end %>
+    slides.push({
+        img: " <%= album['photo'] %>",
+        width: <%= album['width'] %>,
+        height: <%= album['height'] %>
+    })
+    <% end %>
 
-      gallery = new SwipeView('#wrapper', { numberOfPages: slides.length, hastyPageFlip: true });
+    gallery = new SwipeView('#wrapper', { numberOfPages: slides.length, hastyPageFlip: true });
 
-      // Load initial data
-      for (i = 0; i < 3; i++) {
-          page = i == 0 ? slides.length - 1 : i - 1;
-          el = document.createElement('img');
-          el.className = 'loading';
-          el.src = slides[page].img;
-          el.width = slides[page].width;
-          el.height = slides[page].height;
-          el.onload = function () {
-              this.className = '';
-              var maxwidth, maxheight;
-              if (DeviceInfo.type == 'mobile') {
-                  maxwidth = 200;
-                  maxheight = 250;
-              } else if (DeviceInfo.type == 'pad') {
-                  maxwidth = 600;
-                  maxheight = 600;
-              } else {
-                  maxwidth = 0;
-                  maxheight = 0;
-              }
-              AutoResizeImage(this, maxwidth, maxheight);
-          }
-          gallery.masterPages[i].appendChild(el);
+    // Load initial data
+    for (i = 0; i < 3; i++) {
+        page = i == 0 ? slides.length - 1 : i - 1;
+        el = document.createElement('img');
+        el.className = 'loading';
+        el.src = slides[page].img;
+        el.width = slides[page].width;
+        el.height = slides[page].height;
+        el.onload = function () {
+            this.className = '';
+            var maxwidth, maxheight;
+            if (DeviceInfo.type == 'mobile') {
+                maxwidth = 200;
+                maxheight = 250;
+            } else if (DeviceInfo.type == 'pad') {
+                maxwidth = 600;
+                maxheight = 600;
+            } else {
+                maxwidth = 0;
+                maxheight = 0;
+            }
+            AutoResizeImage(this, maxwidth, maxheight);
+        }
+        gallery.masterPages[i].appendChild(el);
 
-          el = document.createElement('span');
-          el.innerHTML = slides[page].desc;
-          gallery.masterPages[i].appendChild(el)
-      }
+        el = document.createElement('span');
+        el.innerHTML = slides[page].desc;
+        gallery.masterPages[i].appendChild(el)
+    }
 
-      gallery.onFlip(function () {
-          var el, upcoming, i;
-          for (i = 0; i < 3; i++) {
-              upcoming = gallery.masterPages[i].dataset.upcomingPageIndex;
-              if (upcoming != gallery.masterPages[i].dataset.pageIndex) {
-                  el = gallery.masterPages[i].querySelector('img');
-                  el.className = 'loading';
-                  el.src = slides[upcoming].img;
-                  el.width = slides[upcoming].width;
-                  el.height = slides[upcoming].height;
-                  el = gallery.masterPages[i].querySelector('span');
-                  el.innerHTML = slides[upcoming].desc;
-              }
-          }
-          document.querySelector('#nav .selected').className = '';
-          dots[gallery.pageIndex].className = 'selected';
-      });
+    gallery.onFlip(function () {
+        var el, upcoming, i;
+        for (i = 0; i < 3; i++) {
+            upcoming = gallery.masterPages[i].dataset.upcomingPageIndex;
+            if (upcoming != gallery.masterPages[i].dataset.pageIndex) {
+                el = gallery.masterPages[i].querySelector('img');
+                el.className = 'loading';
+                el.src = slides[upcoming].img;
+                el.width = slides[upcoming].width;
+                el.height = slides[upcoming].height;
+                el = gallery.masterPages[i].querySelector('span');
+                el.innerHTML = slides[upcoming].desc;
+            }
+        }
+        document.querySelector('#nav .selected').className = '';
+        dots[gallery.pageIndex].className = 'selected';
+    });
 
-      gallery.onMoveOut(function () {
-          gallery.masterPages[gallery.currentMasterPage].className = gallery.masterPages[gallery.currentMasterPage].className.replace(/(^|\s)swipeview-active(\s|$)/, '');
-      });
+    gallery.onMoveOut(function () {
+        gallery.masterPages[gallery.currentMasterPage].className = gallery.masterPages[gallery.currentMasterPage].className.replace(/(^|\s)swipeview-active(\s|$)/, '');
+    });
 
-      gallery.onMoveIn(function () {
-          var className = gallery.masterPages[gallery.currentMasterPage].className;
-          /(^|\s)swipeview-active(\s|$)/.test(className) || (gallery.masterPages[gallery.currentMasterPage].className = !className ? 'swipeview-active' : className + ' swipeview-active');
-      });
+    gallery.onMoveIn(function () {
+        var className = gallery.masterPages[gallery.currentMasterPage].className;
+        /(^|\s)swipeview-active(\s|$)/.test(className) || (gallery.masterPages[gallery.currentMasterPage].className = !className ? 'swipeview-active' : className + ' swipeview-active');
+    });
 
-  </script>
+</script>
 
