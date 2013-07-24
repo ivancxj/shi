@@ -119,17 +119,19 @@
 <script type="text/javascript">
 
   function home (){
-      alert($('.navigation'))
+//      alert($('.navigation'))
       window.location.href = '/';
   }
 
-//  $(function(){
-//        $('.navigation').bind('click',function(e){
-//        e.preventDefault();
-//        e.stopPropagation();
-//        window.location.href = '/';
-//    });
-//  })
+  $(function(){
+        alert($('.navigation'))
+      print('1 pint 2');
+        $('.navigation').bind('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = '/';
+    });
+  })
   var width = ($(window).width() - 10)/2;
   var height = width*96 / 72;
   var style = [
@@ -141,7 +143,7 @@
 </script>
 
 <header>
-  <div class="navigation" onclick="home();">
+  <div class="navigation">
     <div></div>
   </div>
 
