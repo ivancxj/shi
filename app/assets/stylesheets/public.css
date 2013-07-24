@@ -298,10 +298,10 @@ header{
   left: 0;
 }
 .navigation>div{
-  width:25px;
-  height: 26px;
+  width:25px !important;
+  height: 26px ;
   margin: 10px 18px;
-  background: url(/small_logo.png) no-repeat 0 0;
+  background: url(/asserts/small_logo.png) no-repeat 0 0;
   background-size: 300px 200px;
 }
 .title{

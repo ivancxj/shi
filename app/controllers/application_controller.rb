@@ -5,13 +5,12 @@ class ApplicationController < ActionController::Base
 
   def shiyi_conn
     @@shiyi_conn ||= Faraday.new(:url => 'http://api.shiyimm.com') do |faraday|
-      faraday.request :multipart
+      #faraday.request :multipart
       faraday.request  :url_encoded             # form-encode POST params
                                                 #faraday.response :logger                  # log requests to STDOUT
       faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
     end
   end
-
 
   def get_pre_brand(id)
 
@@ -26,6 +25,6 @@ class ApplicationController < ActionController::Base
 
   # 首页上展示的品牌 ids
   def get_brand_ids
-    array = [237,238,240,232,217,239,236,239,221,148,235,75,218,215]
+    array = [240,217,229,148,235,238,236,221,237,75,239,232,241,233]
   end
 end

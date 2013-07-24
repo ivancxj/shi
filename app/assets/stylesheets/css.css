@@ -33,11 +33,11 @@
 	margin: 7px 0 2px;
 	overflow: hidden;
 }
-.con_main table {
-	border: medium none;
-	margin-top: 10px;
-	width: 100%;
-}
+/*.con_main table {*/
+	/*border: medium none;*/
+	/*margin-top: 10px;*/
+	/*width: 100%;*/
+/*}*/
 .sort {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 	font-size: 16px;
@@ -48,7 +48,7 @@
 	height: 50px;
 }
 .sort div img {
-	height: 100%;
+	/*height: 100%;*/
 	float: left;
 }
 .down {
