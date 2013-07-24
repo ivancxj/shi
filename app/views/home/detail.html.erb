@@ -85,15 +85,15 @@
     #nav {
         position: absolute;
         z-index: 100;
-        top: 8px;
-        width: 135px;
+        bottom: 145px;
         height: 20px;
-        left: 50%;
+        left: 58%;
         /*box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
         /*-webkit-box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
         /*-moz-box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
         padding: 0;
         margin: 0 0 0 -100px;
+        display: inline;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         -ms-border-radius: 10px;
@@ -104,18 +104,18 @@
     #nav li {
         display: block;
         float: left;
-        width: 14px;
-        height: 14px;
-        line-height: 14px;
+        width: 8px;
+        height: 8px;
+        line-height: 8px;
         -webkit-border-radius: 7px;
         -moz-border-radius: 7px;
         -ms-border-radius: 7px;
         -o-border-radius: 7px;
         border-radius: 7px;
-        background: rgba(231, 31, 207, 0.2);
+        background: rgba(0, 0, 0, 0.20);
         overflow: hidden;
         padding: 0;
-        margin: 3px 11px 0 8px;
+        margin: 3px 11px 0 4px;
         text-align: center;
     }
 
@@ -130,7 +130,7 @@
     }
 
     #nav li.selected {
-        background: rgba(231, 31, 207, 0.8);
+        background: rgba(6, 2, 5, 0.80);
     }
 
     #swipeview-slider > div {
@@ -294,16 +294,13 @@
 
 
     <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
-
       <div id="wrapper" class="slide_width slide_height scroll_box"></div>
-
       <ul id="nav">
         <li class="selected"></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <% 0.upto(@goods['goods_albums'].length-1) do %>
+            <li></li>
+        <% end %>
       </ul>
-
     </div>
 
 
@@ -336,33 +333,30 @@
 
   <script type="text/javascript">
 
-      var flag = false;
-      function drawImage(ImgD, iwidth, iheight) {
-//参数(图片,允许的宽度,允许的高度)
-          var image = new Image();
-          image.src = ImgD.src;
-          if (image.width > 0 && image.height > 0) {
-              flag = true;
-              if (image.width / image.height >= iwidth / iheight) {
-                  if (image.width > iwidth) {
-                      ImgD.width = iwidth;
-                      ImgD.height = (image.height * iwidth) / image.width;
-                  } else {
-                      ImgD.width = image.width;
-                      ImgD.height = image.height;
-                  }
-                  ImgD.alt = image.width + "×" + image.height;
-              }
-              else {
-                  if (image.height > iheight) {
-                      ImgD.height = iheight;
-                      ImgD.width = (image.width * iheight) / image.height;
-                  } else {
-                      ImgD.width = image.width;
-                      ImgD.height = image.height;
-                  }
-                  ImgD.alt = image.width + "×" + image.height;
-              }
+      function AutoResizeImage(objImg, maxWidth, maxHeight) {
+          var img = new Image();
+          img.src = objImg.src;
+          var hRatio;
+          var wRatio;
+          var Ratio = 1;
+          var w = img.width;
+          var h = img.height;
+          wRatio = maxWidth / w;
+          hRatio = maxHeight / h;
+          if (maxWidth == 0 && maxHeight == 0) {
+              Ratio = 1;
+          } else if (maxWidth == 0) {//
+              if (hRatio < 1) Ratio = hRatio;
+          } else if (maxHeight == 0) {
+              if (wRatio < 1) Ratio = wRatio;
+          } else if (wRatio < 1 || hRatio < 1) {
+              Ratio = (wRatio <= hRatio ? wRatio : hRatio);
+          }
+          if (Ratio < 1) {
+              w = w * Ratio;
+              h = h * Ratio;
+              objImg.height = h;
+              objImg.width = w;
           }
       }
 
@@ -401,9 +395,20 @@
           el.src = slides[page].img;
           el.width = slides[page].width;
           el.height = slides[page].height;
-          drawImage(el, document.body.width, document.body.height);
           el.onload = function () {
               this.className = '';
+              var maxwidth, maxheight;
+              if (DeviceInfo.type == 'mobile') {
+                  maxwidth = 200;
+                  maxheight = 250;
+              } else if (DeviceInfo.type == 'pad') {
+                  maxwidth = 600;
+                  maxheight = 600;
+              } else {
+                  maxwidth = 0;
+                  maxheight = 0;
+              }
+              AutoResizeImage(this, maxwidth, maxheight);
           }
           gallery.masterPages[i].appendChild(el);
 
@@ -422,12 +427,10 @@
                   el.src = slides[upcoming].img;
                   el.width = slides[upcoming].width;
                   el.height = slides[upcoming].height;
-
                   el = gallery.masterPages[i].querySelector('span');
                   el.innerHTML = slides[upcoming].desc;
               }
           }
-
           document.querySelector('#nav .selected').className = '';
           dots[gallery.pageIndex].className = 'selected';
       });
@@ -437,7 +440,8 @@
       });
 
       gallery.onMoveIn(function () {
-
+          var className = gallery.masterPages[gallery.currentMasterPage].className;
+          /(^|\s)swipeview-active(\s|$)/.test(className) || (gallery.masterPages[gallery.currentMasterPage].className = !className ? 'swipeview-active' : className + ' swipeview-active');
       });
 
   </script>
