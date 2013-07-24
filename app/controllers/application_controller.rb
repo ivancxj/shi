@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def get_pre_brand(id)
 
     1
