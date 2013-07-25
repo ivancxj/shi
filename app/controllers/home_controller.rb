@@ -82,9 +82,11 @@ class HomeController < ApplicationController
     # TODO 手机号码验证
     #params[:goods_id] = '735'
     #params[:mobile] = '13958025410'
-
+    p 'confirm before'
     resp=shiyi_conn4.post '/api/v2/order/simple_order',{:goods_id=>params[:goods_id],:mobile=>params[:mobile]}
     @result=ActiveSupport::JSON.decode(resp.body)
+    p 'confirm after'
+    p @result
 
     #p @result
     respond_to do |format|
