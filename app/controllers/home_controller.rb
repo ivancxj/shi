@@ -88,13 +88,14 @@ class HomeController < ApplicationController
     p 'confirm after'
     p @result
 
+    render :json => @result
     #p @result
-    respond_to do |format|
-      format.html
-      format.json{
-        render :json => @result
-      }
-    end
+    #respond_to do |format|
+    #  format.html
+    #  format.json{
+    #    render :json => @result
+    #  }
+    #end
 
   end
 
