@@ -1,5 +1,25 @@
 module ApplicationHelper
 
+  def controller_stylesheet_link_tag
+    # 还未做好
+    #case controller_name
+    #  when "users","home", "topics", "pages", "search", "sites", "notifications", "notes"
+    #    stylesheet_link_tag controller_name
+    #  when "replies"
+    #    stylesheet_link_tag "topics"
+    #end
+  end
+
+  def controller_javascript_include_tag
+    # 还未做好
+    #case controller_name
+    #  when "pages","topics","sites", "notifications", "notes"
+    #    javascript_include_tag controller_name
+    #  when "replies"
+    #    javascript_include_tag "topics"
+    #end
+  end
+
   def render_page_title
     site_name = Setting.app_name
     title = @page_title ? "#{site_name} | #{@page_title}" : site_name rescue 'SITE_NAME'

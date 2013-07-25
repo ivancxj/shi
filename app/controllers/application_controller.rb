@@ -3,6 +3,28 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+
+  def notice_success(msg)
+    flash[:notice] = msg
+  end
+
+  def notice_error(msg)
+    flash[:notice] = msg
+  end
+
+  def notice_warning(msg)
+    flash[:notice] = msg
+  end
+
+  def set_seo_meta(title = '',meta_keywords = '', meta_description = '')
+    if title.length > 0
+      @page_title = "#{title}"
+    end
+    @meta_keywords = meta_keywords
+    @meta_description = meta_description
+  end
+
+
   def shiyi_conn
     @@shiyi_conn ||= Faraday.new(:url => 'http://api.shiyimm.com') do |faraday|
       #faraday.request :multipart
