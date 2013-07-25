@@ -25,16 +25,19 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 gem 'thin'
+group :development, :test do
+  gem 'quiet_assets'
+end
+
 group :production do
-  gem 'dalli', '1.1.1'
+  #gem 'dalli', '1.1.1'
   gem 'unicorn'
 end
 # YAML 配置信息
 gem "settingslogic", '~> 2.0.9'
-gem 'quiet_assets'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

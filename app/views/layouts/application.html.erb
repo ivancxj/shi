@@ -12,9 +12,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       <link rel="apple-touch-icon-precomposed" href="<%= asset_path('ios-icon.png') %>" />
   <% end %>
-  <%= stylesheet_link_tag    'application', media: 'all', "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= controller_stylesheet_link_tag %>
-  <%= javascript_include_tag 'application', "data-turbolinks-track" => true %>
+  <%= javascript_include_tag 'application' %>
   <%= controller_javascript_include_tag %>
   <link rel="shortcut icon" href="<%= asset_path('small_logo.png') %>" />
   <%= csrf_meta_tags %>
@@ -24,6 +24,8 @@
 <%= yield %>
 
 <script type="text/javascript">
+
+
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-42561403-1']);
     _gaq.push(['_trackPageview']);
