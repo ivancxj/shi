@@ -179,14 +179,18 @@
 <script>
     $(function(){
         $(".button").bind('click', function(){
+//            alert(1)
             var phone = $('.txt input').val();
             if(phone.length > 0){
 //                if(confirm("确认您的电话号码是" + phone)){
                     $.getJSON('/home/confirm.json?mobile='+phone+'&goods_id='+"<%= @id%>", function(result){
+//                        alert(2)
                         if(result['result'] == 'ok') {
-                            if(alert("提交成功~")){
-                                window.close();
-                            }
+                            alert("提交成功~")
+                            history.back()
+//                            if(alert("提交成功~")){
+//                                window.close();
+//                            }
                         }else {
                             alert("提交失败~,请重新试试")
                         }

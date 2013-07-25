@@ -15,9 +15,10 @@ class HomeController < ApplicationController
       @page = 1
     end
     @id = params[:id]
+    p 'list before'
     resp=shiyi_conn.get '/api/v2/goods/brand_list',{:brand_id=>@id,:page=>@page,:per_page => 14,:is_wifi=>false}
     @goods_list=ActiveSupport::JSON.decode(resp.body)
-
+    p 'list after'
     @ids = ''
 
     # 第一页 则获取上一个品牌 id
