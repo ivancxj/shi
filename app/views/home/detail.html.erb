@@ -99,12 +99,6 @@
         padding: 0 8px 8px 8px;
     }
 
-    #wrapper {
-        width:100%;
-        min-width:100px;
-        height:100%;
-    }
-
     #swipeview-slider > div {
         position: relative;
         display: -webkit-box;
@@ -283,7 +277,7 @@
     <div class="det_xq">
       <ul>
         <li>
-          <img id='photo_pic' src="<%= @goods['brand_photo'] %>"/>
+          <img id='photo_pic' src="<%= @goods['brand_photo'] %>" style="width: 70px;height: 25px;padding-top: 5px"/>
           <% if @goods['old_price'] %>
               <span id='old_price' class="grey">市场价:￥<%= @goods['old_price'].to_i %></span>
           <% else %>
@@ -324,17 +318,17 @@
             maxheight = 180;
             $('#wrapper').height(200);
         } else {
-            maxheight = 320;
-            $('#wrapper').height(340);
+            maxheight = 280;
+            $('#wrapper').height(300);
         }
     } else if (DeviceInfo.type == 'pad') {
-        $('#wrapper').height(370);
         maxwidth = 250;
         maxheight = 350;
+        $('#wrapper').height(370);
     } else {
-        $('#wrapper').height(470);
         maxwidth = 370;
         maxheight = 450;
+        $('#wrapper').height(470);
     }
 
     var ratio = window.devicePixelRatio || 1, offw;
@@ -405,8 +399,8 @@
         el = document.createElement('img');
         el.className = 'loading';
         el.src = slides[page].img;
-        el.width = slides[page].width;
-        el.height = slides[page].height;
+//        el.width = slides[page].width;
+//        el.height = slides[page].height;
         el.onload = function () {
             this.className = '';
             AutoResizeImage(this, maxwidth, maxheight);
@@ -426,8 +420,8 @@
                 el = gallery.masterPages[i].querySelector('img');
                 el.className = 'loading';
                 el.src = slides[upcoming].img;
-                el.width = slides[upcoming].width;
-                el.height = slides[upcoming].height;
+//                el.width = slides[upcoming].width;
+//                el.height = slides[upcoming].height;
                 el.onload = function () {
                     this.className = '';
                     AutoResizeImage(this, maxwidth, maxheight);
