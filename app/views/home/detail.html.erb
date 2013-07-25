@@ -428,6 +428,10 @@
                 el.src = slides[upcoming].img;
                 el.width = slides[upcoming].width;
                 el.height = slides[upcoming].height;
+                el.onload = function () {
+                    this.className = '';
+                    AutoResizeImage(this, maxwidth, maxheight);
+                }
                 el = gallery.masterPages[i].querySelector('span');
                 el.innerHTML = slides[upcoming].desc;
             }
