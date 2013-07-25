@@ -1,41 +1,4 @@
-<!-- 幻灯宽高设定 -->
-<script type="text/javascript">
-    (function () {
-        var slide_style = function () {
-            // var width = DeviceInfo.width / DeviceInfo.ratio - 8;
-            var width = $(window).width() * 0.65;
-            var height = 96 * width / 72;
-            var style = [
-                '<style type="text/css">',
-                '.slide_width{width:' + width + 'px !important;}',
-                '.slide_height{height:' + height + 'px !important;}',
-                '.slide_scroll_width{width:' + width * <%= (@goods['goods_albums'].length + 1 ) %> +'px !important;}',
-                '</style>'
-            ]
-            $('head').append(style.join(' '));
-        };
-
-        var add_ratio_class = function () {
-            var class_name = 'ratio' + DeviceInfo.ratio;
-            $('body').removeClass('ratio1').addClass(class_name.replace('.', '_'));
-        };
-
-        if (!(DeviceInfo.browser == 'firefox' || (DeviceInfo.os == 'wp' && DeviceInfo.browser == 'ie'))) {
-            slide_style();
-        } else {
-            $(function () {
-                DeviceInfo.ratio = DeviceInfo.width / window.innerWidth;
-                // 设置样式
-                slide_style();
-                // 更新cookie
-                set_cookie('ratio', DeviceInfo.ratio, 365);
-                // body上添加class
-                add_ratio_class();
-            });
-        }
-
-    })();
-</script>
+<%= javascript_include_tag "swipeview" %>
 
 <style>
     header {
@@ -85,14 +48,13 @@
     #nav {
         position: absolute;
         z-index: 100;
-        bottom: 145px;
+        bottom: 120px;
         height: 20px;
-        left: 58%;
         /*box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
         /*-webkit-box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
         /*-moz-box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
-        padding: 0;
-        margin: 0 0 0 -100px;
+        margin: 0 auto;
+        vertical-align: middle;
         display: inline;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
@@ -115,7 +77,7 @@
         background: rgba(0, 0, 0, 0.20);
         overflow: hidden;
         padding: 0;
-        margin: 3px 11px 0 4px;
+        margin: 3px 2px 0 4px;
         text-align: center;
     }
 
@@ -131,6 +93,16 @@
 
     #nav li.selected {
         background: rgba(6, 2, 5, 0.80);
+    }
+
+    .conn {
+        padding: 0 8px 8px 8px;
+    }
+
+    #wrapper {
+        width:100%;
+        min-width:100px;
+        height:100%;
     }
 
     #swipeview-slider > div {
@@ -185,46 +157,46 @@
         pointer-events: none;
     }
 
-    #swipeview-slider span {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px 0;
-        display: block;
-        background: rgba(0, 0, 0, 0.75);
-        font-size: 20px;
-        text-align: center;
-        text-shadow: 0 1px 0 #000;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        -webkit-border-top-left-radius: 10px;
-        -moz-border-top-left-radius: 10px;
-        -ms-border-top-left-radius: 10px;
-        -o-border-top-left-radius: 10px;
-        border-top-left-radius: 10px;
-        -webkit-border-top-right-radius: 10px;
-        -moz-border-top-right-radius: 10px;
-        -ms-border-top-right-radius: 10px;
-        -o-border-top-right-radius: 10px;
-        border-top-right-radius: 10px;
-        -webkit-transition-duration: .3s;
-        -moz-transition-duration: .3s;
-        -ms-transition-duration: .3s;
-        -o-transition-duration: .3s;
-        transition-duration: .3s;
-        -webkit-transition-property: -webkit-transform;
-        -moz-transition-property: -moz-transform;
-        -ms-transition-property: -ms-transform;
-        -o-transition-property: -o-transform;
-        transition-property: transform;
-        -webkit-transform: translate(0, 100%) translateZ(0);
-        -moz-transform: translate(0, 100%) translateZ(0);
-        -ms-transform: translate(0, 100%);
-        -ms-transform: translate(0, 100%) translateZ(0);
-        -o-transform: translate(0, 100%);
-        -o-transform: translate(0, 100%) translateZ(0);
-        transform: translate(0, 100%) translateZ(0);
-    }
+        /*#swipeview-slider span {*/
+        /*position: absolute;*/
+        /*bottom: 0;*/
+        /*left: 0;*/
+        /*width: 100%;*/
+        /*padding: 5px 0;*/
+        /*display: block;*/
+        /*background: rgba(0, 0, 0, 0.75);*/
+        /*font-size: 20px;*/
+        /*text-align: center;*/
+        /*text-shadow: 0 1px 0 #000;*/
+        /*border-top: 1px solid rgba(255, 255, 255, 0.2);*/
+        /*-webkit-border-top-left-radius: 10px;*/
+        /*-moz-border-top-left-radius: 10px;*/
+        /*-ms-border-top-left-radius: 10px;*/
+        /*-o-border-top-left-radius: 10px;*/
+        /*border-top-left-radius: 10px;*/
+        /*-webkit-border-top-right-radius: 10px;*/
+        /*-moz-border-top-right-radius: 10px;*/
+        /*-ms-border-top-right-radius: 10px;*/
+        /*-o-border-top-right-radius: 10px;*/
+        /*border-top-right-radius: 10px;*/
+        /*-webkit-transition-duration: .3s;*/
+        /*-moz-transition-duration: .3s;*/
+        /*-ms-transition-duration: .3s;*/
+        /*-o-transition-duration: .3s;*/
+        /*transition-duration: .3s;*/
+        /*-webkit-transition-property: -webkit-transform;*/
+        /*-moz-transition-property: -moz-transform;*/
+        /*-ms-transition-property: -ms-transform;*/
+        /*-o-transition-property: -o-transform;*/
+        /*transition-property: transform;*/
+        /*-webkit-transform: translate(0, 100%) translateZ(0);*/
+        /*-moz-transform: translate(0, 100%) translateZ(0);*/
+        /*-ms-transform: translate(0, 100%);*/
+        /*-ms-transform: translate(0, 100%) translateZ(0);*/
+        /*-o-transform: translate(0, 100%);*/
+        /*-o-transform: translate(0, 100%) translateZ(0);*/
+        /*transform: translate(0, 100%) translateZ(0);*/
+        /*}*/
 
         /*#swipeview-slider .swipeview-active span {*/
         /*-webkit-transform: translate(0, 0) translateZ(0);*/
@@ -236,33 +208,33 @@
         /*transform: translate(0, 0) translateZ(0);*/
         /*}*/
 
-    #wrapper > div > .swipeview-loading {
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#555)), -webkit-gradient(linear, 0 0, 100% 0, from(#777), to(#777));
-        background-position: 50% 50%, 50% 50%;
-        background-size: 200px 140px, 210px 150px;
-        background-repeat: no-repeat;
-    }
+        /*#wrapper > div > .swipeview-loading {*/
+        /*background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#555)), -webkit-gradient(linear, 0 0, 100% 0, from(#777), to(#777));*/
+        /*background-position: 50% 50%, 50% 50%;*/
+        /*background-size: 200px 140px, 210px 150px;*/
+        /*background-repeat: no-repeat;*/
+        /*}*/
 
-    #wrapper > div > .swipeview-loading img,
-    #swipeview-slider img.loading {
-        -webkit-transition-duration: 0s;
-        opacity: 0;
-    }
+        /*#wrapper > div > .swipeview-loading img,*/
+        /*#swipeview-slider img.loading {*/
+        /*-webkit-transition-duration: 0s;*/
+        /*opacity: 0;*/
+        /*}*/
 
-    #wrapper > div > .swipeview-loading span {
-        -webkit-transition-duration: 0s;
-        -moz-transition-duration: 0s;
-        -ms-transition-duration: 0s;
-        -o-transition-duration: 0s;
-        transition-duration: 0s;
-        -webkit-transform: translate(0, 100%) translateZ(0);
-        -moz-transform: translate(0, 100%) translateZ(0);
-        -ms-transform: translate(0, 100%);
-        -ms-transform: translate(0, 100%) translateZ(0);
-        -o-transform: translate(0, 100%);
-        -o-transform: translate(0, 100%) translateZ(0);
-        transform: translate(0, 100%) translateZ(0);
-    }
+        /*#wrapper > div > .swipeview-loading span {*/
+        /*-webkit-transition-duration: 0s;*/
+        /*-moz-transition-duration: 0s;*/
+        /*-ms-transition-duration: 0s;*/
+        /*-o-transition-duration: 0s;*/
+        /*transition-duration: 0s;*/
+        /*-webkit-transform: translate(0, 100%) translateZ(0);*/
+        /*-moz-transform: translate(0, 100%) translateZ(0);*/
+        /*-ms-transform: translate(0, 100%);*/
+        /*-ms-transform: translate(0, 100%) translateZ(0);*/
+        /*-o-transform: translate(0, 100%);*/
+        /*-o-transform: translate(0, 100%) translateZ(0);*/
+        /*transform: translate(0, 100%) translateZ(0);*/
+        /*}*/
 
 </style>
 
@@ -294,20 +266,18 @@
     <!--<img id='classright' class='classright' src='<%= asset_path('next.png') %>' width="30px" height="30px"/>-->
 
 
-    <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
-      <div id="wrapper" class="slide_width slide_height scroll_box"></div>
-      <ul id="nav">
-        <li class="selected"></li>
-        <% lenght = @goods['goods_albums'].length %>
-        <% if lenght>=6 %>
-        <% lenght = 6 %>
-        <% end %>
+    <div id="wrapper"></div>
+    <ul id="nav">
+      <li class="selected"></li>
+      <% lenght = @goods['goods_albums'].length %>
+      <% if lenght>=6 %>
+          <% lenght = 6 %>
+      <% end %>
 
-        <% 0.upto(lenght-1) do %>
-            <li></li>
-        <% end %>
-      </ul>
-    </div>
+      <% 0.upto(lenght-1) do %>
+          <li></li>
+      <% end %>
+    </ul>
 
 
     <div class="det_xq">
@@ -315,13 +285,13 @@
         <li>
           <img id='photo_pic' src="<%= @goods['brand_photo'] %>"/>
           <% if @goods['old_price'] %>
-              <span id='old_price' class="grey">市场价:￥<%= @goods['old_price'].to_i  %></span>
+              <span id='old_price' class="grey">市场价:￥<%= @goods['old_price'].to_i %></span>
           <% else %>
               <span id='old_price' class="grey"></span>
           <% end %>
-          <span id='sale_price' class="mms">mm价:￥<%= @goods['sale_price'].to_i  %></span>
+          <span id='sale_price' class="mms">mm价:￥<%= @goods['sale_price'].to_i %></span>
         </li>
-        <li style="height: 25px;line-height: 25px;">
+        <li style="height: 25px;line-height: 15px;">
         <span id='mms_name' class="mms_name"><%= @goods['shop']['name'] %>  <%= @goods['shop']['address'] %>
           (<%= @goods['shop']['phone'] %>)</span>
         </li>
@@ -346,6 +316,34 @@
         window.location.href = '/home/order?id=<%= @current_id%>';
     });
 
+    var maxwidth, maxheight;
+
+    if (DeviceInfo.type == 'mobile') {
+        maxwidth = 200;
+        if (DeviceInfo.height <= 960) {
+            maxheight = 180;
+            $('#wrapper').height(200);
+        } else {
+            maxheight = 320;
+            $('#wrapper').height(340);
+        }
+    } else if (DeviceInfo.type == 'pad') {
+        $('#wrapper').height(370);
+        maxwidth = 250;
+        maxheight = 350;
+    } else {
+        $('#wrapper').height(470);
+        maxwidth = 370;
+        maxheight = 450;
+    }
+
+    var ratio = window.devicePixelRatio || 1, offw;
+    if (DeviceInfo.type != 'mobile' && DeviceInfo.type != 'pad') {
+        offw = DeviceInfo.width/(2*ratio) - $('#nav').width()/(2*ratio);
+    }else {
+        offw = DeviceInfo.width/(2*ratio) - $('#nav').width()/(1*ratio);
+    }
+    $('#nav').css("left", offw);
 
     function AutoResizeImage(objImg, maxWidth, maxHeight) {
         var img = new Image();
@@ -374,9 +372,6 @@
         }
     }
 
-    document.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-    }, false);
     var gallery,
             el,
             i,
@@ -387,7 +382,8 @@
     slides.push({
         img: "<%= @goods['detail_photo'] %>",
         width: <%= @goods['width'] %>,
-        height: <%= @goods['height'] %>
+        height: <%= @goods['height'] %>,
+        desc: ''
     })
 
     <% @goods['goods_albums'].each do |album| %>
@@ -395,11 +391,13 @@
     slides.push({
         img: " <%= album['photo'] %>",
         width: <%= album['width'] %>,
-        height: <%= album['height'] %>
+        height: <%= album['height'] %>,
+        desc: ''
     })
     <% end %>
 
-    gallery = new SwipeView('#wrapper', { numberOfPages: slides.length, hastyPageFlip: true });
+    gallery = new SwipeView('#wrapper', { numberOfPages: slides.length });
+    var ratio = window.devicePixelRatio || 1;
 
     // Load initial data
     for (i = 0; i < 3; i++) {
@@ -411,17 +409,6 @@
         el.height = slides[page].height;
         el.onload = function () {
             this.className = '';
-            var maxwidth, maxheight;
-            if (DeviceInfo.type == 'mobile') {
-                maxwidth = 200;
-                maxheight = 250;
-            } else if (DeviceInfo.type == 'pad') {
-                maxwidth = 600;
-                maxheight = 600;
-            } else {
-                maxwidth = 0;
-                maxheight = 0;
-            }
             AutoResizeImage(this, maxwidth, maxheight);
         }
         gallery.masterPages[i].appendChild(el);

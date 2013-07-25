@@ -8,6 +8,7 @@ var DeviceInfo = (function (ua) {
             browser_engine: '',
             device: '',  // device model
             width: '',
+            height: '',
             ratio: '',
             type: '',  // pc || pad || mobile
             user_agent: ua
@@ -61,6 +62,12 @@ var DeviceInfo = (function (ua) {
             return x;
         },
 
+        _get_height = function () {
+            var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName('body')[0],
+                y = w.innerHeight || e.clientHeight || g.clientHeight;
+            return y;
+        },
+
         get_width = function () {
             var orientation = window.orientation || 0,
                 ratio = window.devicePixelRatio || 1,
@@ -90,6 +97,35 @@ var DeviceInfo = (function (ua) {
             return client_width;
         },
 
+        get_height = function () {
+            var orientation = window.orientation || 0,
+                ratio = window.devicePixelRatio || 1,
+                browser = get_browser(),
+                os = get_os(), client_height;
+            if (os == 'ios') {
+                client_height = screen.height * ratio;
+            } else if (os == 'android') {
+                if (browser == 'uc') {
+                    client_height = _get_height();
+                } else if (browser == 'chrome') {
+                    client_height = screen.height;
+                } else {
+                    if (['opera', 'firefox'].indexOf(browser) > -1) {
+                        client_height = screen.height < screen.width ? screen.height : screen.width;
+                    } else if (orientation == 0) {
+                        client_height = screen.height;
+                    } else if (orientation == 90 || orientation == -90) {
+                        client_height = screen.width;
+                    }
+                }
+            } else if (ua.match(/(Macintosh|Windows)/i) && !ua.match(/Windows Phone/i)) {
+                client_height = _get_height() * ratio;
+            } else {
+                client_height = screen.height;
+            }
+            return client_height;
+        },
+
         get_ratio = function () {
             return window.devicePixelRatio || 1;
         },
@@ -106,6 +142,7 @@ var DeviceInfo = (function (ua) {
 
     d.os = get_os();
     d.width = get_width();
+    d.height = get_height();
     d.type = get_type();
     d.ratio = get_ratio();
     d.browser = get_browser();
