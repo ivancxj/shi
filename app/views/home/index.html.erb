@@ -120,264 +120,134 @@
         color: #333;
     }
 
-    /*body a {*/
+    .product {
+        font-size: 13px;
+        text-align: center;
+        overflow: hidden;
+        line-height: 15px;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        float: left;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .img_wrap {
+        width: 100%;
+        height: auto;
+        margin: 3px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+        /*margin: 0 auto;*/
+    }
+
+        /*body a {*/
         /*outline: none;*/
         /*blr: expression(this.onFocus=this.blur());*/
-    /*}*/
+        /*}*/
 
         /************ table ****************/
 
 </style>
 
-<div class="top_bar">宁波试衣MM</div>
+<style>
+    .nav_list li{
+        width: 20%
+    }
+    .shop li{
+        padding-top: 10px;
+    }
+    ul{
+        margin-bottom: 20px;
+    }
+
+    .special .img_box{
+        width:300px;
+        height:172px;
+        margin: 0 auto;
+        border: 3px solid #ffffff;
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        margin-top: 4px;
+    }
+    .special .img_box.first{
+        margin-top:0;
+    }
+    .special .img_box p{
+        position: absolute;
+        bottom: 0;
+        height:22px;
+        line-height: 22px;
+        display: block;
+        background: #000000;
+        font-size: 12px;
+        color: #ffffff;
+        text-align: center;
+        width:100%;
+        padding: 0;
+    }
+    .special .img_box.failed{
+        background: rgba(4,0,0,0.05);
+    }
+    .special .img_box.failed img,
+    .special .img_box img{
+        display: none;
+    }
+    .special .img_box.loaded img{
+        display: block;
+    }
+</style>
+
+<!--<div class="top_bar">宁波试衣MM</div>-->
+<header>
+  <div class="navigation"></div>
+
+  <div class="title">宁波试衣MM</div>
+</header>
 <div class="main">
-  <!-- 回到头部 -->
-
-  <!-- 滑动大图 -->
-  <div class="slide_bar m_bg">
-    <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
-      <div style="-moz-transition-property: -moz-transform; -moz-transform-origin: 0pt 0pt; -moz-transform: translate(0px, 0px) scale(1);" class="img_wrap slide_scroll_width slide_height">
-        <a class="slide_a slide_width slide_height">
-          <img class="slide_width slide_height" src="<%= asset_path('d1.jpg') %>">
-        </a>
-        <a class="slide_a slide_width slide_height">
-          <img class="slide_width slide_height" src="<%= asset_path('d2.jpg') %>">
-        </a>
-        <a class="slide_a slide_width slide_height">
-          <img class="slide_width slide_height" src="<%= asset_path('d3.jpg') %>">
-        </a>
-        <!--
-        <div class="bar left"></div>
-        <div class="bar right"></div> -->
-      </div>
-      <!-- active -->
-      <div class="slide margin5">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript">
-    (function () {
-        var
-                $wrapper = $('.scroll_box'),
-                $slide = $wrapper.children('.slide'),
-//                $left = $('.left.arrow'),
-//                $right = $('.right.arrow'),
-                auto_slide,
-                $body = $('body'),
-                direction = 'landscape',
-
-                scroll = new iScroll($wrapper[0], {
-                    snap: true,
-                    momentum: false,
-                    vScroll: false,
-                    hScrollbar: false,
-                    onBeforeScrollStart: function () {
-                    },
-                    onBeforeScrollMove: function () {
-                        if (direction == 'portrait') {
-                            this._unbind('touchmove', window);
-                            this._unbind('touchend', window);
-                            this._unbind('touchcancel', window);
-                            return;
-                        }
-                    },
-                    onScrollMove: function (e) {
-                        if (this.dirY == 0) e.preventDefault();
-                    },
-                    onScrollEnd: function () {
-                        indicator_update(this.currPageX + 1);
-                    }
-                });
-
-
-//        alert($right.length)
-        $body.bind('touchstart', function (e) {
-            var point = e.touches[0],
-                    startPageX = point.pageX,
-                    startPageY = point.pageY;
-            $body.bind('touchmove', function (e) {
-                var point = e.touches[0],
-                        movePageX = point.pageX,
-                        movePageY = point.pageY;
-                if (Math.abs(movePageX - startPageX) < Math.abs(movePageY - startPageY)) {
-                    direction = 'portrait';
-                } else {
-                    direction = 'landscape';
-                }
-                $body.unbind('touchmove');
-            });
-        });
-
-        //幻灯提示点同步
-        function indicator_update(x) {
-            $slide.children('.active').removeClass('active');
-            $slide.find('li:nth-child(' + x + ')').addClass('active');
-//            $left.toggleClass('hide', x == 1);
-//            $right.toggleClass('hide', x == 4);
-        };
-
-        function scroll_to(x) {
-            var pageX = scroll.currPageX + x;
-            scroll.scrollToPage(pageX, 0, 500);
-        };
-
-//        $left.bind('itap', function () {
-//            scroll_to(-1);
-//        });
-//
-//        $right.bind('itap', function () {
-//            scroll_to(1);
-//        });
-
-        $wrapper.bind('touchstart', function () {
-            if (auto_slide) clearInterval(auto_slide);
-        });
-
-        $wrapper.bind('touchend', function () {
-            interval();
-        });
-
-//        $('.slide_a').bind('itap', function (e) {
-//            var $this = $(this);
-//            window.location.href = $this.data('href');
-//        });
-
-        function interval() {
-            if (auto_slide) clearInterval(auto_slide);
-            auto_slide = setInterval(function () {
-                scroll.scrollToPage((scroll.currPageX + 1) % 3, 0, 500)
-            }, 5000);
-        };
-        interval();
-    })();
-
-</script>
-<div class="con_main">
-  <table id='table'>
-    <tbody>
-    <tr>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=233">
-            <img src="<%= asset_path('pin14.jpg') %>"/>
-          </a>
+  <ul class="shop">
+    <li>
+      <a class="special" href="">
+        <div class="img_box loaded" >
+          <img src='<%= asset_path('at1.jpg')%>' width='300' height='150'>
+          <p class="name">游泳装备大集合，畅快体验水上清凉作战乐趣</p>
         </div>
-      </td>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=217">
-            <img src="<%= asset_path('pin2.jpg') %>"/>
-          </a>
+      </a>
+    </li>
+    <li>
+      <a class="special" href="">
+        <div class="img_box loaded" >
+          <img src='<%= asset_path('at2.jpg')%>' width='300' height='150'>
+          <p class="name">选择优雅男士配饰，打造高端商务精英气质</p>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=229">
-            <img src="<%= asset_path('pin3.jpg') %>"/>
-          </a>
+      </a>
+    </li>
+    <li>
+      <a class="special" href="">
+        <div class="img_box loaded" >
+          <img src='<%= asset_path('at1.jpg')%>' width='300' height='150'>
+          <p class="name">选择优雅男士配饰，打造高端商务精英气质</p>
         </div>
-      </td>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=148">
-            <img src="<%= asset_path('pin4.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=235">
-            <img src="<%= asset_path('pin5.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=238">
-            <img src="<%= asset_path('pin6.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=236">
-            <img src="<%= asset_path('pin7.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=221">
-            <img src="<%= asset_path('pin8.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=237">
-            <img src="<%= asset_path('pin9.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=75">
-            <img src="<%= asset_path('pin10.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=239">
-            <img src="<%= asset_path('pin11.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-      <td class="sort">
-        <div>
-          <a href="home/list?id=232">
-            <img src="<%= asset_path('pin12.jpg') %>"/>
-          </a>
-        </div>
-      </td>
-    </tr>
-    <!--<tr>-->
-    <!--<td class="sort">-->
-    <!--<div>-->
-    <!--<a href="home/list?id=241">-->
-    <!--<img src="<%= asset_path('pin13.jpg') %>" />-->
-    <!--</a>-->
-    <!--</div>-->
-    <!--</td>-->
-    <!--<td class="sort">-->
-    <!--<div>-->
-    <!--<a href="home/list?id=233">-->
-    <!--<img src="<%= asset_path('pin14.jpg') %>" />-->
-    <!--</a>-->
-    <!--</div>-->
-    <!--</td>-->
-    <!--</tr>-->
-    </tbody>
-  </table>
-  <div class="down"><a href="http://d.shiyimm.com">下载手机客户端</a></div>
+      </a>
+    </li>
+  </ul>
 </div>
 
-<script type="text/javascript">
-    // 通过滑动显示delete按钮
+<!-- footer -->
+<footer>
+  <p>© 2013-试衣MM</p>
+  <p><a href="http://d.shiyimm.com">下载手机客户端</a></p>
+</footer> <!-- end footer -->
 
+
+<script type="text/javascript">
+    var height = $(window).height() - 46;
+    $('.main').css('min-height', height - 46);
 </script>
