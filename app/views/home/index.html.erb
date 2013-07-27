@@ -1,69 +1,27 @@
 <script type="text/javascript">
     (function () {
         var slide_style = function () {
-            // var width = DeviceInfo.width / DeviceInfo.ratio - 8;
             var width = $(window).width() - 8;
             var height = width / 2;
-//            alert("width="+width+"  height="+height);
+            var width2 = width * 0.95;
+            var height2 = width * 22 / 72;
             var style = [
                 '<style type="text/css">',
                 '.slide_width{width:' + width + 'px !important;}',
                 '.slide_height{height:' + height + 'px !important;}',
-                '.slide_scroll_width{width:' + width * 3 + 'px !important;}',
+                '.slide_width2{width:' + width2 + 'px !important;}',
+                '.slide_height2{height:' + height2 + 'px !important;}',
                 '</style>'
             ]
             $('head').append(style.join(' '));
         };
-
-        var add_ratio_class = function () {
-            var class_name = 'ratio' + DeviceInfo.ratio;
-            $('body').removeClass('ratio1').addClass(class_name.replace('.', '_'));
-        };
-
-        if (!(DeviceInfo.browser == 'firefox' || (DeviceInfo.os == 'wp' && DeviceInfo.browser == 'ie'))) {
-            slide_style();
-        } else {
-            $(function () {
-                DeviceInfo.ratio = DeviceInfo.width / window.innerWidth;
-                // 设置样式
-                slide_style();
-                // 更新cookie
-                set_cookie('ratio', DeviceInfo.ratio, 365);
-                // body上添加不同浏览器的class
-                add_ratio_class();
-            });
-        }
-
+        slide_style();
     })();
 </script>
 
 <style type="text/css">
-    .top_bar {
-        height: 45px;
-        background: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#222));
-        line-height: 45px;
-        font-size: 18px;
-        text-align: center;
-        color: #FFF;
-        font-weight: bold;
-    }
-
-    .img_wrap a {
-        width: 320px;
-        float: left;
-        height: 155px;
-    }
-
-    .slide {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        margin-left: -30px;
-        z-index: 1;
-    }
-
-    .scroll_box {
-        margin: 0 auto;
+    body {
+        background: #F0F0F0;
     }
 
     .slide_bar {
@@ -75,179 +33,146 @@
         -webkit-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
         -moz-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
         margin: 7px 0 2px;
+        margin-bottom: 40px;
         overflow: hidden;
     }
 
-    .con_main table {
-        border: medium none;
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    .sort {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        font-size: 16px;
-        text-align: center;
-        width: 97px;
-    }
-
-    .sort div {
-        /*height: 50px;*/
-        /*width: 50px;*/
-    }
-
-    .sort div img {
-        height: 100%;
-        float: left;
-    }
-
-    .down {
-        margin: 15px 35px;
-        overflow: hidden;
-        border: 1px solid #DDD;
-        background: #FFF;
-        text-align: center;
-        padding: 10px;
-        background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF), to(#EEE));
-        border-radius: 0.5em;
-    }
-
-    .down a {
-        width: 100%;
-        height: 100%;
-        display: block;
-        font-size: 14px;
-        color: #333;
-    }
-
-    .product {
-        font-size: 13px;
-        text-align: center;
-        overflow: hidden;
-        line-height: 15px;
-        border-radius: 8px;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        float: left;
-        width: 100%;
-        height: auto;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        margin-bottom: 10px;
-    }
-
-    .img_wrap {
-        width: 100%;
-        height: auto;
-        margin: 3px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-
-        /*margin: 0 auto;*/
-    }
-
-        /*body a {*/
-        /*outline: none;*/
-        /*blr: expression(this.onFocus=this.blur());*/
-        /*}*/
-
-        /************ table ****************/
-
-</style>
-
-<style>
-    .nav_list li{
-        width: 20%
-    }
-    .shop li{
-        padding-top: 10px;
-    }
-    ul{
-        margin-bottom: 20px;
-    }
-
-    .special .img_box{
-        width:300px;
-        height:172px;
-        margin: 0 auto;
+    .scroll_box {
+        margin: 0 auto 10px auto;
         border: 3px solid #ffffff;
         position: relative;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
         margin-top: 4px;
+
     }
-    .special .img_box.first{
-        margin-top:0;
+
+    .ppsh {
+        height: 35px;
+        margin-top: -5px;
+        line-height: 35px;
     }
-    .special .img_box p{
-        position: absolute;
-        bottom: 0;
-        height:22px;
-        line-height: 22px;
-        display: block;
-        background: #000000;
+
+    .ppsh strong {
+        width: 65px;
+        background: #eb3873;
+        float: left;
+        height: 100%;
+        font-size: 16px;
+        padding-left: 5px;
+        color: #FFF;
+    }
+
+    .ppsh span {
+        float: left;
         font-size: 12px;
-        color: #ffffff;
-        text-align: center;
-        width:100%;
-        padding: 0;
+        color: #eb3873;
     }
-    .special .img_box.failed{
-        background: rgba(4,0,0,0.05);
-    }
-    .special .img_box.failed img,
-    .special .img_box img{
-        display: none;
-    }
-    .special .img_box.loaded img{
-        display: block;
+
+    .ppsh em {
+        width: 1px;
+        width: 1px;
+        border-left: 15px solid #eb3873;
+        border-bottom: 17px solid #F0F0F0;
+        border-top: 18px solid #F0F0F0;
+        float: left;
+        border-right: 5px solid #F0F0F0;
     }
 </style>
 
-<!--<div class="top_bar">宁波试衣MM</div>-->
+
 <header>
   <div class="navigation"></div>
 
   <div class="title">宁波试衣MM</div>
 </header>
 <div class="main">
-  <ul class="shop">
-    <li>
-      <a class="special" href="">
-        <div class="img_box loaded" >
-          <img src='<%= asset_path('at1.jpg')%>' width='300' height='150'>
-          <p class="name">游泳装备大集合，畅快体验水上清凉作战乐趣</p>
-        </div>
+  <div class="slide_bar">
+    <!-- 广告-->
+    <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
+      <a class="slide_width slide_height">
+        <img class="slide_width slide_height" src="<%= asset_path('d1.jpg') %>">
       </a>
-    </li>
-    <li>
-      <a class="special" href="">
-        <div class="img_box loaded" >
-          <img src='<%= asset_path('at2.jpg')%>' width='300' height='150'>
-          <p class="name">选择优雅男士配饰，打造高端商务精英气质</p>
-        </div>
+    </div>
+    <!--品牌说明-->
+    <div class="ppsh">
+      <h2><strong>先试再说</strong><em></em><span>以下品牌支持宁波市区内免费送上门试穿</span></h2>
+    </div>
+    <!--品牌说明end-->
+    <!-- 品牌列表-->
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=75&name=优衣库" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('1.jpg') %>">
       </a>
-    </li>
-    <li>
-      <a class="special" href="">
-        <div class="img_box loaded" >
-          <img src='<%= asset_path('at1.jpg')%>' width='300' height='150'>
-          <p class="name">选择优雅男士配饰，打造高端商务精英气质</p>
-        </div>
+    </div>
+
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=217&name=5+" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('2.jpg') %>">
       </a>
-    </li>
-  </ul>
+    </div>
+
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=233&name=诺诗凡" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('3.jpg') %>">
+      </a>
+    </div>
+
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=236&name=玛莎" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('4.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=238&name=MANGO" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('5.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=237&name=ONLY" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('6.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=221&name=欧时力" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('7.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=235&name=LILY" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('8.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=148&name=H&M" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('9.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=239&name=VERO MODA" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('10.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=241&name=伊芙丽" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('12.jpg') %>">
+      </a>
+    </div>
+    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+      <a href="/home/list?id=229&name=歌莉娅" class="slide_width2 slide_height2">
+        <img class="slide_width2 slide_height2" src="<%= asset_path('13.jpg') %>">
+      </a>
+    </div>
+
+  </div>
+
 </div>
 
-<!-- footer -->
 <footer>
   <p>© 2013-试衣MM</p>
-  <p><a href="http://d.shiyimm.com">下载手机客户端</a></p>
-</footer> <!-- end footer -->
 
+  <p><a href="http://d.shiyimm.com">android客户端</a></p>
 
-<script type="text/javascript">
-    var height = $(window).height() - 46;
-    $('.main').css('min-height', height - 46);
-</script>
+  <p><a href="http://itunes.apple.com/cn/app/id655655105">iphone客户端</a></p>
+</footer>
