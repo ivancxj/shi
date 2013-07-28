@@ -188,14 +188,16 @@
 
   <div class="page">
     <span class="selected">1</span>
-    <% @goods["goods_albums"].each do |album| %>
-        <span>1</span>
+    <% @goods["goods_albums"].each_with_index do |album, index| %>
+        <% if index < 7 %>
+            <span>1</span>
+        <% end %>
     <% end %>
   </div>
   <div class="extra">
     <p class="price">
-      <del>市场价: ￥<%= @goods["old_price"]%></del>
-      <b>MM价: ￥<%= @goods["sale_price"]%></b></p>
+      <del>市场价: ￥<%= @goods["old_price"] %></del>
+      <b>MM价: ￥<%= @goods["sale_price"] %></b></p>
     <p class="go-order">
       <button class="button pink">点击体验试穿</button>
     </p>
