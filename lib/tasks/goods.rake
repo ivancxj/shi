@@ -12,6 +12,11 @@ namespace :goods do
   desc '获取全部goods id'
 
   task :get do
+    #ids2 = ids
+    #ids = []
+    #get_ids.each do |k,v|
+    #  ids << k.to_i
+    #end
     ids = [217, 229, 148, 235, 238, 236, 221, 237, 75, 239, 232, 241, 233]
     arr = []
     ids.each do |id|

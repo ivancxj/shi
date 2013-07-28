@@ -110,16 +110,4 @@ class HomeController < ApplicationController
 
   end
 
-  def test
-    ids = [217,229,148,235,238,236,221,237,75,239,232,241,233]
-
-
-
-    @current_id = params[:id]
-    resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
-    @goods=ActiveSupport::JSON.decode(resp.body)
-
-    render :json => @result
-  end
-
 end
