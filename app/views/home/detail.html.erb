@@ -151,23 +151,16 @@
 
 </style>
 
-<script type="text/javascript">
-
-    $(function () {
-        $('.navigation').bind('itap', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.href = '/';
-        });
-    })
-</script>
-
 <header>
   <div class="navigation">
     <div></div>
   </div>
   <div class="title"><%= @goods["name"] %></div>
 </header>
+
+<!--  nav  -->
+<%= render :partial => 'common/nav' %>
+<!--  end nav  -->
 
 <article class="gallery">
   <div id="wrapper" class="wrapper">
@@ -183,8 +176,8 @@
     </div>
   </div>
   <div class="trigger">
-    <a href="#" class="prev"><img src="<%= asset_path('prev.png') %>"/></a>
-    <a href="#" class="next"><img src="<%= asset_path('next.png') %>"/></a>
+    <a href="/home/detail?id=<%= @pre_id %>" class="prev"><img src="<%= asset_path('prev.png') %>"/></a>
+    <a href="/home/detail?id=<%= @next_id %>" class="next"><img src="<%= asset_path('next.png') %>"/></a>
   </div>
 
   <div class="page">
@@ -205,6 +198,19 @@
 </article>
 
 <script>
+
+    (function () {
+
+        var click_event = DeviceInfo.browser == 'ie' ? 'click' : 'tap';
+
+//        商品详情点击事件
+        $('.button').bind(click_event, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = '/home/order?id=<%= @current_id%>';
+        });
+    })();
+
     document.addEventListener("orientationchange", updateLayout);
 
     // The wrapperWidth before orientationChange. Used to identify the current page number in updateLayout();
