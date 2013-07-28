@@ -127,13 +127,6 @@
 </style>
 
 <script type="text/javascript">
-    $(function () {
-        $('.navigation').bind('itap', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.href = '/';
-        });
-    })
 </script>
 
 <header>
@@ -144,6 +137,10 @@
   <div class="title">送上门试</div>
 
 </header>
+
+<!--  nav  -->
+<%= render :partial => 'common/nav' %>
+<!--  end nav  -->
 
 <section class="info">
   <h3>感兴趣就试试吧,免费试穿送上门!</h3>
@@ -158,13 +155,13 @@
         </dd>
       </dl>
     </li>
-    <li>
-      <dl>
-        <dt>尺码:</dt>
-        <dd id="measure">
-        </dd>
-      </dl>
-    </li>
+    <!--<li>-->
+      <!--<dl>-->
+        <!--<dt>尺码:</dt>-->
+        <!--<dd id="measure">-->
+        <!--</dd>-->
+      <!--</dl>-->
+    <!--</li>-->
   </ul>
 </section>
 <section class="order">
@@ -230,8 +227,11 @@
                 $.getJSON('/home/confirm?mobile=' + phone + '&goods_id=' + "<%= @id%>", function (result) {
 //                        alert(2)
                     if (result['result'] == 'ok') {
-                        alert("提交成功~,我们马上回联系您！")
-                        history.back()
+                        if(confirm("提交成功~,我们会马上联系您！")){
+                            history.back()
+                        }
+//                        alert("提交成功~,我们会马上联系您！")
+//                        history.back()
 //                            if(alert("提交成功~")){
 //                                window.close();
 //                            }

@@ -5,7 +5,7 @@
     <% get_brand.each do |key, value| %>
         <a data-href="/home/list?id=<%= key %>"class="nav_enter">
           <div class="nav_home">
-            <span></span>
+            <!--<span></span>-->
             <p><%= value[1]%></p></div>
         </a>
     <% end %>
@@ -15,7 +15,7 @@
 </div>
 
 <script>
-    (function () {
+    $(function () {
         var click_event = DeviceInfo.browser == 'ie' ? 'click' : 'tap';
         var nav_event = DeviceInfo.browser == 'ie' ? 'click' : 'itap';
 

@@ -78,6 +78,9 @@
 
 </style>
 
+<!--  nav  -->
+<%= render :partial => 'common/nav' %>
+<!--  end nav  -->
 
 <script type="text/javascript">
     var width = ($(window).width() - 10) / 2;
@@ -103,7 +106,7 @@
   <section style="margin-top: 10px;">
     <% @goods_list.each do |goods| %>
         <div class="product">
-          <a data-href="/home/detail?id=<%= goods['id'] %>&page=<%= @page %>&brand_id=<%= @id %>">
+          <a data-href="/home/detail?id=<%= goods['id'] %>&brand_id=<%= @id %>">
             <div class="img_wrap">
               <img src="<%= goods['photo_url'] %>">
             </div>
@@ -138,9 +141,7 @@
 
 </div>
 
-<!--  nav  -->
-<%= render :partial => 'common/nav' %>
-<!--  end nav  -->
+
 <footer>
   <p>© 2013-试衣MM</p>
 
@@ -148,6 +149,7 @@
 
   <p><a href="http://itunes.apple.com/cn/app/id655655105">iPhone客户端</a></p>
 </footer>
+
 
 <script>
 

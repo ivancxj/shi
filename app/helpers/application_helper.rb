@@ -21,7 +21,7 @@ module ApplicationHelper
         '232'=>['11.jpg', 'H&M'],
         '241'=>['8.jpg', 'EIFINI 伊芙丽'],
 
-        '233'=>['2.jpg', 'NOIHSAF 诺诗凡']
+        '233'=>['3.jpg', 'NOIHSAF 诺诗凡']
     }
   end
 
