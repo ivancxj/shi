@@ -98,234 +98,70 @@
   <div class="title">宁波试衣MM</div>
 </header>
 
-<!--  nav  -->
-<div class="nav_layer hide">
-  <div class="nav_body">
-    <div class="nav_arrow"></div>
-    <a data-href="/" class="nav_enter">
-      <div class="nav_home"><span></span>
-
-        <p>COCO DEAL</p></div>
-    </a>
-    <a data-href="" class="nav_enter">
-      <div class="nav_new"><span></span>
-
-        <p>FIVE PLUS</p></div>
-    </a>
-    <a data-href="/brands" class="nav_enter">
-      <div class="nav_brand"><span></span>
-
-        <p>H&M</p></div>
-    </a>
-    <a data-href="/stores" class="nav_enter">
-      <div class="nav_shop"><span></span>
-
-        <p>LILY</p></div>
-    </a>
-    <a class="nav_space nav_enter" data-href="/categories?target=male">
-      <div class="nav_men"><span></span>
-
-        <p>MANGO</p></div>
-    </a>
-    <a data-href="" class="nav_enter">
-      <div class="nav_women"><span></span>
-
-        <p>MS</p></div>
-    </a>
-    <a data-href="" class="nav_enter">
-      <div class="nav_furniture"><span></span>
-
-        <p>OCHIRLY</p></div>
-    </a>
-    <a data-href="/products?where[category1_id]=203" class="nav_enter">
-      <div class="nav_treasure"><span></span>
-
-        <p>ONLY</p></div>
-    </a>
-    <a data-href="/products?where[category1_id]=193" class="nav_enter">
-      <div class="nav_outdoor"><span></span>
-
-        <p>UNIQLO</p></div>
-    </a>
-    <a class="nav_space nav_enter" data-href="/user_center" class="nav_enter">
-      <div class="nav_account"><span></span>
-
-        <p>VERO MODA</p></div>
-    </a>
-    <a class="check_order nav_enter" data-href="/trades?status=receive">
-      <div class="nav_order"><span></span>
-
-        <p>ZARA</p></div>
-    </a>
-  </div>
-  <div class="nav_other"></div>
-</div>
-<!--  end nav  -->
 
 <div class="main">
-<section style="margin-top: 10px;">
-  <% @goods_list.each do |goods| %>
-      <div class="product">
-        <a href="/home/detail?id=<%= goods['id'] %>&ids=<%= @ids %>&page=<%= @page %>&brand_id=<%= @id %>">
-          <div class="img_wrap">
-            <img src="<%= goods['photo_url'] %>">
+  <section style="margin-top: 10px;">
+    <% @goods_list.each do |goods| %>
+        <div class="product">
+          <a data-href="/home/detail?id=<%= goods['id'] %>&page=<%= @page %>&brand_id=<%= @id %>">
+            <div class="img_wrap">
+              <img src="<%= goods['photo_url'] %>">
+            </div>
+          </a>
+        </div>
+    <% end %>
+
+    <div style="clear: both"></div>
+
+    <div class="page">
+
+      <% if @page == 1 %>
+
+      <% else %>
+          <div class="up_page left">
+            <a href='/home/list?id=<%= @id %>&page=<%= (@page-1) %>'>上一页</a>
           </div>
-        </a>
-      </div>
-  <% end %>
-
-  <div style="clear: both"></div>
-
-  <div class="page">
-
-    <% if @page == 1 %>
-
-    <% else %>
-        <div class="up_page left disables">
-          <a href='/home/list?id=<%= @id %>&page=<%= (@page-1) %>'>上一页</a>
-        </div>
-    <% end %>
+      <% end %>
 
 
+      <!--判断是否有下一页-->
+      <% if @goods_list.blank? or @goods_list.length < 14 %>
+      <% else %>
+          <div class="down_page right">
+            <a href='/home/list?id=<%= (@id) %>&page=<%= (@page+1) %>'>下一页</a>
+          </div>
+      <% end %>
+      <div style="clear: both;"/>
+    </div>
 
-    <% if @goods_list.blank? or @goods_list.length < 14 %>
-
-
-    <% else %>
-        <div class="down_page right">
-          <a href='/home/list?id=<%= (@id) %>&page=<%= (@page+1) %>'>下一页</a>
-        </div>
-    <% end %>
-
-
-    <div style="clear: both;"/>
-  </div>
-
-</section>
+  </section>
 
 </div>
+
+<!--  nav  -->
+<%= render :partial => 'common/nav' %>
+<!--  end nav  -->
 <footer>
   <p>© 2013-试衣MM</p>
-  <p onclick="addBookmark('12','http://www.baidu.com');">12</p>
+
   <p><a href="http://d.shiyimm.com">android客户端</a></p>
 
-  <p><a href="http://itunes.apple.com/cn/app/id655655105">iphone客户端</a></p>
+  <p><a href="http://itunes.apple.com/cn/app/id655655105">iPhone客户端</a></p>
 </footer>
 
 <script>
 
-    function addBookmark(title,url)
-    {
-        if (window.sidebar)
-        {
-            window.sidebar.addPanel(title, url,"");
-        }
-        else if( document.all )
-        {
-            window.external.AddFavorite( url, title);
-        }
-        else if( window.opera && window.print ) {
-            return true;
-        }
-    }
-
-    function hotKeys() {
-        alert(1212)
-        var ua = navigator.userAgent.toLowerCase();
-        var str = '';
-        var isWebkit = (ua.indexOf('webkit') != - 1);
-        var isMac = (ua.indexOf('mac') != - 1);
-
-        if (ua.indexOf('konqueror') != - 1) {
-            str = 'CTRL + B'; // Konqueror
-        } else if (window.home || isWebkit || isIEmac || isMac) {
-            str = (isMac ? 'Command/Cmd' : 'CTRL') + ' + D'; // Netscape, Safari, iCab, IE5/Mac
-        }
-        return ((str) ? 'Press ' + str + ' to bookmark this page.' : str);
-    }
-
-
     (function () {
-        if (false) {
-            setTimeout(function () {
-                window.scrollTo(0, 88);
-            }, 100)
-
-        }
 
         var click_event = DeviceInfo.browser == 'ie' ? 'click' : 'tap';
-        var nav_event = DeviceInfo.browser == 'ie' ? 'click' : 'itap';
 
-        var $nav = $('.navigation'),
-                $nav_layer = $('.nav_layer'),
-                $main = $('.main'),
-                $footer = $('footer'),
-                $nav_other = $nav_layer.find('.nav_other'),
-                $nav_enter = $nav_layer.find('.nav_enter'),
-                height = $(window).height() - 46,
-//                $app = $('.app'),
-                width = $(window).width();
-
-        $nav_layer.find('.nav_body').width(width * 0.59375);
-        $main.css('min-height', height - 46);
-
-//        if($app.hasClass('hide')){
-//            $nav_layer.css('top', 46);
-//        }else{
-//            $nav_layer.css('top', 106);
-//        }
-
-        <!-- 导航事件绑定 -->
-        $nav.bind(nav_event, function () {
-            $nav.addClass('push');
-            $nav_layer.toggleClass('hide');
-            if ($nav_layer.hasClass('hide')) {
-                $main.css('height', 'auto');
-                $footer.removeClass('hide');
-            } else {
-                if (height > 570) {
-                    $nav_layer.css('height', height);
-                } else {
-                    $nav_layer.css('height', 570);
-                }
-                if ($main.height() > height) {
-                    var main_height = $nav_layer.height();
-                    $main.css('height', main_height);
-                    $footer.addClass('hide');
-                }
-            }
-
-            setTimeout(function () {
-                $nav.removeClass('push');
-            }, 1000)
-        });
-
-        <!-- 浮层事件绑定 -->
-        $nav_other.width(width * 0.40625);
-
-        $nav_other.bind('click', function () {
-            $nav_layer.addClass('hide');
-            $main.css('height', 'auto');
-            $footer.removeClass('hide');
-            return false;
-        });
-
-        $nav_enter.bind(click_event, function (e) {
-            var $dom = $(this),
+//        商品详情点击事件
+        $('.product a').bind(click_event, function (e) {
+            var
+                    $dom = $(this),
                     link = $dom.data('href');
-            $dom.addClass('push');
             $dom.attr('href', link);
-            $dom.siblings().removeClass('push');
         });
-        <!-- app浮层事件绑定 -->
-//        $('.app_delete').bind('click', function(e){
-//            var $dom = $(this);
-//            $dom.parent('.app').addClass('hide');
-//            $nav_layer.css('top', 46);
-//            set_cookie('app',false);
-//        });
-
-
     })();
 
 </script>

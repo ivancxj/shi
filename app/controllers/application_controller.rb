@@ -72,8 +72,4 @@ class ApplicationController < ActionController::Base
     2
   end
 
-  # 首页上展示的品牌 ids
-  def get_brand_ids
-    array = [240,217,229,148,235,238,236,221,237,75,239,232,241,233]
-  end
 end

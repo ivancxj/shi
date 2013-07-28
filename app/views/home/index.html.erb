@@ -101,69 +101,13 @@
     </div>
     <!--品牌说明end-->
     <!-- 品牌列表-->
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=75&name=优衣库" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('1.jpg') %>">
-      </a>
-    </div>
-
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=217&name=5+" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('2.jpg') %>">
-      </a>
-    </div>
-
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=233&name=诺诗凡" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('3.jpg') %>">
-      </a>
-    </div>
-
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=236&name=玛莎" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('4.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=238&name=MANGO" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('5.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=237&name=ONLY" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('6.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=221&name=欧时力" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('7.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=235&name=LILY" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('8.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=148&name=H&M" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('9.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=239&name=VERO MODA" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('10.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=241&name=伊芙丽" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('12.jpg') %>">
-      </a>
-    </div>
-    <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-      <a href="/home/list?id=229&name=歌莉娅" class="slide_width2 slide_height2">
-        <img class="slide_width2 slide_height2" src="<%= asset_path('13.jpg') %>">
-      </a>
-    </div>
+    <% get_brand.each do |key, value| %>
+        <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+          <a href="/home/list?id=<%= key %>" class="slide_width2 slide_height2">
+            <img class="slide_width2 slide_height2" src="<%= asset_path("#{value[0]}") %>">
+          </a>
+        </div>
+    <% end %>
 
   </div>
 
