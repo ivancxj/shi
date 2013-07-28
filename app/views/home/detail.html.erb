@@ -176,8 +176,14 @@
     </div>
   </div>
   <div class="trigger">
-    <a href="/home/detail?id=<%= @pre_id %>" class="prev"><img src="<%= asset_path('prev.png') %>"/></a>
-    <a href="/home/detail?id=<%= @next_id %>" class="next"><img src="<%= asset_path('next.png') %>"/></a>
+    <% if @pre_id %>
+        <a href="/home/detail?id=<%= @pre_id %>" class="prev"><img src="<%= asset_path('prev.png') %>"/></a>
+    <% end %>
+
+    <% if @next_id %>
+        <a href="/home/detail?id=<%= @next_id %>" class="next"><img src="<%= asset_path('next.png') %>"/></a>
+    <% end %>
+
   </div>
 
   <div class="page">
