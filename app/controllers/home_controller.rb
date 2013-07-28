@@ -52,6 +52,9 @@ class HomeController < ApplicationController
 
     @pre_id = get_pre_goods_id(@current_id)
     @next_id = get_next_goods_id(@current_id)
+
+    #p 'pre_id='+ @pre_id.to_s
+    #p 'next_id='+ @next_id.to_s
     # 品牌id
     #brand_id = params[:brand_id]
     #page = params[:page]

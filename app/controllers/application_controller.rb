@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
 
   def get_pre_goods_id(id)
     arr = get_ids
-    index = arr.index(id)
+    index = arr.index(id.to_i)
     if index.nil?
       p 'todo 有错'
     else
@@ -79,12 +79,12 @@ class ApplicationController < ActionController::Base
   def get_next_goods_id (id)
     arr = get_ids
     len = arr.count
-    index = arr.index(id)
+    index = arr.index(id.to_i)
     if index.nil?
       p 'todo 有错'
     else
       if index < len-1
-        arr[index-1]
+        arr[index+1]
       else
         nil
       end
