@@ -81,8 +81,24 @@ class HomeController < ApplicationController
 
   def order
     @id = params[:id]
-
-
+    resp = shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
+    goods = ActiveSupport::JSON.decode(resp.body)
+    if goods
+      @color = Array.new;
+      @measure = Array.new;
+      goods["sku"].each_with_index do |sku, index|
+        if sku["color"].include?("-")
+          @color.push(sku["color"].split('-')[0])
+        else
+          @color.push(sku["color"])
+        end
+        if sku["measure"] && (index == 1)
+          sku["measure"].each do |measure|
+            @measure.push(measure["size"])
+          end
+        end
+      end
+    end
   end
 
   def confirm
