@@ -18,6 +18,15 @@
   <%= controller_javascript_include_tag %>
   <link rel="shortcut icon" href="<%= asset_path('small_logo.png') %>" />
   <%= csrf_meta_tags %>
+  <style>
+      .navigation>div {
+          width: 25px !important;
+          height: 26px !important;
+          margin: 10px 18px;
+          background: url(<%= asset_path('pinpai.png')%>) no-repeat;
+          background-size: 100%;
+      }
+  </style>
 </head>
 <body>
 
