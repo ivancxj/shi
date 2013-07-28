@@ -1,54 +1,4 @@
 <style>
-    .top_bar2 {
-        font-size: 14px;
-        margin: 16px 0 16px 8px;
-    }
-
-    .contact_box {
-        position: relative;
-        float: none;
-        background: #ffffff;
-        margin-top: 4px;
-        padding: 4px 4px 4px 4px;
-        border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-    }
-
-    .txt {
-        border-bottom: 1px solid #f6f6f6;
-        font-size: 14px;
-        color: #333333;
-        font-weight: bold;
-        line-height: 1em;
-
-    }
-
-    .txt p {
-        margin-left: 8px;
-    }
-
-    .txt span, .txt em , .txt input{
-        text-align: left;
-        padding-right: 12px;
-    }
-
-    .txt span {
-        color: #feb1d3;
-    }
-
-    .btn_wrap {
-        vertical-align: middle;
-        text-align: center;
-        padding: 10px;
-        *position: absolute;
-        *top: 50%;
-        *left: 50%;
-    }
-
         /* button
 ---------------------------------------------- */
     .button {
@@ -56,24 +6,26 @@
         zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
         *display: inline;
         vertical-align: baseline;
-        margin: 0 2px;
+        margin: 0 32px 32px 0;
         outline: none;
         cursor: pointer;
         text-align: center;
         text-decoration: none;
         font: 14px/100% Arial, Helvetica, sans-serif;
-        padding: .5em 2em .55em;
-        text-shadow: 0 1px 1px rgba(0,0,0,.3);
+        padding: .6em 3em .55em;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
         -webkit-border-radius: .5em;
         -moz-border-radius: .5em;
         border-radius: .5em;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-        box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
     }
+
     .button:hover {
         text-decoration: none;
     }
+
     .button:active {
         position: relative;
         top: 1px;
@@ -85,27 +37,98 @@
         border: solid 1px #d2729e;
         background: #f895c2;
         background: -webkit-gradient(linear, left top, left bottom, from(#feb1d3), to(#f171ab));
-        background: -moz-linear-gradient(top,  #feb1d3,  #f171ab);
-        filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#feb1d3', endColorstr='#f171ab');
+        background: -moz-linear-gradient(top, #feb1d3, #f171ab);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#feb1d3', endColorstr='#f171ab');
     }
+
     .pink:hover {
         background: #d57ea5;
         background: -webkit-gradient(linear, left top, left bottom, from(#f4aacb), to(#e86ca4));
-        background: -moz-linear-gradient(top,  #f4aacb,  #e86ca4);
-        filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4aacb', endColorstr='#e86ca4');
+        background: -moz-linear-gradient(top, #f4aacb, #e86ca4);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4aacb', endColorstr='#e86ca4');
     }
+
     .pink:active {
         color: #f3c3d9;
         background: -webkit-gradient(linear, left top, left bottom, from(#f171ab), to(#feb1d3));
-        background: -moz-linear-gradient(top,  #f171ab,  #feb1d3);
-        filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f171ab', endColorstr='#feb1d3');
+        background: -moz-linear-gradient(top, #f171ab, #feb1d3);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f171ab', endColorstr='#feb1d3');
+    }
+
+        /*info*/
+    section {
+        padding: 0;
+    }
+
+    section h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #f2f2f2;
+    }
+
+    .info {
+        line-height: 24px;
+        margin: 10px;
+    }
+
+    .info li span {
+        padding: 5px;
+        border: 1px solid #eee;
+        margin: 5px;
+        line-height: 18px;
+    }
+
+    .info li .selected {
+        border-color: #88166c;
+        background-color: #f2f2f2;
+    }
+
+    .info dl,
+    .info dd {
+        overflow: hidden;
+    }
+
+    .info dd span {
+        padding: 4px 12px 4px 12px;
+        font-size: 14px;
+    }
+
+    .info dt {
+        float: left;
+        width: 50px;
+        line-height: 32px;
+        font-size: 14px;
+    }
+
+        /*order*/
+    .order {
+        line-height: 24px;
+        margin-right: 35px;
+    }
+
+    .order input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    .order p {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+        /*footer*/
+    footer {
+        margin-top: 40px;
     }
 
 </style>
 
 <script type="text/javascript">
-    $(function(){
-        $('.navigation').bind('itap',function(e){
+    $(function () {
+        $('.navigation').bind('itap', function (e) {
             e.preventDefault();
             e.stopPropagation();
             window.location.href = '/';
@@ -122,41 +145,108 @@
 
 </header>
 
-<div class="top_bar2">免费试穿送上门，一个电话就搞定!</div>
-<section>
-  <div class="contact_box">
-    <div class="txt">
-      <p><span style="height: 30px;text-align: center">联系电话:</span> <input placeholder="请输入您的联系电话" type="text"/></p>
-    </div>
-    <div class="btn_wrap">
-      <div class="button pink"><a>快点联系我</a></div>
-    </div>
-  </div>
+<section class="info">
+  <h3>感兴趣就试试吧,免费试穿送上门!</h3>
+  <ul>
+    <li>
+      <dl>
+        <dt>颜色:</dt>
+        <dd id="color">
+          <% @color.each do |color| %>
+              <span><%= color %></span>
+          <% end %>
+        </dd>
+      </dl>
+    </li>
+    <li>
+      <dl>
+        <dt>尺码:</dt>
+        <dd id="measure">
+        </dd>
+      </dl>
+    </li>
+  </ul>
 </section>
+<section class="order">
+    <h3>请留下您的联系方式</h3>
+
+    <p>以便我们与您确认配送时间</p>
+
+    <p><input id="mobile" placeholder="电话号码"/></p>
+
+    <p>
+      <button class="button pink" type="submit">确认</button>
+    </p>
+</section>
+
+<footer>
+  <p>版权所有 试衣MM</p>
+</footer>
 
 
 <script>
-    $(function(){
-        $(".button").bind('click', function(){
-            var phone = $('.txt input').val();
-            if(phone.length > 0){
+    $(function () {
+
+        var color = [];
+        <% @color.each do |value|%>
+            color.push("<%= value %>")
+        <% end %>
+        var measure = [];
+        <% @measure.each do |value|%>
+            measure.push("<%= value %>")
+        <% end %>
+
+        $('#color span').live('click', function () {
+            $('#color span').each(function (){
+                $(this).removeClass('selected');
+            });
+            $(this).toggleClass('selected');
+            for(var i=0;i<color.length;i++){
+                if(color[i] == $(this).text()){
+                    $('#measure').empty();
+                    for(var j=0;j<measure.length;j++){
+                        $('#measure').append('<span>' + measure[j] +'</span>');
+                    }
+                }
+            }
+        });
+
+        $('#color span:first-child').trigger('click');
+
+        $('#measure span').live('click', function(){
+            $(this).toggleClass('selected');
+//            var selectedMeasure = [];
+//            $('#measure span').each(function (){
+//                if($(this).hasClass('selected')){
+//                    selectedMeasure.push($(this));
+//                }
+//            });
+        });
+
+        $(".button").bind('click', function () {
+            var phone = $('#mobile').val();
+            if (phone.length > 0) {
 //                if(confirm("确认您的电话号码是" + phone)){
-                    $.getJSON('/home/confirm?mobile='+phone+'&goods_id='+"<%= @id%>", function(result){
+                $.getJSON('/home/confirm?mobile=' + phone + '&goods_id=' + "<%= @id%>", function (result) {
 //                        alert(2)
-                        if(result['result'] == 'ok') {
-                            alert("提交成功~,我们会马上联系您！")
-                            history.back()
+                    if (result['result'] == 'ok') {
+                        alert("提交成功~,我们马上回联系您！")
+                        history.back()
 //                            if(alert("提交成功~")){
 //                                window.close();
 //                            }
-                        }else {
-                            alert("提交失败~,请重新试试")
-                        }
-                    });
+                    } else {
+                        alert("提交失败~,请重新试试")
+                    }
+                });
 //                }
-            }else {
+            } else {
                 alert("您的联系电话还没有填写哦~");
             }
         });
+//        $(".info li span").click(function () {
+//            $(this).toggleClass('selected');
+//        });
+
     });
 </script>
