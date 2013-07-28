@@ -19,4 +19,4 @@
 
 //隐藏头部地址栏
 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-function hideURLbar(){ window.scrollTo(0,1);}
+function hideURLbar(){ window.scrollTo(0, 1);}

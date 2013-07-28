@@ -15,7 +15,7 @@ class HomeController < ApplicationController
       @page = 1
     end
     @id = params[:id]
-    resp=shiyi_conn.get '/api/v2/goods/brand_list',{:brand_id=>@id,:page=>@page,:per_page => 14,:is_wifi=>false}
+    resp=shiyi_conn.get '/api/v2/goods/brand_list', {:brand_id => @id, :page => @page, :per_page => 14, :is_wifi => false}
     @goods_list=ActiveSupport::JSON.decode(resp.body)
     @ids = ''
 
@@ -25,11 +25,11 @@ class HomeController < ApplicationController
     end
 
     # 获取下一个品牌 id
-    if @goods_list.blank?  or @goods_list.length == 0
+    if @goods_list.blank? or @goods_list.length == 0
       @next_brand_id = get_next_brand(@id)
     end
 
-    @goods_list.each do|goods|
+    @goods_list.each do |goods|
       @ids << goods['id'].to_s+' '
     end
 
@@ -41,7 +41,7 @@ class HomeController < ApplicationController
   def detail
     @ids = params[:ids].split
     @current_id = params[:id]
-    resp=shiyi_conn2.get '/api/v2/goods/detail',{:id=>params[:id],:is_wifi=>false}
+    resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
     @goods=ActiveSupport::JSON.decode(resp.body)
 
     #p @goods['old_price'].class
@@ -49,10 +49,10 @@ class HomeController < ApplicationController
 
   def next
     p params[:id]
-    resp=shiyi_conn3.get '/api/v2/goods/detail',{:id=>params[:id] || 946,:is_wifi=>false}
+    resp=shiyi_conn3.get '/api/v2/goods/detail', {:id => params[:id] || 946, :is_wifi => false}
     respond_to do |format|
       format.html
-      format.json{
+      format.json {
         render :json => ActiveSupport::JSON.decode(resp.body)
       }
     end
@@ -60,8 +60,24 @@ class HomeController < ApplicationController
 
   def order
     @id = params[:id]
-
-
+    resp = shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
+    goods = ActiveSupport::JSON.decode(resp.body)
+    if goods
+      @color = Array.new;
+      @measure = Array.new;
+      goods["sku"].each_with_index do |sku, index|
+        if sku["color"].include?("-")
+          @color.push(sku["color"].split('-')[0])
+        else
+          @color.push(sku["color"])
+        end
+        if sku["measure"] && (index == 1)
+          sku["measure"].each do |measure|
+            @measure.push(measure["size"])
+          end
+        end
+      end
+    end
   end
 
   def confirm
@@ -79,7 +95,7 @@ class HomeController < ApplicationController
     #params[:goods_id] = '735'
     #params[:mobile] = '13958025410'
     p 'confirm before'
-    resp=shiyi_conn4.post '/api/v2/order/simple_order',{:goods_id=>params[:goods_id],:mobile=>params[:mobile]}
+    resp=shiyi_conn4.post '/api/v2/order/simple_order', {:goods_id => params[:goods_id], :mobile => params[:mobile]}
     @result=ActiveSupport::JSON.decode(resp.body)
     p 'confirm after'
     p @result
