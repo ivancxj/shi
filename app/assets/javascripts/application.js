@@ -13,7 +13,6 @@
 //= require zepto
 //= require iscroll
 //= require device
-//= require swipeview
 //= require fast_button
 //  不要一次全包含 require_tree .
 

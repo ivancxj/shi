@@ -1,192 +1,153 @@
 <style>
-    #nav {
-        position: absolute;
-        z-index: 100;
-        bottom: 120px;
-        height: 20px;
-        /*box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
-        /*-webkit-box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
-        /*-moz-box-shadow: 0 0px 4px rgba(0,0,0,0.2);*/
-        margin: 0 auto;
-        vertical-align: middle;
-        display: inline;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        -ms-border-radius: 10px;
-        -o-border-radius: 10px;
-        border-radius: 10px;
+
+        /* button ------------- */
+    .button {
+        display: inline-block;
+        zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+        *display: inline;
+        vertical-align: baseline;
+        margin: 0 2px;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        font: 14px/100% Arial, Helvetica, sans-serif;
+        padding: .5em 2em .55em;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+        -webkit-border-radius: .5em;
+        -moz-border-radius: .5em;
+        border-radius: .5em;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
     }
 
-    #nav li {
-        display: block;
-        float: left;
-        width: 8px;
-        height: 8px;
-        line-height: 8px;
-        -webkit-border-radius: 7px;
-        -moz-border-radius: 7px;
-        -ms-border-radius: 7px;
-        -o-border-radius: 7px;
-        border-radius: 7px;
-        background: rgba(0, 0, 0, 0.20);
+    .button:hover {
+        text-decoration: none;
+    }
+
+    .button:active {
+        position: relative;
+        top: 1px;
+    }
+
+        /* pink button */
+    .button.pink {
+        color: #feeef5;
+        border: solid 1px #d2729e;
+        background: #f895c2;
+        background: -webkit-gradient(linear, left top, left bottom, from(#feb1d3), to(#f171ab));
+        background: -moz-linear-gradient(top, #feb1d3, #f171ab);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#feb1d3', endColorstr='#f171ab');
+    }
+
+    .button.pink:hover {
+        background: #d57ea5;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f4aacb), to(#e86ca4));
+        background: -moz-linear-gradient(top, #f4aacb, #e86ca4);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4aacb', endColorstr='#e86ca4');
+    }
+
+    .button.pink:active {
+        color: #f3c3d9;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f171ab), to(#feb1d3));
+        background: -moz-linear-gradient(top, #f171ab, #feb1d3);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f171ab', endColorstr='#feb1d3');
+    }
+
+        /*gallery*/
+    .gallery {
+        width: auto;
+        height: calc(100% -60px);
+    }
+
+    .gallery img {
+        vertical-align: middle;
+    }
+
+    .gallery .wrapper {
         overflow: hidden;
-        padding: 0;
-        margin: 3px 2px 0 4px;
+        height: 100%;
+    }
+
+    .gallery .pic {
+        width: 100%;
+        height: 100%;
+        float: left;
         text-align: center;
     }
 
-    #nav li#prev {
-        margin-left: 5px;
-        background: transparent;
+    .gallery #pageScroller {
+        width: 100%;
+        height: 100%;
+        float: left;
+        text-align: center;
     }
 
-    #nav li#next {
-        margin-right: 0;
-        background: transparent;
+    .gallery .pic span {
+        display: inline-block;
+        vertical-align: middle;
+        visibility: hidden;
+        width: 1px;
+        height: 100%;
     }
 
-    #nav li.selected {
-        background: rgba(6, 2, 5, 0.80);
+    .gallery .extra {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #000;
+        opacity: .6;
+        padding: 10px;
+        color: #ffffff;
+        height: 30px;
+        vertical-align: middle;
+        text-align: match-parent;
+        line-height: 30px;
+        font-size: 14px;
     }
 
-    .conn {
-        padding: 0 8px 8px 8px;
+    .gallery .go-order {
+        position: absolute;
+        right: 30px;
+        top: 10px;
+
     }
 
-    #wrapper {
-        height: 0;
+    .gallery .page {
+        text-align: center;
+        position: absolute;
+        top: 60px;
+        width: 100%;
     }
 
-    #swipeview-slider > div {
-        position: relative;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-box;
-        display: -o-box;
-        display: box;
-        -webkit-box-orient: vertical;
-        -moz-box-orient: vertical;
-        -ms-box-orient: vertical;
-        -o-box-orient: vertical;
-        box-orient: vertical;
-        -webkit-box-pack: center;
-        -moz-box-pack: center;
-        -ms-box-pack: center;
-        -o-box-pack: center;
-        box-pack: center;
-        -webkit-box-align: center;
-        -mox-box-align: center;
-        -ms-box-align: center;
-        -o-box-align: center;
-        box-align: center;
-        overflow: hidden;
+    .gallery .page span {
+        font-size: 0;
+        border: 5px solid #f2f2f2;
+        border-radius: 5px;
+        margin: 0 5px;
     }
 
-    #swipeview-slider img {
+    .gallery .page .selected {
+        border-color: #000;
+    }
+
+    .gallery .trigger a {
+        width: 80px;
+        height: 80px;
+        top: 50%;
         display: block;
-        border: 5px solid #eee;
-        -webkit-box-shadow: 0 2px 6px #000;
-        -moz-box-shadow: 0 2px 6px #000;
-        -ms-box-shadow: 0 2px 6px #000;
-        -o-box-shadow: 0 2px 6px #000;
-        box-shadow: 0 2px 6px #000;
-        -webkit-border-radius: 2px;
-        -moz-border-radius: 2px;
-        -ms-border-radius: 2px;
-        -o-border-radius: 2px;
-        border-radius: 2px;
-        -webkit-transition-duration: .4s;
-        -moz-transition-duration: .4s;
-        -ms-transition-duration: .4s;
-        -o-transition-duration: .4s;
-        transition-duration: .4s;
-        -webkit-transition-property: opacity;
-        -moz-transition-property: opacity;
-        -ms-transition-property: opacity;
-        -o-transition-property: opacity;
-        transition-property: opacity;
-        opacity: 1;
-        pointer-events: none;
+        position: fixed;
     }
 
-        /*#swipeview-slider span {*/
-        /*position: absolute;*/
-        /*bottom: 0;*/
-        /*left: 0;*/
-        /*width: 100%;*/
-        /*padding: 5px 0;*/
-        /*display: block;*/
-        /*background: rgba(0, 0, 0, 0.75);*/
-        /*font-size: 20px;*/
-        /*text-align: center;*/
-        /*text-shadow: 0 1px 0 #000;*/
-        /*border-top: 1px solid rgba(255, 255, 255, 0.2);*/
-        /*-webkit-border-top-left-radius: 10px;*/
-        /*-moz-border-top-left-radius: 10px;*/
-        /*-ms-border-top-left-radius: 10px;*/
-        /*-o-border-top-left-radius: 10px;*/
-        /*border-top-left-radius: 10px;*/
-        /*-webkit-border-top-right-radius: 10px;*/
-        /*-moz-border-top-right-radius: 10px;*/
-        /*-ms-border-top-right-radius: 10px;*/
-        /*-o-border-top-right-radius: 10px;*/
-        /*border-top-right-radius: 10px;*/
-        /*-webkit-transition-duration: .3s;*/
-        /*-moz-transition-duration: .3s;*/
-        /*-ms-transition-duration: .3s;*/
-        /*-o-transition-duration: .3s;*/
-        /*transition-duration: .3s;*/
-        /*-webkit-transition-property: -webkit-transform;*/
-        /*-moz-transition-property: -moz-transform;*/
-        /*-ms-transition-property: -ms-transform;*/
-        /*-o-transition-property: -o-transform;*/
-        /*transition-property: transform;*/
-        /*-webkit-transform: translate(0, 100%) translateZ(0);*/
-        /*-moz-transform: translate(0, 100%) translateZ(0);*/
-        /*-ms-transform: translate(0, 100%);*/
-        /*-ms-transform: translate(0, 100%) translateZ(0);*/
-        /*-o-transform: translate(0, 100%);*/
-        /*-o-transform: translate(0, 100%) translateZ(0);*/
-        /*transform: translate(0, 100%) translateZ(0);*/
-        /*}*/
+    .gallery .trigger .prev {
+        left: 0;
+    }
 
-        /*#swipeview-slider .swipeview-active span {*/
-        /*-webkit-transform: translate(0, 0) translateZ(0);*/
-        /*-moz-transform: translate(0, 0) translateZ(0);*/
-        /*-ms-transform: translate(0, 0);*/
-        /*-ms-transform: translate(0, 0) translateZ(0);*/
-        /*-o-transform: translate(0, 0);*/
-        /*-o-transform: translate(0, 0) translateZ(0);*/
-        /*transform: translate(0, 0) translateZ(0);*/
-        /*}*/
-
-        /*#wrapper > div > .swipeview-loading {*/
-        /*background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#555)), -webkit-gradient(linear, 0 0, 100% 0, from(#777), to(#777));*/
-        /*background-position: 50% 50%, 50% 50%;*/
-        /*background-size: 200px 140px, 210px 150px;*/
-        /*background-repeat: no-repeat;*/
-        /*}*/
-
-        /*#wrapper > div > .swipeview-loading img,*/
-        /*#swipeview-slider img.loading {*/
-        /*-webkit-transition-duration: 0s;*/
-        /*opacity: 0;*/
-        /*}*/
-
-        /*#wrapper > div > .swipeview-loading span {*/
-        /*-webkit-transition-duration: 0s;*/
-        /*-moz-transition-duration: 0s;*/
-        /*-ms-transition-duration: 0s;*/
-        /*-o-transition-duration: 0s;*/
-        /*transition-duration: 0s;*/
-        /*-webkit-transform: translate(0, 100%) translateZ(0);*/
-        /*-moz-transform: translate(0, 100%) translateZ(0);*/
-        /*-ms-transform: translate(0, 100%);*/
-        /*-ms-transform: translate(0, 100%) translateZ(0);*/
-        /*-o-transform: translate(0, 100%);*/
-        /*-o-transform: translate(0, 100%) translateZ(0);*/
-        /*transform: translate(0, 100%) translateZ(0);*/
-        /*}*/
+    .gallery .trigger .next {
+        right: 0;
+    }
 
 </style>
 
@@ -205,196 +166,81 @@
   <div class="navigation">
     <div></div>
   </div>
-  <div class="title">试衣MM</div>
+  <div class="title"><%= @goods["name"] %></div>
 </header>
 
-<div class="conn">
-  <!-- 滑动大图 -->
-  <div class="slide_bar m_bg sshow">
-
-    <!--<img id='classleft' class='classleft' src='<%= asset_path('prev.png') %>' width="30px" height="30px"/>-->
-    <!--<img id='classright' class='classright' src='<%= asset_path('next.png') %>' width="30px" height="30px"/>-->
-
-
-    <div id="wrapper"></div>
-    <ul id="nav">
-      <li class="selected"></li>
-      <% lenght = @goods['goods_albums'].length %>
-
-      <% 0.upto(lenght-1) do %>
-          <li></li>
+<article class="gallery">
+  <div id="wrapper" class="wrapper">
+    <div id="pageScroller">
+      <div class="pic">
+        <img src="<%= @goods['detail_photo'] %>" width="100%">
+      </div>
+      <% @goods["goods_albums"].each do |album| %>
+          <div class="pic">
+            <img src="<%= album['photo'] %>" width="100%">
+          </div>
       <% end %>
-    </ul>
-
-
-    <div class="det_xq">
-      <ul>
-        <li>
-          <img id='photo_pic' src="<%= @goods['brand_photo'] %>" style="width: 70px;height: 25px;padding-top: 5px"/>
-          <% if @goods['old_price'] %>
-              <span id='old_price' class="grey">市场价:￥<%= @goods['old_price'].to_i %></span>
-          <% else %>
-              <span id='old_price' class="grey"></span>
-          <% end %>
-          <span id='sale_price' class="mms">mm价:￥<%= @goods['sale_price'].to_i %></span>
-        </li>
-        <li style="height: 25px;line-height: 15px;">
-        <span id='mms_name' class="mms_name"><%= @goods['shop']['name'] %>  <%= @goods['shop']['address'] %>
-          (<%= @goods['shop']['phone'] %>)</span>
-        </li>
-        <!--<li class="size">可选尺码:-->
-        <!--<span>M</span>-->
-        <!--<span>L</span>-->
-        <!--<span>XL</span>-->
-        <!--</li>-->
-      </ul>
-    </div>
-    <div id="ss" class="songsm">
-      <div>送上门来试</div>
     </div>
   </div>
-</div>
+  <div class="trigger">
+    <a href="#" class="prev"><img src="<%= asset_path('prev.png') %>"/></a>
+    <a href="#" class="next"><img src="<%= asset_path('next.png') %>"/></a>
+  </div>
 
-<script type="text/javascript">
-
-    $('#ss').bind('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.location.href = '/home/order?id=<%= @current_id%>';
-    });
-
-    var maxwidth, maxheight;
-
-    if (DeviceInfo.type == 'mobile') {
-        maxwidth = 200;
-        if (DeviceInfo.height <= 960) {
-            maxheight = 200;
-            $('#wrapper').height(220);
-        } else {
-            maxheight = 280;
-            $('#wrapper').height(300);
-        }
-    } else if (DeviceInfo.type == 'pad') {
-        maxwidth = 250;
-        maxheight = 350;
-        $('#wrapper').height(370);
-    } else {
-        maxwidth = 370;
-        maxheight = 450;
-        $('#wrapper').height(470);
-    }
-
-    var ratio = window.devicePixelRatio || 1, offw;
-    if (DeviceInfo.type != 'mobile' && DeviceInfo.type != 'pad') {
-        offw = DeviceInfo.width/(2*ratio) - $('#nav').width()/(2*ratio);
-    }else {
-        offw = DeviceInfo.width/(2*ratio) - $('#nav').width()/(1*ratio)-10;
-    }
-    $('#nav').css("left", offw);
-
-    function AutoResizeImage(objImg, maxWidth, maxHeight) {
-        var img = new Image();
-        img.src = objImg.src;
-        var hRatio;
-        var wRatio;
-        var Ratio = 1;
-        var w = img.width;
-        var h = img.height;
-        wRatio = maxWidth / w;
-        hRatio = maxHeight / h;
-        if (maxWidth == 0 && maxHeight == 0) {
-            Ratio = 1;
-        } else if (maxWidth == 0) {//
-            if (hRatio < 1) Ratio = hRatio;
-        } else if (maxHeight == 0) {
-            if (wRatio < 1) Ratio = wRatio;
-        } else if (wRatio < 1 || hRatio < 1) {
-            Ratio = (wRatio <= hRatio ? wRatio : hRatio);
-        }
-        if (Ratio < 1) {
-            w = w * Ratio;
-            h = h * Ratio;
-            objImg.height = h;
-            objImg.width = w;
-        }
-    }
-
-    var gallery,
-            el,
-            i,
-            page,
-            dots = document.querySelectorAll('#nav li'),
-            slides = [];
-
-    slides.push({
-        img: "<%= @goods['detail_photo'] %>",
-        width: <%= @goods['width'] %>,
-        height: <%= @goods['height'] %>,
-        desc: ''
-    })
-
-    <% @goods['goods_albums'].each do |album| %>
-
-    slides.push({
-        img: " <%= album['photo'] %>",
-        width: <%= album['width'] %>,
-        height: <%= album['height'] %>,
-        desc: ''
-    })
+  <div class="page">
+    <span class="selected">1</span>
+    <% @goods["goods_albums"].each do |album| %>
+        <span>1</span>
     <% end %>
+  </div>
+  <div class="extra">
+    <p class="price">
+      <del>市场价: ￥1</del>
+      <b>MM价: ￥1</b></p>
+    <p class="go-order">
+      <button class="button pink">点击体验试穿</button>
+    </p>
+  </div>
+  </div>
+</article>
 
-    gallery = new SwipeView('#wrapper', { numberOfPages: slides.length });
-    var ratio = window.devicePixelRatio || 1;
+<script>
+    document.addEventListener("orientationchange", updateLayout);
 
-    // Load initial data
-    for (i = 0; i < 3; i++) {
-        page = i == 0 ? slides.length - 1 : i - 1;
-        el = document.createElement('img');
-        el.className = 'loading';
-        el.src = slides[page].img;
-//        el.width = slides[page].width;
-//        el.height = slides[page].height;
-        el.onload = function () {
-            this.className = '';
-            AutoResizeImage(this, maxwidth, maxheight);
+    // The wrapperWidth before orientationChange. Used to identify the current page number in updateLayout();
+    wrapperWidth = 0;
+    currentIndex = 0;
+
+    var myScroll = new iScroll('wrapper', {
+        snap: true,
+        momentum: false,
+        hScrollbar: false,
+        vScrollbar: false,
+        lockDirection: true,
+        onScrollEnd: function () {
+            var currentIndex = this.currPageX;
+            $('.page span').each(function () {
+                $(this).removeClass('selected');
+            });
+            $('.page span').eq(currentIndex).addClass('selected');
         }
-        gallery.masterPages[i].appendChild(el);
+    });
 
-        el = document.createElement('span');
-        el.innerHTML = slides[page].desc;
-        gallery.masterPages[i].appendChild(el)
+    updateLayout();
+
+    function updateLayout() {
+        var currentPage = 0;
+        if (wrapperWidth > 0) {
+            currentPage = -Math.ceil($('#pageScroller').position().left / wrapperWidth);
+        }
+        wrapperWidth = $('#wrapper').width();
+        $('#pageScroller').css('width', wrapperWidth * (<%=@goods['goods_albums'].length%>+1));
+        $('.pic').css('width', wrapperWidth);
+        myScroll.refresh();
+        myScroll.scrollToPage(currentPage, 0, 0);
     }
-
-    gallery.onFlip(function () {
-        var el, upcoming, i;
-        for (i = 0; i < 3; i++) {
-            upcoming = gallery.masterPages[i].dataset.upcomingPageIndex;
-            if (upcoming != gallery.masterPages[i].dataset.pageIndex) {
-                el = gallery.masterPages[i].querySelector('img');
-                el.className = 'loading';
-                el.src = slides[upcoming].img;
-//                el.width = slides[upcoming].width;
-//                el.height = slides[upcoming].height;
-                el.onload = function () {
-                    this.className = '';
-                    AutoResizeImage(this, maxwidth, maxheight);
-                }
-                el = gallery.masterPages[i].querySelector('span');
-                el.innerHTML = slides[upcoming].desc;
-            }
-        }
-        document.querySelector('#nav .selected').className = '';
-        dots[gallery.pageIndex].className = 'selected';
-    });
-
-    gallery.onMoveOut(function () {
-        gallery.masterPages[gallery.currentMasterPage].className = gallery.masterPages[gallery.currentMasterPage].className.replace(/(^|\s)swipeview-active(\s|$)/, '');
-    });
-
-    gallery.onMoveIn(function () {
-        var className = gallery.masterPages[gallery.currentMasterPage].className;
-        /(^|\s)swipeview-active(\s|$)/.test(className) || (gallery.masterPages[gallery.currentMasterPage].className = !className ? 'swipeview-active' : className + ' swipeview-active');
-    });
 
 </script>
+
+
 
