@@ -1,3 +1,4 @@
+# coding: utf-8
 module ApplicationHelper
 
   # 首页上展示的品牌 ids

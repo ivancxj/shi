@@ -4,7 +4,6 @@ class HomeController < ApplicationController
   # 首页
   def index
     # 清楚 商品ids
-    session[:ids] = nil
   end
 
   # 品牌下的商品列表
@@ -23,34 +22,24 @@ class HomeController < ApplicationController
     end
     resp=shiyi_conn.get '/api/v2/goods/brand_list', {:brand_id => @id, :page => @page, :per_page => 14, :is_wifi => false}
     @goods_list=ActiveSupport::JSON.decode(resp.body)
-    #@goods_list = Crack::JSON.parse(resp.body)
-
-    # 第一页 则获取上一个品牌 id
-    #if @page == 1
-    #  @pre_brand_id = get_pre_brand(@id)
-    #end
-    #
-    ## 获取下一个品牌 id
-    #if @goods_list.blank? or @goods_list.length == 0
-    #  @next_brand_id = get_next_brand(@id)
-    #end
 
     if @goods_list.present? and @goods_list.length >= 1
       set_seo_meta(@goods_list[0]['brand_name'])
     end
 
-    ids = ''
-    @goods_list.each do |goods|
-      ids << goods['id'].to_s+' '
-    end
-
-    session[:ids] = ids
+    #ids = []
+    #@goods_list.each do |goods|
+    #  ids << goods['id'].to_i
+    #end
+    #
+    #session[:ids] = ids
 
   end
 
   # 商品详情
   def detail
-    #@ids = params[:ids].split
+
+    # 当前商品id
     @current_id = params[:id]
     resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
     @goods=ActiveSupport::JSON.decode(resp.body)
@@ -58,13 +47,14 @@ class HomeController < ApplicationController
     if @goods.present?
       set_seo_meta(@goods['name'])
     end
-    # 品牌id
-    brand_id = params[:brand_id]
-    if session[:ids].present?
 
-    end
-    @pre_id = nil
-    @next_id = nil
+    # 获取下/上一个商品的 id
+
+    @pre_id = get_pre_goods_id(@current_id)
+    @next_id = get_next_goods_id(@current_id)
+    # 品牌id
+    #brand_id = params[:brand_id]
+    #page = params[:page]
 
   end
 
@@ -102,6 +92,18 @@ class HomeController < ApplicationController
 
     render :json => @result
 
+  end
+
+  def test
+    ids = [217,229,148,235,238,236,221,237,75,239,232,241,233]
+
+
+
+    @current_id = params[:id]
+    resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
+    @goods=ActiveSupport::JSON.decode(resp.body)
+
+    render :json => @result
   end
 
 end
