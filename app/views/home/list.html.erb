@@ -98,69 +98,6 @@
   <div class="title">宁波试衣MM</div>
 </header>
 
-<!--  nav  -->
-<div class="nav_layer hide">
-  <div class="nav_body">
-    <div class="nav_arrow"></div>
-    <a data-href="/" class="nav_enter">
-      <div class="nav_home"><span></span>
-
-        <p>COCO DEAL</p></div>
-    </a>
-    <a data-href="" class="nav_enter">
-      <div class="nav_new"><span></span>
-
-        <p>FIVE PLUS</p></div>
-    </a>
-    <a data-href="/brands" class="nav_enter">
-      <div class="nav_brand"><span></span>
-
-        <p>H&M</p></div>
-    </a>
-    <a data-href="/stores" class="nav_enter">
-      <div class="nav_shop"><span></span>
-
-        <p>LILY</p></div>
-    </a>
-    <a class="nav_space nav_enter" data-href="/categories?target=male">
-      <div class="nav_men"><span></span>
-
-        <p>MANGO</p></div>
-    </a>
-    <a data-href="" class="nav_enter">
-      <div class="nav_women"><span></span>
-
-        <p>MS</p></div>
-    </a>
-    <a data-href="" class="nav_enter">
-      <div class="nav_furniture"><span></span>
-
-        <p>OCHIRLY</p></div>
-    </a>
-    <a data-href="/products?where[category1_id]=203" class="nav_enter">
-      <div class="nav_treasure"><span></span>
-
-        <p>ONLY</p></div>
-    </a>
-    <a data-href="/products?where[category1_id]=193" class="nav_enter">
-      <div class="nav_outdoor"><span></span>
-
-        <p>UNIQLO</p></div>
-    </a>
-    <a class="nav_space nav_enter" data-href="/user_center" class="nav_enter">
-      <div class="nav_account"><span></span>
-
-        <p>VERO MODA</p></div>
-    </a>
-    <a class="check_order nav_enter" data-href="/trades?status=receive">
-      <div class="nav_order"><span></span>
-
-        <p>ZARA</p></div>
-    </a>
-  </div>
-  <div class="nav_other"></div>
-</div>
-<!--  end nav  -->
 
 <div class="main">
   <section style="margin-top: 10px;">
@@ -200,12 +137,16 @@
   </section>
 
 </div>
+
+<!--  nav  -->
+<%= render :partial => 'common/nav' %>
+<!--  end nav  -->
 <footer>
   <p>© 2013-试衣MM</p>
 
   <p><a href="http://d.shiyimm.com">android客户端</a></p>
 
-  <p><a href="http://itunes.apple.com/cn/app/id655655105">iphone客户端</a></p>
+  <p><a href="http://itunes.apple.com/cn/app/id655655105">iPhone客户端</a></p>
 </footer>
 
 <script>
@@ -213,7 +154,6 @@
     (function () {
 
         var click_event = DeviceInfo.browser == 'ie' ? 'click' : 'tap';
-        var nav_event = DeviceInfo.browser == 'ie' ? 'click' : 'itap';
 
 //        商品详情点击事件
         $('.product a').bind(click_event, function (e) {
@@ -222,64 +162,6 @@
                     link = $dom.data('href');
             $dom.attr('href', link);
         });
-
-        var $nav = $('.navigation'),
-                $nav_layer = $('.nav_layer'),
-                $main = $('.main'),
-                $footer = $('footer'),
-                $nav_other = $nav_layer.find('.nav_other'),
-                $nav_enter = $nav_layer.find('.nav_enter'),
-                height = $(window).height() - 46,
-                width = $(window).width();
-
-        $nav_layer.find('.nav_body').width(width * 0.59375);
-        $main.css('min-height', height - 46);
-
-        <!-- 导航事件绑定 -->
-        $nav.bind(nav_event, function () {
-            $nav.addClass('push');
-            $nav_layer.toggleClass('hide');
-            if ($nav_layer.hasClass('hide')) {
-                $main.css('height', 'auto');
-                $footer.removeClass('hide');
-            } else {
-                if (height > 570) {
-                    $nav_layer.css('height', height);
-                } else {
-                    $nav_layer.css('height', 570);
-                }
-                if ($main.height() > height) {
-                    var main_height = $nav_layer.height();
-                    $main.css('height', main_height);
-                    $footer.addClass('hide');
-                }
-            }
-
-            setTimeout(function () {
-                $nav.removeClass('push');
-            }, 1000)
-        });
-
-        <!-- 浮层事件绑定 -->
-        $nav_other.width(width * 0.40625);
-
-        $nav_other.bind('click', function () {
-            $nav_layer.addClass('hide');
-            $main.css('height', 'auto');
-            $footer.removeClass('hide');
-            return false;
-        });
-
-        <!-- 品牌点击事件-->
-        $nav_enter.bind(click_event, function (e) {
-            var
-                    $dom = $(this),
-                    link = $dom.data('href');
-            $dom.addClass('push');
-            $dom.attr('href', link);
-            $dom.siblings().removeClass('push');
-        });
-
     })();
 
 </script>

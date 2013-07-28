@@ -1,0 +1,81 @@
+<div class="nav_layer hide">
+  <div class="nav_body">
+    <div class="nav_arrow"></div>
+
+    <% get_brand.each do |key, value| %>
+        <a data-href="/home/list?id=<%= key %>"class="nav_enter">
+          <div class="nav_home">
+            <span></span>
+            <p><%= value[1]%></p></div>
+        </a>
+    <% end %>
+
+  </div>
+  <div class="nav_other"></div>
+</div>
+
+<script>
+    (function () {
+        var click_event = DeviceInfo.browser == 'ie' ? 'click' : 'tap';
+        var nav_event = DeviceInfo.browser == 'ie' ? 'click' : 'itap';
+
+        var $nav = $('.navigation'),
+                $nav_layer = $('.nav_layer'),
+                $main = $('.main'),
+                $footer = $('footer'),
+                $nav_other = $nav_layer.find('.nav_other'),
+                $nav_enter = $nav_layer.find('.nav_enter'),
+                height = $(window).height() - 46,
+                width = $(window).width();
+
+        $nav_layer.find('.nav_body').width(width * 0.59375);
+        $main.css('min-height', height - 46);
+
+        <!-- 导航事件绑定 -->
+        $nav.bind(nav_event, function () {
+            $nav.addClass('push');
+            $nav_layer.toggleClass('hide');
+            if ($nav_layer.hasClass('hide')) {
+                $main.css('height', 'auto');
+                $footer.removeClass('hide');
+            } else {
+                if (height > 570) {
+                    $nav_layer.css('height', height);
+                } else {
+                    $nav_layer.css('height', 570);
+                }
+                if ($main.height() > height) {
+                    var main_height = $nav_layer.height();
+                    $main.css('height', main_height);
+                    $footer.addClass('hide');
+                }
+            }
+
+            setTimeout(function () {
+                $nav.removeClass('push');
+            }, 1000)
+        });
+
+        <!-- 浮层事件绑定 -->
+        $nav_other.width(width * 0.40625);
+
+        $nav_other.bind('click', function () {
+            $nav_layer.addClass('hide');
+            $main.css('height', 'auto');
+            $footer.removeClass('hide');
+            return false;
+        });
+
+        <!-- 品牌点击事件-->
+        $nav_enter.bind(click_event, function (e) {
+            var
+                    $dom = $(this),
+                    link = $dom.data('href');
+            $dom.addClass('push');
+            $dom.attr('href', link);
+            $dom.siblings().removeClass('push');
+        });
+
+    })();
+
+</script>

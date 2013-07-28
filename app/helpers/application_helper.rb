@@ -1,5 +1,29 @@
 module ApplicationHelper
 
+  # 首页上展示的品牌 ids
+  def get_brand
+    array={
+        #'240'=>%w[,COCO DEA 可可迪尔],
+
+        '217'=>['2.jpg', 'five plus'],
+        '229'=>['13.jpg', 'GOELIA'],
+        '148'=>['9.jpg', 'H&M 歌莉娅'],
+        '235'=>['8.jpg', 'LILY'],
+
+        '238'=>['5.jpg', 'MANGO'],
+        '236'=>['4.jpg', 'MS 玛莎'],
+        '221'=>['7.jpg', 'OCHIRLY 欧时力'],
+        '237'=>['6.jpg', 'ONLY'],
+
+        '75'=>['1.jpg', 'UNIQLO 优衣库'],
+        '239'=>['10.jpg', 'VERO MODA'],
+        '232'=>['11.jpg', 'H&M'],
+        '241'=>['8.jpg', 'EIFINI 伊芙丽'],
+
+        '233'=>['2.jpg', 'NOIHSAF 诺诗凡']
+    }
+  end
+
   def controller_stylesheet_link_tag
     # 还未做好
     #case controller_name

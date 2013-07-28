@@ -10,7 +10,6 @@ class HomeController < ApplicationController
   # 品牌下的商品列表
   def list
     # 页码
-
     if params[:page]
       @page = params[:page].to_i
     else
