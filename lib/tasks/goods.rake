@@ -37,7 +37,7 @@ namespace :goods do
       end
     end
     p '====='
-    p arr.count
+    p arr
   end
 
 end

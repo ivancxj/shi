@@ -8,7 +8,7 @@ module ApplicationHelper
 
         '217'=>['2.jpg', 'five plus'],
         '229'=>['13.jpg', 'GOELIA 歌莉娅'],
-        '148'=>['9.jpg', 'H&M'],
+        #'148'=>['9.jpg', 'H&M'],
         '235'=>['8.jpg', 'LILY'],
 
         '238'=>['5.jpg', 'MANGO'],
@@ -18,7 +18,7 @@ module ApplicationHelper
 
         '75'=>['1.jpg', 'UNIQLO 优衣库'],
         '239'=>['10.jpg', 'VERO MODA'],
-        '232'=>['11.jpg', 'H&M'],
+        '232'=>['11.jpg', 'ZARA'],
         '241'=>['8.jpg', 'EIFINI 伊芙丽'],
 
         '233'=>['3.jpg', 'NOIHSAF 诺诗凡']

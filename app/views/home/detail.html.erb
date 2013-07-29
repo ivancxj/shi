@@ -76,6 +76,7 @@
         height: 100%;
         float: left;
         text-align: center;
+
     }
 
     .gallery #pageScroller {
@@ -122,16 +123,16 @@
         width: 100%;
     }
 
-    .gallery .page span {
-        font-size: 0;
-        border: 5px solid #f2f2f2;
-        border-radius: 5px;
-        margin: 0 5px;
-    }
+        /*.gallery .page span {*/
+        /*font-size: 0;*/
+        /*border: 5px solid #f2f2f2;*/
+        /*border-radius: 5px;*/
+        /*margin: 0 5px;*/
+        /*}*/
 
-    .gallery .page .selected {
-        border-color: #000;
-    }
+        /*.gallery .page .selected {*/
+        /*border-color: #000;*/
+        /*}*/
 
     .gallery .trigger a {
         width: 80px;
@@ -155,7 +156,7 @@
   <div class="navigation">
     <div></div>
   </div>
-  <div class="title"><%= @goods["name"] %></div>
+  <div class="title"><%= @goods['name'] %></div>
 </header>
 
 <!--  nav  -->
@@ -168,7 +169,7 @@
       <a class="pic">
         <img src="<%= @goods['detail_photo'] %>" width="100%">
       </a>
-      <% @goods["goods_albums"].each do |album| %>
+      <% @goods['goods_albums'].each do |album| %>
           <a class="pic" data-src="<%= album['photo'] %>">
           </a>
       <% end %>
@@ -186,76 +187,96 @@
   </div>
 
   <div class="page">
-    <span class="selected">1</span>
-    <% @goods["goods_albums"].each_with_index do |album, index| %>
-        <% if index < 7 %>
-            <span>1</span>
-        <% end %>
-    <% end %>
-  </div>
-  <div class="extra">
-    <p class="price">
-      <del>市场价: ￥<%= @goods["old_price"] %></del>
-      <b>MM价: ￥<%= @goods["sale_price"] %></b></p>
-    <p class="go-order">
-      <button class="button pink">点击体验试穿</button>
-    </p>
-  </div>
+    <!--<span class="selected">1</span>-->
+    <div class="slide margin5 ">
+      <% @goods["goods_albums"].each_with_index do |album, index| %>
+          <% if index < 8 %>
+              <li></li>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="extra">
+      <p class="price">
+        <del>市场价: ￥<%= @goods["old_price"] %></del>
+        <b>MM价: ￥<%= @goods["sale_price"] %></b></p>
+      <p class="go-order">
+        <button class="button pink">点击体验试穿</button>
+      </p>
+    </div>
   </div>
 </article>
 
 <!-- loading -->
 <div id='loading' class='hide'>
   <style type="text/css">
-      /*img{*/
+          /*img{*/
           /*display: none;*/
-      /*}*/
-      /*img.load{*/
+          /*}*/
+          /*img.load{*/
           /*display: block;*/
-      /*}*/
+          /*}*/
           /**********/
-      .order_load{
-          position: absolute;
+      .order_load {
+
+          width: 225px;
+          height: 225px;
+          float: left;
+          left: 50%;
+          position: relative;
+          margin-left: -112px;
+          /*position: absolute;*/
           /*width: 220px;*/
-          margin:0 auto;
-          height: 220px;
-          z-index: 1;
-          display: inline-block;
-          -webkit-transition: all 0.3s ease-in-out;
-          -webkit-backface-visibility: hidden;
-          -moz-transition: all 0.3s ease-in-out;
-          -moz-backface-visibility: hidden;
+          /*margin: 0 auto;*/
+          /*height: 220px;*/
+          /*z-index: 1;*/
+          /*display: inline-block;*/
+          /*-webkit-transition: all 0.3s ease-in-out;*/
+          /*-webkit-backface-visibility: hidden;*/
+          /*-moz-transition: all 0.3s ease-in-out;*/
+          /*-moz-backface-visibility: hidden;*/
       }
 
-      .loading32{
+      .loading32 {
           position: relative;
-          margin:0 auto;
-          top:62px;
+          margin: 0 auto;
+          top: 62px;
           width: 100px;
           height: 100px;
           position: absolute;
           left: 50%;
           margin-left: -50px;
           -webkit-border-radius: 100px;
-          -webkit-animation-duration:1.5s;
-          -webkit-animation-iteration-count:infinite;
-          -webkit-animation-timing-function:linear;
+          -webkit-animation-duration: 1.5s;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-timing-function: linear;
           -webkit-animation-name: rotateThis16;
           -moz-border-radius: 100px;
-          -moz-animation-duration:1.5s;
-          -moz-animation-iteration-count:infinite;
-          -moz-animation-timing-function:linear;
+          -moz-animation-duration: 1.5s;
+          -moz-animation-iteration-count: infinite;
+          -moz-animation-timing-function: linear;
           -moz-animation-name: rotateThis16;
       }
-      @-webkit-keyframes rotateThis16{
-          from {-webkit-transform: scale(0.32) rotate(0deg);}
-          to {-webkit-transform: scale(0.32) rotate(360deg);}
+
+      @-webkit-keyframes rotateThis16 {
+          from {
+              -webkit-transform: scale(0.32) rotate(0deg);
+          }
+          to {
+              -webkit-transform: scale(0.32) rotate(360deg);
+          }
       }
-      @-moz-keyframes rotateThis16{
-          from {-moz-transform: scale(0.32) rotate(0deg);}
-          to {-moz-transform: scale(0.32) rotate(360deg);}
+
+      @-moz-keyframes rotateThis16 {
+          from {
+              -moz-transform: scale(0.32) rotate(0deg);
+          }
+          to {
+              -moz-transform: scale(0.32) rotate(360deg);
+          }
       }
-      .loading32>div{
+
+      .loading32>div {
           width: 16px;
           height: 16px;
           background-color: #a6a6a6;
@@ -267,42 +288,50 @@
           left: 42px;
           top: 42px;
       }
-      .bar1{
+
+      .bar1 {
           opacity: 0.3;
           -webkit-transform: rotate(0deg) translate(0, -42px);
           -moz-transform: rotate(0deg) translate(0, -42px);
       }
-      .bar2{
+
+      .bar2 {
           opacity: 0.4;
           -webkit-transform: rotate(45deg) translate(0, -42px);
           -moz-transform: rotate(45deg) translate(0, -42px);
       }
-      .bar3{
+
+      .bar3 {
           opacity: 0.5;
           -webkit-transform: rotate(90deg) translate(0, -42px);
           -moz-transform: rotate(90deg) translate(0, -42px);
       }
-      .bar4{
+
+      .bar4 {
           opacity: 0.6;
           -webkit-transform: rotate(135deg) translate(0, -42px);
           -moz-transform: rotate(135deg) translate(0, -42px);
       }
-      .bar5{
+
+      .bar5 {
           opacity: 0.7;
           -webkit-transform: rotate(180deg) translate(0, -42px);
           -moz-transform: rotate(180deg) translate(0, -42px);
       }
-      .bar6{
+
+      .bar6 {
           opacity: 0.8;
           -webkit-transform: rotate(225deg) translate(0, -42px);
           -moz-transform: rotate(225deg) translate(0, -42px);
       }
-      .bar7{
+
+      .bar7 {
           opacity: 0.9;
           -webkit-transform: rotate(270deg) translate(0, -42px);
           -moz-transform: rotate(270deg) translate(0, -42px);
       }
-      .bar8{
+
+      .bar8 {
           opacity: 1;
           -webkit-transform: rotate(315deg) translate(0, -42px);
           -moz-transform: rotate(315deg) translate(0, -42px);
@@ -334,71 +363,79 @@
             e.stopPropagation();
             window.location.href = '/home/order?id=<%= @current_id%>';
         });
+
+        //   todo uc不支持
+        document.addEventListener("orientationchange", updateLayout);
+
+        // The wrapperWidth before orientationChange. Used to identify the current page number in updateLayout();
+        wrapperWidth = 0;
+        currentIndex = 0;
+
+        var myScroll = new iScroll('wrapper', {
+            snap: true,
+            momentum: false,
+            hScrollbar: false,
+            vScrollbar: false,
+            lockDirection: true,
+            onScrollEnd: function () {
+                var ci = this.currPageX + 1;
+                indicator_update(ci)
+                load_img(ci);
+            }
+        });
+
+        var $slide = $('.slide');
+        $slide.find('li:nth-child(1)').addClass('active');  //提示点初始化
+        //幻灯提示点同步
+        function indicator_update(x) {
+            $slide.children('.active').removeClass('active');
+            $slide.find('li:nth-child(' + x + ')').addClass('active');
+        };
+
+        // 加载图片
+        function load_img(index) {
+            var $wrapper = $('#pageScroller')
+            var selector = 'a:nth-child(' + index + ')',
+                    $loading = $('#loading'),
+                    $a = $wrapper.find(selector);
+
+            if (!$a.find('img')[0]) {
+                $a.html($loading.html());
+                var img = document.createElement('img');
+                img.width = $(window).width();
+
+                $(img).bind('load',function () {
+                    $a.html(img);
+                    setTimeout(function () {
+                        $(img).addClass('load');
+                    }, 10);
+                }).bind('error', function () {
+                            $a.html('');
+                        });
+                img.src = $a.data('src');
+            }
+
+        }
+
+        updateLayout();
+
+
+        function updateLayout() {
+
+            var currentPage = 0;
+            if (wrapperWidth > 0) {
+                currentPage = -Math.ceil($('#pageScroller').position().left / wrapperWidth);
+            }
+            wrapperWidth = $('#wrapper').width();
+            $('#pageScroller').css('width', wrapperWidth * (<%=@goods['goods_albums'].length%>+1));
+            $('.pic').css('width', wrapperWidth);
+            myScroll.refresh();
+            myScroll.scrollToPage(currentPage, 0, 0);
+        }
+
+
     })();
 
-    document.addEventListener("orientationchange", updateLayout);
-
-    // The wrapperWidth before orientationChange. Used to identify the current page number in updateLayout();
-    wrapperWidth = 0;
-    currentIndex = 0;
-
-    var myScroll = new iScroll('wrapper', {
-        snap: true,
-        momentum: false,
-        hScrollbar: false,
-        vScrollbar: false,
-        lockDirection: true,
-        onScrollEnd: function () {
-            var currentIndex = this.currPageX;
-            $('.page span').each(function () {
-                $(this).removeClass('selected');
-            });
-            $('.page span').eq(currentIndex).addClass('selected');
-
-            load_img(currentIndex + 1);
-        }
-    });
-
-    // 加载图片
-    function load_img(index){
-        var $wrapper = $('#pageScroller')
-        var     selector = 'a:nth-child(' + index + ')',
-                $loading = $('#loading'),
-                $a = $wrapper.find(selector);
-
-        if(!$a.find('img')[0]){
-            $a.html($loading.html());
-            var img = document.createElement('img');
-            img.width = $(window).width();
-
-            $(img).bind('load', function(){
-                $a.html(img);
-                setTimeout(function(){
-                    $(img).addClass('load');
-                }, 10);
-            }).bind('error', function(){
-                        $a.html('');
-                    });
-            img.src = $a.data('src');
-        }
-
-    }
-
-    updateLayout();
-
-
-
-    function updateLayout() {
-        var currentPage = 0;
-        if (wrapperWidth > 0) {
-            currentPage = -Math.ceil($('#pageScroller').position().left / wrapperWidth);
-        }
-        wrapperWidth = $('#wrapper').width();
-        $('#pageScroller').css('width', wrapperWidth * (<%=@goods['goods_albums'].length%>+1));
-        $('.pic').css('width', wrapperWidth);
-        myScroll.refresh();
-        myScroll.scrollToPage(currentPage, 0, 0);
-    }
 
 </script>
 

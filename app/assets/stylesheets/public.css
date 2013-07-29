@@ -307,7 +307,7 @@ header{
     font-family: STHeitiSC-Light, STHeiti;
 }
 .nav_body > a.push{
-    background: #88166c;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#222));
 }
 .nav_body > a.push p{
     color: #ffffff;
