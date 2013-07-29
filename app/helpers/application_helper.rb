@@ -16,7 +16,7 @@ module ApplicationHelper
         '221'=>['7.jpg', 'OCHIRLY 欧时力'],
         '237'=>['6.jpg', 'ONLY'],
 
-        '75'=>['1.jpg', 'UNIQLO 优衣库'],
+        #'75'=>['1.jpg', 'UNIQLO 优衣库'],
         '239'=>['10.jpg', 'VERO MODA'],
         '232'=>['11.jpg', 'ZARA'],
         '241'=>['8.jpg', 'EIFINI 伊芙丽'],
