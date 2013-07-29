@@ -80,6 +80,7 @@
     }
 
     .info li .selected {
+        color: #ffffff;
         border-color: #d7235e;
         background-color: #eb3873;
     }
@@ -207,7 +208,7 @@
                 if(color[i] == $(this).text()){
                     $('#measure').empty();
                     for(var j=0;j<measure.length;j++){
-                        $('#measure').append('<span>' + measure[j] +'</span>');
+                        $('#measure').append('<span onclick="">' + measure[j] +'</span>');
                     }
 
                     if(measure.length == 0){
