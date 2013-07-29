@@ -165,13 +165,12 @@
 <article class="gallery">
   <div id="wrapper" class="wrapper">
     <div id="pageScroller">
-      <div class="pic">
+      <a class="pic">
         <img src="<%= @goods['detail_photo'] %>" width="100%">
-      </div>
+      </a>
       <% @goods["goods_albums"].each do |album| %>
-          <div class="pic">
-            <img src="<%= album['photo'] %>" width="100%">
-          </div>
+          <a class="pic" data-src="<%= album['photo'] %>">
+          </a>
       <% end %>
     </div>
   </div>
@@ -205,6 +204,124 @@
   </div>
 </article>
 
+<!-- loading -->
+<div id='loading' class='hide'>
+  <style type="text/css">
+      /*img{*/
+          /*display: none;*/
+      /*}*/
+      /*img.load{*/
+          /*display: block;*/
+      /*}*/
+          /**********/
+      .order_load{
+          position: absolute;
+          /*width: 220px;*/
+          margin:0 auto;
+          height: 220px;
+          z-index: 1;
+          display: inline-block;
+          -webkit-transition: all 0.3s ease-in-out;
+          -webkit-backface-visibility: hidden;
+          -moz-transition: all 0.3s ease-in-out;
+          -moz-backface-visibility: hidden;
+      }
+
+      .loading32{
+          position: relative;
+          margin:0 auto;
+          top:62px;
+          width: 100px;
+          height: 100px;
+          position: absolute;
+          left: 50%;
+          margin-left: -50px;
+          -webkit-border-radius: 100px;
+          -webkit-animation-duration:1.5s;
+          -webkit-animation-iteration-count:infinite;
+          -webkit-animation-timing-function:linear;
+          -webkit-animation-name: rotateThis16;
+          -moz-border-radius: 100px;
+          -moz-animation-duration:1.5s;
+          -moz-animation-iteration-count:infinite;
+          -moz-animation-timing-function:linear;
+          -moz-animation-name: rotateThis16;
+      }
+      @-webkit-keyframes rotateThis16{
+          from {-webkit-transform: scale(0.32) rotate(0deg);}
+          to {-webkit-transform: scale(0.32) rotate(360deg);}
+      }
+      @-moz-keyframes rotateThis16{
+          from {-moz-transform: scale(0.32) rotate(0deg);}
+          to {-moz-transform: scale(0.32) rotate(360deg);}
+      }
+      .loading32>div{
+          width: 16px;
+          height: 16px;
+          background-color: #a6a6a6;
+          -webkit-border-radius: 30px;
+          -moz-border-radius: 30px;
+          -o-border-radius: 30px;
+          border-radius: 30px;
+          position: absolute;
+          left: 42px;
+          top: 42px;
+      }
+      .bar1{
+          opacity: 0.3;
+          -webkit-transform: rotate(0deg) translate(0, -42px);
+          -moz-transform: rotate(0deg) translate(0, -42px);
+      }
+      .bar2{
+          opacity: 0.4;
+          -webkit-transform: rotate(45deg) translate(0, -42px);
+          -moz-transform: rotate(45deg) translate(0, -42px);
+      }
+      .bar3{
+          opacity: 0.5;
+          -webkit-transform: rotate(90deg) translate(0, -42px);
+          -moz-transform: rotate(90deg) translate(0, -42px);
+      }
+      .bar4{
+          opacity: 0.6;
+          -webkit-transform: rotate(135deg) translate(0, -42px);
+          -moz-transform: rotate(135deg) translate(0, -42px);
+      }
+      .bar5{
+          opacity: 0.7;
+          -webkit-transform: rotate(180deg) translate(0, -42px);
+          -moz-transform: rotate(180deg) translate(0, -42px);
+      }
+      .bar6{
+          opacity: 0.8;
+          -webkit-transform: rotate(225deg) translate(0, -42px);
+          -moz-transform: rotate(225deg) translate(0, -42px);
+      }
+      .bar7{
+          opacity: 0.9;
+          -webkit-transform: rotate(270deg) translate(0, -42px);
+          -moz-transform: rotate(270deg) translate(0, -42px);
+      }
+      .bar8{
+          opacity: 1;
+          -webkit-transform: rotate(315deg) translate(0, -42px);
+          -moz-transform: rotate(315deg) translate(0, -42px);
+      }
+  </style>
+  <div class="order_load">
+    <div class="loading32">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+      <div class="bar4"></div>
+      <div class="bar5"></div>
+      <div class="bar6"></div>
+      <div class="bar7"></div>
+      <div class="bar8"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 
     (function () {
@@ -237,10 +354,39 @@
                 $(this).removeClass('selected');
             });
             $('.page span').eq(currentIndex).addClass('selected');
+
+            load_img(currentIndex + 1);
         }
     });
 
+    // 加载图片
+    function load_img(index){
+        var $wrapper = $('#pageScroller')
+        var     selector = 'a:nth-child(' + index + ')',
+                $loading = $('#loading'),
+                $a = $wrapper.find(selector);
+
+        if(!$a.find('img')[0]){
+            $a.html($loading.html());
+            var img = document.createElement('img');
+            img.width = $(window).width();
+
+            $(img).bind('load', function(){
+                $a.html(img);
+                setTimeout(function(){
+                    $(img).addClass('load');
+                }, 10);
+            }).bind('error', function(){
+                        $a.html('');
+                    });
+            img.src = $a.data('src');
+        }
+
+    }
+
     updateLayout();
+
+
 
     function updateLayout() {
         var currentPage = 0;

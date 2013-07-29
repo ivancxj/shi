@@ -7,8 +7,8 @@ module ApplicationHelper
         #'240'=>%w[,COCO DEA 可可迪尔],
 
         '217'=>['2.jpg', 'five plus'],
-        '229'=>['13.jpg', 'GOELIA'],
-        '148'=>['9.jpg', 'H&M 歌莉娅'],
+        '229'=>['13.jpg', 'GOELIA 歌莉娅'],
+        '148'=>['9.jpg', 'H&M'],
         '235'=>['8.jpg', 'LILY'],
 
         '238'=>['5.jpg', 'MANGO'],

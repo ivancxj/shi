@@ -34,24 +34,24 @@
         /* pink */
     .pink {
         color: #feeef5;
-        border: solid 1px #d2729e;
+        border: solid 1px #e05281;
         background: #f895c2;
-        background: -webkit-gradient(linear, left top, left bottom, from(#feb1d3), to(#f171ab));
-        background: -moz-linear-gradient(top, #feb1d3, #f171ab);
+        background: -webkit-gradient(linear, left top, left bottom, from(#f06996), to(#eb3873));
+        background: -moz-linear-gradient(top, #f06996, #eb3873);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#feb1d3', endColorstr='#f171ab');
     }
 
     .pink:hover {
         background: #d57ea5;
-        background: -webkit-gradient(linear, left top, left bottom, from(#f4aacb), to(#e86ca4));
-        background: -moz-linear-gradient(top, #f4aacb, #e86ca4);
+        background: -webkit-gradient(linear, left top, left bottom, from(#eb3873), to(#f06996));
+        background: -moz-linear-gradient(top, #f06996, #eb3873);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4aacb', endColorstr='#e86ca4');
     }
 
     .pink:active {
         color: #f3c3d9;
-        background: -webkit-gradient(linear, left top, left bottom, from(#f171ab), to(#feb1d3));
-        background: -moz-linear-gradient(top, #f171ab, #feb1d3);
+        background: -webkit-gradient(linear, left top, left bottom, from(#eb3873), to(#f06996));
+        background: -moz-linear-gradient(top, #eb3873, #f06996);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f171ab', endColorstr='#feb1d3');
     }
 
@@ -80,13 +80,14 @@
     }
 
     .info li .selected {
-        border-color: #88166c;
-        background-color: #f2f2f2;
+        border-color: #d7235e;
+        background-color: #eb3873;
     }
 
     .info dl,
     .info dd {
         overflow: hidden;
+        color: #2f2f2f;
     }
 
     .info dd span {
@@ -95,6 +96,7 @@
     }
 
     .info dt {
+        color: #999999;
         float: left;
         width: 50px;
         line-height: 32px;
@@ -143,7 +145,7 @@
 <!--  end nav  -->
 
 <section class="info">
-  <h3>感兴趣就试试吧,免费试穿送上门!</h3>
+  <h3 style="color: #2f2f2f">感兴趣就试试吧,免费试穿送上门!</h3>
   <ul>
     <li>
       <dl>
@@ -155,7 +157,7 @@
         </dd>
       </dl>
     </li>
-    <li>
+    <li id="mea">
       <dl>
         <dt>尺码:</dt>
         <dd id="measure">
@@ -165,7 +167,7 @@
   </ul>
 </section>
 <section class="order">
-    <h3>请留下您的联系方式</h3>
+    <h3 style="color: #2f2f2f">请留下您的联系方式</h3>
 
     <p>以便我们与您确认配送时间</p>
 
@@ -174,10 +176,13 @@
     <p>
       <button class="button pink" type="submit">确认</button>
     </p>
+
+
 </section>
 
 <footer>
   <p>版权所有 试衣MM</p>
+  <dt>联系电话:0574-81855387</dt>
 </footer>
 
 
@@ -203,6 +208,10 @@
                     $('#measure').empty();
                     for(var j=0;j<measure.length;j++){
                         $('#measure').append('<span>' + measure[j] +'</span>');
+                    }
+
+                    if(measure.length == 0){
+                        $('#mea').hide()
                     }
                 }
             }

@@ -41,7 +41,7 @@ class HomeController < ApplicationController
 
     # 当前商品id
     @current_id = params[:id]
-    resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
+    resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => true}
     @goods=ActiveSupport::JSON.decode(resp.body)
 
     if @goods.present?
