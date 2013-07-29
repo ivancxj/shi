@@ -1,5 +1,5 @@
 defaults: &defaults
-  app_name: "宁波试衣MM"
+  app_name: "试衣MM(宁波)"
   foot_html: "&copy; Sui Shou."
 
 development:

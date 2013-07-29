@@ -100,7 +100,7 @@ input,select,textarea{
 }
 section{
     width:auto;
-    margin: 20px 10px 0;
+    margin: 10px 0px;
 }
 .slide{
     text-align: center;
@@ -198,11 +198,11 @@ footer a{
 /********** 头部 *************/
 header{
     width:100%;
-    height:46px;
+    height:40px;
     text-align: center;
     position: relative;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#222));
-    background-size: 16px 46px;
+    background-size: 16px 40px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.6);
     -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.6);
     -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.6);
@@ -227,12 +227,12 @@ header{
     width: -webkit-calc(100% -160px);
     width: -moz-calc(100% -160px);
     margin: 0 auto;
-    height: 46px;
+    height: 40px;
     text-align: center;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    line-height: 46px;
+    line-height: 40px;
     color: #ffffff;
     font-size: 20px;
     text-shadow: 0 1px 0 #000000;
@@ -243,7 +243,7 @@ header{
     width: 100%;
     position: absolute;
     z-index: 9999;
-    top:46px;
+    top:40px;
     left: 0;
     background: rgba(0,0,0,0.7);
 }

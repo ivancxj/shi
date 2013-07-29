@@ -108,7 +108,6 @@
     .order {
         line-height: 24px;
         margin-right: 35px;
-        0
     }
 
     .order input {
@@ -158,29 +157,32 @@
 <%= render :partial => 'common/nav' %>
 <!--  end nav  -->
 <div class="main">
-  <section class="info">
-    <h3 style="color: #2f2f2f">感兴趣就试试吧,免费试穿送上门!</h3>
-    <ul>
-      <li>
-        <dl>
-          <dt>颜色:</dt>
-          <dd id="color">
-            <% @color.each do |color| %>
-                <span onclick=""><%= color %></span>
-            <% end %>
-          </dd>
-        </dl>
-      </li>
-      <li id="mea">
-        <dl>
-          <dt>尺码:</dt>
-          <dd id="measure">
-          </dd>
-        </dl>
-      </li>
-    </ul>
-  </section>
-  <section class="order">
+<section class="info">
+  <h3 style="color: #2f2f2f">感兴趣就试试吧,免费试穿送上门!</h3>
+  <ul>
+    <li style="color: #999999;font-size: 14px">
+      <%= @goods_name %>
+    </li>
+    <li>
+      <dl>
+        <dt>颜色:</dt>
+        <dd id="color">
+          <% @color.each do |color| %>
+              <span onclick=""><%= color %></span>
+          <% end %>
+        </dd>
+      </dl>
+    </li>
+    <li id="mea">
+      <dl>
+        <dt>尺码:</dt>
+        <dd id="measure">
+        </dd>
+      </dl>
+    </li>
+  </ul>
+</section>
+<section class="order" style="margin: 20px 10px">
     <h3 style="color: #2f2f2f">请留下您的联系方式</h3>
 
     <p>以便我们与您确认配送时间</p>
@@ -192,7 +194,7 @@
     </p>
 
 
-  </section>
+</section>
 
   <footer>
     <p>版权所有 试衣MM</p>
@@ -208,26 +210,26 @@
 
         var color = [];
         <% @color.each do |value|%>
-        color.push("<%= value %>")
+            color.push("<%= value %>")
         <% end %>
         var measure = [];
         <% @measure.each do |value|%>
-        measure.push("<%= value %>")
+            measure.push("<%= value %>")
         <% end %>
 
         $('#color span').live('click', function () {
-            $('#color span').each(function () {
+            $('#color span').each(function (){
                 $(this).removeClass('selected');
             });
             $(this).toggleClass('selected');
-            for (var i = 0; i < color.length; i++) {
-                if (color[i] == $(this).text()) {
+            for(var i=0;i<color.length;i++){
+                if(color[i] == $(this).text()){
                     $('#measure').empty();
-                    for (var j = 0; j < measure.length; j++) {
-                        $('#measure').append('<span onclick="">' + measure[j] + '</span>');
+                    for(var j=0;j<measure.length;j++){
+                        $('#measure').append('<span onclick="">' + measure[j] +'</span>');
                     }
 
-                    if (measure.length == 0) {
+                    if(measure.length == 0){
                         $('#mea').hide()
                     }
                 }
@@ -236,7 +238,7 @@
 
         $('#color span:first-child').trigger('click');
 
-        $('#measure span').live('click', function () {
+        $('#measure span').live('click', function(){
             $(this).toggleClass('selected');
 //            var selectedMeasure = [];
 //            $('#measure span').each(function (){
@@ -253,7 +255,7 @@
                 $.getJSON('/home/confirm?mobile=' + phone + '&goods_id=' + "<%= @id%>", function (result) {
 //                        alert(2)
                     if (result['result'] == 'ok') {
-                        if (confirm("提交成功~,我们会马上联系您！")) {
+                        if(confirm("提交成功~,我们会马上联系您！")){
                             history.back()
                         }
 //                        alert("提交成功~,我们会马上联系您！")
@@ -267,7 +269,7 @@
                 });
 //                }
             } else {
-                alert("您的联系电话还没有填写哦~");
+                alert("请填写电话号码,以便送货上门试穿");
             }
         });
 //        $(".info li span").click(function () {

@@ -1,5 +1,4 @@
 <style>
-
         /* button ------------- */
     .button {
         display: inline-block;
@@ -57,44 +56,7 @@
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f171ab', endColorstr='#feb1d3');
     }
 
-
-        /*gallery*/
-    .gallery {
-        width: auto;
-        margin-top: 10px;
-        height: calc(100% -60px);
-    }
-
-    .gallery img {
-        vertical-align: middle;
-    }
-
-    .gallery .wrapper {
-        overflow: hidden;
-        height: 100%;
-    }
-
-    .gallery .pic {
-        width: 100%;
-        height: 100%;
-        float: left;
-    }
-
-    .gallery #pageScroller {
-        width: 100%;
-        height: 100%;
-        float: left;
-    }
-
-    .gallery .pic span {
-        display: inline-block;
-        vertical-align: middle;
-        visibility: hidden;
-        width: 1px;
-        height: 100%;
-    }
-
-    .gallery .extra {
+    .extra {
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -109,31 +71,14 @@
         font-size: 14px;
     }
 
-    .gallery .go-order {
+    .go-order {
         position: absolute;
         right: 30px;
         top: 10px;
 
     }
 
-    .gallery .page {
-        position: absolute;
-        top: 60px;
-        width: 100%;
-    }
-
-        /*.gallery .page span {*/
-        /*font-size: 0;*/
-        /*border: 5px solid #f2f2f2;*/
-        /*border-radius: 5px;*/
-        /*margin: 0 5px;*/
-        /*}*/
-
-        /*.gallery .page .selected {*/
-        /*border-color: #000;*/
-        /*}*/
-
-    .gallery .trigger a {
+    .trigger a {
         width: 40px;
         height: 40px;
         top: 50%;
@@ -141,53 +86,146 @@
         position: fixed;
     }
 
-    .gallery .trigger .prev {
+    .trigger .prev {
         left: 0;
     }
 
-    .gallery .trigger .next {
+    .trigger .next {
         right: 0;
     }
 
+    /*.h_title {*/
+
+        /*width: calc(100%-160px);*/
+        /*width: -webkit-calc(100% -160px);*/
+        /*width: -moz-calc(100% -160px);*/
+        /*margin: 0 60px 0 60px;*/
+        /*height: 40px;*/
+        /*text-align: center;*/
+        /*text-overflow: ellipsis;*/
+        /*overflow: hidden;*/
+        /*white-space: nowrap;*/
+        /*line-height: 40px;*/
+        /*color: #ffffff;*/
+        /*font-size: 14px;*/
+        /*text-shadow: 0 1px 0 #000000;*/
+        /*font-family: STHeitiSC-Light, STHeiti;*/
+    /*}*/
+
+    .product_img {
+        margin-bottom: 5px;
+    }
+
+    /*.img_wrap {*/
+        /*width: 210px;*/
+        /*height: 280px;*/
+        /*float: left;*/
+        /*left: 50%;*/
+        /*position: relative;*/
+        /*margin-left: -112px;*/
+        /*overflow: hidden;*/
+    /*}*/
+
+    .img_wrap > div {
+        width: auto;
+        height: 100%;
+    }
+
+    /*.img_wrap > div > a {*/
+        /*float: left;*/
+        /*width: 208px;*/
+        /*height: 280px;*/
+        /*margin: 0 1px;*/
+        /*overflow: hidden;*/
+    /*}*/
+
+    /*.img_wrap > div > a > img {*/
+        /*width: 210px;*/
+        /*height: 280px;*/
+        /*-webkit-transform: translate3d(0, 0, 0);*/
+        /*-webkit-backface-visibility: hidden;*/
+    /*}*/
+    .pro_name{
+        margin: 15px 9px 0 ;
+        line-height: 20px;
+        text-align: left;
+        font-size: 13px;
+        color:#2f2f2f;
+        font-weight: bold;
+        text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        -moz-text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        -webkit-text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        line-height: 20px;
+    }
+
 </style>
+
+<script>
+    (function () {
+        var slide_style = function () {
+            var width,height,left;
+            if(DeviceInfo.width <= 640){
+                left = -90;
+                width = '180';
+                height = '240';
+            }else{
+                left = -112;
+                width = '210';
+                height = '280';
+            }
+
+            var style = [
+                '<style type="text/css">',
+                '.img_wrap{width:' + width + 'px;height:'+height+'px ;float: left;left: 50%;position: relative;margin-left: '+left+'px;overflow: hidden;}',
+                '.img_wrap > div > a{width:' + (width-2) + 'px;height:'+height+'px ;float: left;margin: 0 1px;overflow: hidden;}',
+                '.img_wrap > div > a > img{width:' + (width-2) + 'px;height:'+height+'px ;-webkit-transform: translate3d(0, 0, 0);-webkit-backface-visibility: hidden;}',
+                '</style>'
+            ]
+            $('head').append(style.join(' '));
+        };
+        slide_style();
+    })();
+</script>
+
 
 <header>
   <div class="navigation">
     <div></div>
   </div>
-  <div class="title"><%= @goods['name'] %></div>
+  <div class="title"><%= Setting.app_name%></div>
 </header>
 
 <!--  nav  -->
 <%= render :partial => 'common/nav' %>
 <!--  end nav  -->
 
-<article class="gallery">
-  <div id="wrapper" class="wrapper">
-    <div id="pageScroller">
-      <a class="pic">
-        <img src="<%= @goods['detail_photo'] %>" width="100%">
-      </a>
-      <% @goods['goods_albums'].each do |album| %>
-          <a class="pic" data-src="<%= album['photo'] %>">
-          </a>
-      <% end %>
+<section id='product'>
+  <div class="product_img">
+    <div class="img_wrap" data-width="<%= (@goods["goods_albums"].length + 1) %>">
+      <div>
+        <a class="pic" data-href="<%= @goods['detail_photo'] %>" data-src="<%= @goods['detail_photo'] %>">
+        </a>
+        <% @goods['goods_albums'].each do |album| %>
+            <a data-href="<%= album['photo'] %>" class="pic" data-src="<%= album['photo'] %>">
+            </a>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <div class="trigger">
-    <% if @pre_id %>
-        <a href="/home/detail?id=<%= @pre_id %>" class="prev"><img src="<%= asset_path('prev.png') %>" width="40px" height="40px"/></a>
-    <% end %>
 
-    <% if @next_id %>
-        <a href="/home/detail?id=<%= @next_id %>" class="next"><img src="<%= asset_path('next.png') %>" width="40px" height="40px"/></a>
-    <% end %>
+    <div class="trigger">
+      <% if @pre_id %>
+          <a href="/home/detail?id=<%= @pre_id %>" class="prev"><img src="<%= asset_path('prev.png') %>" width="40px" height="40px"/></a>
+      <% end %>
 
-  </div>
+      <% if @next_id %>
+          <a href="/home/detail?id=<%= @next_id %>" class="next"><img src="<%= asset_path('next.png') %>" width="40px" height="40px"/></a>
+      <% end %>
 
-  <div class="page">
-    <!--<span class="selected">1</span>-->
-    <div class="slide margin5 ">
+    </div>
+    <div style="clear:both;"></div>
+    <!-- active -->
+    <div class="slide">
+      <li></li>
       <% @goods["goods_albums"].each_with_index do |album, index| %>
           <% if index < 8 %>
               <li></li>
@@ -195,27 +233,37 @@
       <% end %>
     </div>
 
-    <div class="extra">
-      <p class="price">
-        <del>市场价: ￥<%= @goods["old_price"] %></del>
-        <b>MM价: ￥<%= @goods["sale_price"] %></b></p>
-      <p class="go-order">
-        <button class="button pink">点击体验试穿</button>
-      </p>
-    </div>
+
   </div>
-</article>
+
+  <!-- 详情 -->
+  <p class="pro_name"><%= @goods['name'] %> </p>
+  <!-- safari 不超出屏幕 不会隐藏 地址栏-->
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+
+  <div class="extra">
+    <p class="price">
+      <% if @goods["old_price"]%>
+          市场价:<del>￥<%= @goods["old_price"] %></del>
+      <% end%>
+
+      <b>MM价: ￥<%= @goods["sale_price"] %></b></p>
+    <p class="go-order">
+      <button class="button pink">点击体验试穿</button>
+    </p>
+  </div>
+
+</section>
 
 <!-- loading -->
 <div id='loading' class='hide'>
   <style type="text/css">
-          /*img{*/
-          /*display: none;*/
-          /*}*/
-          /*img.load{*/
-          /*display: block;*/
-          /*}*/
-          /**********/
       .order_load {
 
           width: 225px;
@@ -224,16 +272,6 @@
           left: 50%;
           position: relative;
           margin-left: -112px;
-          /*position: absolute;*/
-          /*width: 220px;*/
-          /*margin: 0 auto;*/
-          /*height: 220px;*/
-          /*z-index: 1;*/
-          /*display: inline-block;*/
-          /*-webkit-transition: all 0.3s ease-in-out;*/
-          /*-webkit-backface-visibility: hidden;*/
-          /*-moz-transition: all 0.3s ease-in-out;*/
-          /*-moz-backface-visibility: hidden;*/
       }
 
       .loading32 {
@@ -363,45 +401,93 @@
             window.location.href = '/home/order?id=<%= @current_id%>';
         });
 
-        //   todo uc不支持
-        document.addEventListener("orientationchange", updateLayout);
+        var direction = 'landscape';
 
-        // The wrapperWidth before orientationChange. Used to identify the current page number in updateLayout();
-        wrapperWidth = 0;
-        currentIndex = 0;
+        // 初始化图片slide
+        var $wrapper = $('.img_wrap'),
+                $slide = $('.slide'),
+                length = $wrapper.data('width') * 1,
+                width = $wrapper.width(),
+                $body = $('body');
 
-        var myScroll = new iScroll('wrapper', {
+
+        $slide.find('li:nth-child(1)').addClass('active');  //提示点初始化
+        $wrapper.children('div').css('width', width * length); //iscroll内层动态计算宽度
+
+        $body.bind('touchstart', function (e) {
+            var point = e.touches[0],
+                    startPageX = point.pageX,
+                    startPageY = point.pageY;
+            $body.bind('touchmove', function (e) {
+                var point = e.touches[0],
+                        movePageX = point.pageX,
+                        movePageY = point.pageY;
+                if (Math.abs(movePageX - startPageX) < Math.abs(movePageY - startPageY)) {
+                    direction = 'portrait';
+                } else {
+                    direction = 'landscape';
+                }
+                $body.unbind('touchmove');
+            });
+        });
+
+        var scroll = new iScroll($wrapper[0], {
+            x: (0),
+            currPageX: 0,
             snap: true,
             momentum: false,
+            vScroll: false,
             hScrollbar: false,
-            vScrollbar: false,
-            lockDirection: true,
+            onBeforeScrollStart: function () {
+            },
+            onBeforeScrollMove: function () {
+                if (direction == 'portrait') {
+                    this._unbind('touchmove', window);
+                    this._unbind('touchend', window);
+                    this._unbind('touchcancel', window);
+                    return;
+                }
+            },
+            onScrollMove: function (e) {
+                if (this.dirY == 0) e.preventDefault();
+            },
             onScrollEnd: function () {
                 var ci = this.currPageX + 1;
-                indicator_update(ci)
+                indicator_update(ci);
                 load_img(ci);
             }
         });
-
-        var $slide = $('.slide');
-        $slide.find('li:nth-child(1)').addClass('active');  //提示点初始化
         //幻灯提示点同步
         function indicator_update(x) {
             $slide.children('.active').removeClass('active');
             $slide.find('li:nth-child(' + x + ')').addClass('active');
         };
+        function scroll_to(x) {
+            var pageX = scroll.currPageX + x;
+            scroll.scrollToPage(pageX, 0, 300);
+        };
+        $wrapper.find('a').bind('itap', function () {
+            var $this = $(this);
+            window.location.href = $this.data('href');
+        });
+
+        load_img(1)
 
         // 加载图片
         function load_img(index) {
-            var $wrapper = $('#pageScroller')
             var selector = 'a:nth-child(' + index + ')',
                     $loading = $('#loading'),
                     $a = $wrapper.find(selector);
-
             if (!$a.find('img')[0]) {
                 $a.html($loading.html());
                 var img = document.createElement('img');
-                img.width = $(window).width();
+                if(DeviceInfo.width <= 640){
+                    img.width = '180';
+                    img.height = '240';
+                }else{
+                    img.width = '210';
+                    img.height = '280';
+                }
 
                 $(img).bind('load',function () {
                     $a.html(img);
@@ -413,25 +499,7 @@
                         });
                 img.src = $a.data('src');
             }
-
         }
-
-        updateLayout();
-
-
-        function updateLayout() {
-
-            var currentPage = 0;
-            if (wrapperWidth > 0) {
-                currentPage = -Math.ceil($('#pageScroller').position().left / wrapperWidth);
-            }
-            wrapperWidth = $('#wrapper').width();
-            $('#pageScroller').css('width', wrapperWidth * (<%=@goods['goods_albums'].length%>+1));
-            $('.pic').css('width', wrapperWidth);
-            myScroll.refresh();
-            myScroll.scrollToPage(currentPage, 0, 0);
-        }
-
 
     })();
 
