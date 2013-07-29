@@ -33,28 +33,30 @@
     }
 
         /* pink button */
-    .button.pink {
+        /* pink */
+    .pink {
         color: #feeef5;
-        border: solid 1px #d2729e;
+        border: solid 1px #e05281;
         background: #f895c2;
-        background: -webkit-gradient(linear, left top, left bottom, from(#feb1d3), to(#f171ab));
-        background: -moz-linear-gradient(top, #feb1d3, #f171ab);
+        background: -webkit-gradient(linear, left top, left bottom, from(#f06996), to(#eb3873));
+        background: -moz-linear-gradient(top, #f06996, #eb3873);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#feb1d3', endColorstr='#f171ab');
     }
 
-    .button.pink:hover {
+    .pink:hover {
         background: #d57ea5;
-        background: -webkit-gradient(linear, left top, left bottom, from(#f4aacb), to(#e86ca4));
-        background: -moz-linear-gradient(top, #f4aacb, #e86ca4);
+        background: -webkit-gradient(linear, left top, left bottom, from(#eb3873), to(#f06996));
+        background: -moz-linear-gradient(top, #f06996, #eb3873);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4aacb', endColorstr='#e86ca4');
     }
 
-    .button.pink:active {
+    .pink:active {
         color: #f3c3d9;
-        background: -webkit-gradient(linear, left top, left bottom, from(#f171ab), to(#feb1d3));
-        background: -moz-linear-gradient(top, #f171ab, #feb1d3);
+        background: -webkit-gradient(linear, left top, left bottom, from(#eb3873), to(#f06996));
+        background: -moz-linear-gradient(top, #eb3873, #f06996);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f171ab', endColorstr='#feb1d3');
     }
+
 
         /*gallery*/
     .gallery {
@@ -75,14 +77,12 @@
         width: 100%;
         height: 100%;
         float: left;
-
     }
 
     .gallery #pageScroller {
         width: 100%;
         height: 100%;
         float: left;
-        text-align: center;
     }
 
     .gallery .pic span {
@@ -116,7 +116,6 @@
     }
 
     .gallery .page {
-        text-align: center;
         position: absolute;
         top: 60px;
         width: 100%;
@@ -161,7 +160,7 @@
 <!--  nav  -->
 <%= render :partial => 'common/nav' %>
 <!--  end nav  -->
- <div class="main">
+
 <article class="gallery">
   <div id="wrapper" class="wrapper">
     <div id="pageScroller">
@@ -348,8 +347,6 @@
       <div class="bar8"></div>
     </div>
   </div>
-</div>
-
 </div>
 
 <script>
