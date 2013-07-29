@@ -63,11 +63,21 @@ class HomeController < ApplicationController
 
   def next
     p params[:id]
-    resp=shiyi_conn3.get '/api/v2/goods/detail', {:id => params[:id] || 946, :is_wifi => false}
+    resp=shiyi_conn3.get '/api/v2/goods/detail', {:id => params[:id] || 946, :is_wifi => true}
+
+    goods=ActiveSupport::JSON.decode(resp.body)
+
+    if @goods.present?
+      set_seo_meta(goods['name'])
+    end
+    @pre_id = get_pre_goods_id(params[:id])
+    @next_id = get_next_goods_id(params[:id])
+    goods['pre_id'] = @pre_id
+    goods['next_id'] = @next_id
     respond_to do |format|
       format.html
       format.json {
-        render :json => ActiveSupport::JSON.decode(resp.body)
+        render :json => goods
       }
     end
   end
