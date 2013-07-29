@@ -91,6 +91,8 @@ class HomeController < ApplicationController
           end
         end
       end
+
+      @goods_name =  goods['name']
     end
   end
 
