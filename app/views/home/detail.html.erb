@@ -97,23 +97,20 @@
 
     .h_title {
 
-        display: inline-block;
-        line-height: 100%;
-        color: #fcfcfc;
-        font-weight: bold;
-        text-shadow: 0 0 3px #000;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        font-size: 13px;
-        width: auto;
-        max-width: 195px;
-        width: calc(100% -160px);
+        width: culc(100%-160px);
         width: -webkit-calc(100% -160px);
         width: -moz-calc(100% -160px);
-        height: 100%;
-        word-wrap: break-word;
-        word-break: normal;
+        margin: 0 60px 0 60px;
+        height: 46px;
         text-align: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 46px;
+        color: #ffffff;
+        font-size: 14px;
+        text-shadow: 0 1px 0 #000000;
+        font-family: STHeitiSC-Light, STHeiti;
     }
 
     .product_img {
@@ -148,6 +145,18 @@
         height: 280px;
         -webkit-transform: translate3d(0, 0, 0);
         -webkit-backface-visibility: hidden;
+    }
+    .pro_name{
+        margin: 15px 9px 0 ;
+        line-height: 20px;
+        text-align: left;
+        font-size: 13px;
+        color:#2f2f2f;
+        font-weight: bold;
+        text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        -moz-text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        -webkit-text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        line-height: 20px;
     }
 
 </style>
@@ -202,7 +211,7 @@
   </div>
 
   <!-- 详情 -->
-  <!--<p class="pro_name"><%= @goods['name'] %> </p>-->
+  <p class="pro_name"><%= @goods['name'] %> </p>
   <div class="extra">
     <p class="price">
       <del>市场价: ￥<%= @goods["old_price"] %></del>
