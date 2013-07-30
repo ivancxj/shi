@@ -208,10 +208,10 @@
   <div class="product_img">
     <div id='img_wrap' class="img_wrap" data-width="<%= (@goods["goods_albums"].length + 1) %>">
       <div>
-        <a class="pic" data-href="<%= @goods['normal_photo'] %>" data-src="<%= @goods['normal_photo'] %>">
+        <a class="pic" data-src="<%= @goods['normal_photo'] %>">
         </a>
         <% @goods['goods_albums'].each do |album| %>
-            <a data-href="<%= album['photo'] %>" class="pic" data-src="<%= album['photo'] %>">
+            <a data-width='<%= album['width'] %>' data-height='<%= album['height'] %>' class="pic" data-src="<%= album['photo'] %>">
             </a>
         <% end %>
       </div>
@@ -419,41 +419,42 @@
 
             $.getJSON('/home/next?id=' + goods_id, function (data) {
 
-                var state = { //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
-                    title : "HTML 5 History API simple demo",
-                    url : "http://www.baidu.com"
-                };
-
                 var state = {title:'',url:window.location.href.split("?")[0]};
-                history.pushState(state, "HTML 5 History API simple demo", '?id='+goods_id);
+                history.pushState(state, "", '?id='+goods_id);
 
-                var current_id = data.id
+//                var current_id = data.id
                 var name = data.name
-                var albums = data.goods_albums;
+                var albums_photo = data.goods_albums;
                 var sale_price = data.sale_price;
                 var old_price = data.old_price;
-                var photo_pic = data.shop.photo;
-                var photos = [];
-                photos.push(data.normal_photo);
-                for (var i = 0; i < albums.length; i++) {
-                    var photo = albums[i].photo;
-                    photos.push(photo);
-                }
+//                var photo_pic = data.shop.photo;
+//                var photos = [];
+//                photos.push(data.normal_photo);
+
 
                 var albums = $('#img_wrap');
-                var albums_str = "<div>";
-                var active_str = '';
+                var albums_str = '<div> <a class="pic" data-src=' + data.normal_photo + '></a>';
+                var active_str = '<li></li>';
 
-                for (var i = 0; i < photos.length; i++) {
-                    var obj = photos[i];
-                    albums_str += ' <a class="pic" data-href=' + obj + ' data-src=' + obj + '></a>';
 
-                    if (i < 8) {
+                for (var i = 0; i < albums_photo.length; i++) {
+                    var photo = albums_photo[i].photo;
+                    albums_str += ' <a data-height='+albums_photo[i].height+' data-width='+albums_photo[i].width+' class="pic" data-href=' + photo + ' data-src=' + photo + '></a>';
+                    if (i < 7) {
                         active_str += ' <li></li>';
                     }
                 }
 
-                albums.attr("data-width", photos.length);
+//                for (var i = 0; i < photos.length; i++) {
+//                    var obj = photos[i];
+//                    albums_str += ' <a class="pic" data-href=' + obj + ' data-src=' + obj + '></a>';
+//
+//                    if (i < 8) {
+//                        active_str += ' <li></li>';
+//                    }
+//                }
+
+                albums.attr("data-width",albums_photo.length+1);
 
                 albums_str += "</div>"
                 albums.html(albums_str);
@@ -494,10 +495,6 @@
                     }
                     $('#trigger_2').attr("data-src", data.next_id);
                 }
-
-
-
-
 
                 var direction = 'landscape';
 
@@ -559,11 +556,10 @@
                 });
                 $wrapper.find('a').bind('itap', function () {
                     var $this = $(this);
-                    window.location.href = $this.data('href');
+                    window.location.href = $this.data('src');
                 });
 
                 load_img(1)
-
 
             });
         });
@@ -642,7 +638,7 @@
         };
         $wrapper.find('a').bind('itap', function () {
             var $this = $(this);
-            window.location.href = $this.data('href');
+            window.location.href = $this.data('src');
         });
 
         load_img(1)
@@ -655,12 +651,28 @@
             if (!$a.find('img')[0]) {
                 $a.html($loading.html());
                 var img = document.createElement('img');
-                if (DeviceInfo.width <= 640) {
-                    img.width = '180';
-                    img.height = '240';
-                } else {
-                    img.width = '240';
-                    img.height = '320';
+
+                var w = $a.data('width');
+                var l = $a.data('height');
+
+                if(w != null){
+                    var width,height;
+
+                    if (DeviceInfo.width <= 640) {
+                        width = 180;
+                        height = 240;
+
+                    } else {
+                        width = 240;
+                        height = 320;
+                    }
+
+                    var tmp = (width * l)/w
+                    var mtop =  height-2*tmp;
+                    if(mtop > 0){
+                        img.style.height= (width * l)/w+'px';
+                        img.style.marginTop = mtop+'px'
+                    }
                 }
 
                 $(img).bind('load',function () {
@@ -679,6 +691,3 @@
 
 
 </script>
-
-
-
