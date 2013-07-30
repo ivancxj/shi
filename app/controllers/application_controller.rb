@@ -5,6 +5,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
+  def redis_cache_get(key)
+    Redis::Objects.redis.get(key)
+  end
+  def redis_cache_set(key,value,expire)
+    #Redis::Objects.redis.del(key)
+    Redis::Objects.redis.set(key,value)
+    Redis::Objects.redis.expire(key,expire)
+    value
+  end
+
   def notice_success(msg)
     flash[:notice] = msg
   end

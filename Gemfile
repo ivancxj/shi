@@ -25,6 +25,13 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 gem 'thin'
+# gem 'activeuuid'
+gem 'redis', '~> 3.0.1'
+gem 'redis-store', :git=>'git://github.com/jodosha/redis-store.git'
+# Redis 命名空间
+gem 'redis-namespace','~> 1.2.1'
+# 将一些数据存放入 Redis
+gem 'redis-objects', '0.5.2'
 group :development, :test do
   gem 'quiet_assets'
 end
