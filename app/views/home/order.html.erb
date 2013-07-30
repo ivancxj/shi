@@ -225,8 +225,17 @@
         color.push("<%= value %>")
         <% end %>
         var measure = [];
-        <% @measure.each do |value|%>
-        measure.push("<%= value %>")
+
+        function Measure() {
+            this.color;
+            this.measure;
+        }
+
+        <% @measure.each do |key, value|%>
+        var ms = new Measure();
+        ms.color = "<%= key %>";
+        ms.measure = "<%= value %>".replace(/&quot;/g, '').replace('[', '').replace(']', '');
+        measure.push(ms);
         <% end %>
 
         $('#color span').live('click', function () {
@@ -238,9 +247,13 @@
                 if (color[i] == $(this).text()) {
                     $('#measure').empty();
                     for (var j = 0; j < measure.length; j++) {
-                        $('#measure').append('<span onclick="">' + measure[j] + '</span>');
+                        if (measure[j].color == color[i]) {
+                            var kk = measure[j].measure.split(",");
+                            for (var k = 0; k < kk.length; k++) {
+                                $('#measure').append('<span onclick="">' + kk[k] + '</span>');
+                            }
+                        }
                     }
-
                     if (measure.length == 0) {
                         $('#mea').hide()
                     }

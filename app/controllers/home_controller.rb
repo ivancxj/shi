@@ -78,21 +78,21 @@ class HomeController < ApplicationController
     goods = ActiveSupport::JSON.decode(resp.body)
     if goods
       @color = Array.new;
-      @measure = Array.new;
+      @measure = Hash.new;
       goods["sku"].each_with_index do |sku, index|
         if sku["color"].include?("-")
           @color.push(sku["color"].split('-')[0])
         else
           @color.push(sku["color"])
         end
-        if sku["measure"] && (index == 1)
-          sku["measure"].each do |measure|
-            @measure.push(measure["size"])
-          end
+        ms = Array.new;
+        sku["measure"].each do |measure|
+          ms.push(measure["size"])
         end
+        @measure["#{@color[index]}"] = ms
       end
-
-      @goods_name =  goods['name']
+      p @measure
+      @goods_name = goods['name']
     end
   end
 
