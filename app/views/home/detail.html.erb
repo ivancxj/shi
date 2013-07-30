@@ -257,7 +257,7 @@
           <del>￥<%= @goods["old_price"] %></del>
       <% end %>
 
-      <b>MM价: ￥<%= @goods["sale_price"] %></b>
+      <b>mm价: ￥<%= @goods["sale_price"] %></b>
     </p>
     <p class="go-order">
       <button id='button' data-src="<%= @current_id%>" class="button pink">点击体验试穿</button>
@@ -407,6 +407,14 @@
             var goods_id = $this.data('src')
             $.getJSON('/home/next?id=' + goods_id, function (data) {
 
+                var state = { //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
+                    title : "HTML 5 History API simple demo",
+                    url : "http://www.baidu.com"
+                };
+
+                var state = {title:'',url:window.location.href.split("?")[0]};
+                history.pushState(state, "HTML 5 History API simple demo", '?id='+goods_id);
+
                 var current_id = data.id
                 var name = data.name
                 var albums = data.goods_albums;
@@ -440,13 +448,14 @@
 
                 $('#slide').html(active_str);
                 $('#pro_name').text(name);
+                $('head title').text(name);
 
                 var price_html = '';
 
                 if (old_price != null) {
                     price_html += '市场价:<del>￥' + old_price + '</del> ';
                 }
-                price_html += '<b>MM价: ￥' + sale_price + '</b>';
+                price_html += '<b>mm价: ￥' + sale_price + '</b>';
                 $('#price').html(price_html);
 
                 $('#button').attr("data-src", goods_id);

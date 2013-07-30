@@ -106,7 +106,7 @@
   <section style="margin-top: 10px;">
     <% @goods_list.each do |goods| %>
         <div class="product">
-          <a data-href="/home/detail?id=<%= goods['id'] %>&brand_id=<%= @id %>">
+          <a data-href="/home/detail?id=<%= goods['id'] %>">
             <div class="img_wrap">
               <img src="<%= goods['photo_url'] %>">
             </div>
