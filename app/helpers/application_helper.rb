@@ -19,7 +19,7 @@ module ApplicationHelper
         #'75'=>['1.jpg', 'UNIQLO 优衣库'],
         '239'=>['10.jpg', 'VERO MODA'],
         '232'=>['11.jpg', 'ZARA'],
-        '241'=>['8.jpg', 'EIFINI 伊芙丽'],
+        '241'=>['12.jpg', 'EIFINI 伊芙丽'],
 
         '233'=>['3.jpg', 'NOIHSAF 诺诗凡']
     }
