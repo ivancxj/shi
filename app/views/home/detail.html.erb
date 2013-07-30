@@ -545,6 +545,10 @@
                         load_img(ci);
                     }
                 });
+                $wrapper.find('a').bind('itap', function () {
+                    var $this = $(this);
+                    window.location.href = $this.data('href');
+                });
 
                 load_img(1)
 
