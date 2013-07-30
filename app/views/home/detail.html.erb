@@ -411,6 +411,12 @@
             e.stopPropagation();
             var $this = $(this);
             var goods_id = $this.data('src')
+
+            var selector = 'a:nth-child(' + (scroll.currPageX+1) + ')',
+                    $loading = $('#loading'),
+                    $a = $wrapper.find(selector);
+            $a.html($loading.html());
+
             $.getJSON('/home/next?id=' + goods_id, function (data) {
 
                 var state = { //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
