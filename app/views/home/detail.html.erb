@@ -260,10 +260,10 @@
     <p id='price' class="price">
       <% if @goods["old_price"] %>
           市场价:
-          <del>￥<%= @goods["old_price"] %></del>
+          <del>￥<%= @goods["old_price"].to_i %></del>
       <% end %>
 
-      <b>mm价: ￥<%= @goods["sale_price"] %></b>
+      <b>mm价: ￥<%= @goods["sale_price"].to_i %></b>
     </p>
     <p class="go-order">
       <button id='button' data-src="<%= @current_id%>" class="button pink">点击体验试穿</button>
@@ -459,9 +459,9 @@
                 var price_html = '';
 
                 if (old_price != null) {
-                    price_html += '市场价:<del>￥' + old_price + '</del> ';
+                    price_html += '市场价:<del>￥' +Math.floor(old_price)  + '</del> ';
                 }
-                price_html += '<b>mm价: ￥' + sale_price + '</b>';
+                price_html += '<b>mm价: ￥' + Math.floor(sale_price) + '</b>';
                 $('#price').html(price_html);
 
                 $('#button').attr("data-src", goods_id);
