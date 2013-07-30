@@ -94,7 +94,7 @@
         right: 0;
     }
 
-    /*.h_title {*/
+        /*.h_title {*/
 
         /*width: calc(100%-160px);*/
         /*width: -webkit-calc(100% -160px);*/
@@ -110,13 +110,13 @@
         /*font-size: 14px;*/
         /*text-shadow: 0 1px 0 #000000;*/
         /*font-family: STHeitiSC-Light, STHeiti;*/
-    /*}*/
+        /*}*/
 
     .product_img {
         margin-bottom: 5px;
     }
 
-    /*.img_wrap {*/
+        /*.img_wrap {*/
         /*width: 210px;*/
         /*height: 280px;*/
         /*float: left;*/
@@ -124,37 +124,37 @@
         /*position: relative;*/
         /*margin-left: -112px;*/
         /*overflow: hidden;*/
-    /*}*/
+        /*}*/
 
     .img_wrap > div {
         width: auto;
         height: 100%;
     }
 
-    /*.img_wrap > div > a {*/
+        /*.img_wrap > div > a {*/
         /*float: left;*/
         /*width: 208px;*/
         /*height: 280px;*/
         /*margin: 0 1px;*/
         /*overflow: hidden;*/
-    /*}*/
+        /*}*/
 
-    /*.img_wrap > div > a > img {*/
+        /*.img_wrap > div > a > img {*/
         /*width: 210px;*/
         /*height: 280px;*/
         /*-webkit-transform: translate3d(0, 0, 0);*/
         /*-webkit-backface-visibility: hidden;*/
-    /*}*/
-    .pro_name{
-        margin: 15px 9px 0 ;
+        /*}*/
+    .pro_name {
+        margin: 15px 9px 0;
         line-height: 20px;
         text-align: left;
         font-size: 13px;
-        color:#2f2f2f;
+        color: #2f2f2f;
         font-weight: bold;
-        text-shadow:0 1px 0 rgba(252,252,252,0.26);
-        -moz-text-shadow:0 1px 0 rgba(252,252,252,0.26);
-        -webkit-text-shadow:0 1px 0 rgba(252,252,252,0.26);
+        text-shadow: 0 1px 0 rgba(252, 252, 252, 0.26);
+        -moz-text-shadow: 0 1px 0 rgba(252, 252, 252, 0.26);
+        -webkit-text-shadow: 0 1px 0 rgba(252, 252, 252, 0.26);
         line-height: 20px;
     }
 
@@ -163,12 +163,12 @@
 <script>
     (function () {
         var slide_style = function () {
-            var width,height,left;
-            if(DeviceInfo.width <= 640){
+            var width, height, left;
+            if (DeviceInfo.width <= 640) {
                 left = -90;
                 width = '180';
                 height = '240';
-            }else{
+            } else {
                 left = -112;
                 width = '210';
                 height = '280';
@@ -176,9 +176,9 @@
 
             var style = [
                 '<style type="text/css">',
-                '.img_wrap{width:' + width + 'px;height:'+height+'px ;float: left;left: 50%;position: relative;margin-left: '+left+'px;overflow: hidden;}',
-                '.img_wrap > div > a{width:' + (width-2) + 'px;height:'+height+'px ;float: left;margin: 0 1px;overflow: hidden;}',
-                '.img_wrap > div > a > img{width:' + (width-2) + 'px;height:'+height+'px ;-webkit-transform: translate3d(0, 0, 0);-webkit-backface-visibility: hidden;}',
+                '.img_wrap{width:' + width + 'px;height:' + height + 'px ;float: left;left: 50%;position: relative;margin-left: ' + left + 'px;overflow: hidden;}',
+                '.img_wrap > div > a{width:' + (width - 2) + 'px;height:' + height + 'px ;float: left;margin: 0 1px;overflow: hidden;}',
+                '.img_wrap > div > a > img{width:' + (width - 2) + 'px;height:' + height + 'px ;-webkit-transform: translate3d(0, 0, 0);-webkit-backface-visibility: hidden;}',
                 '</style>'
             ]
             $('head').append(style.join(' '));
@@ -192,16 +192,15 @@
   <div class="navigation">
     <div></div>
   </div>
-  <div class="title"><%= Setting.app_name%></div>
+  <div class="title"><%= Setting.app_name %></div>
 </header>
 
 <!--  nav  -->
 <%= render :partial => 'common/nav' %>
 <!--  end nav  -->
-
 <section id='product'>
   <div class="product_img">
-    <div class="img_wrap" data-width="<%= (@goods["goods_albums"].length + 1) %>">
+    <div id='img_wrap' class="img_wrap" data-width="<%= (@goods["goods_albums"].length + 1) %>">
       <div>
         <a class="pic" data-href="<%= @goods['detail_photo'] %>" data-src="<%= @goods['detail_photo'] %>">
         </a>
@@ -214,17 +213,21 @@
 
     <div class="trigger">
       <% if @pre_id %>
-          <a href="/home/detail?id=<%= @pre_id %>" class="prev"><img src="<%= asset_path('prev.png') %>" width="40px" height="40px"/></a>
+          <a id='trigger_1' data-src="<%= @pre_id %>" class="prev"><img src="<%= asset_path('prev.png') %>" width="40px" height="40px"/></a>
+      <% else%>
+          <a id='trigger_1' data-src="<%= @pre_id %>" class="prev hide"><img src="<%= asset_path('prev.png') %>" width="40px" height="40px"/></a>
       <% end %>
 
       <% if @next_id %>
-          <a href="/home/detail?id=<%= @next_id %>" class="next"><img src="<%= asset_path('next.png') %>" width="40px" height="40px"/></a>
+          <a id='trigger_2' data-src="<%= @next_id %>" class="next"><img src="<%= asset_path('next.png') %>" width="40px" height="40px"/></a>
+      <% else%>
+          <a id='trigger_2' data-src="<%= @next_id %>" class="next hide"><img src="<%= asset_path('next.png') %>" width="40px" height="40px"/></a>
       <% end %>
 
     </div>
     <div style="clear:both;"></div>
     <!-- active -->
-    <div class="slide">
+    <div id='slide' class="slide">
       <li></li>
       <% @goods["goods_albums"].each_with_index do |album, index| %>
           <% if index < 8 %>
@@ -237,7 +240,7 @@
   </div>
 
   <!-- 详情 -->
-  <p class="pro_name"><%= @goods['name'] %> </p>
+  <p id='pro_name' class="pro_name"><%= @goods['name'] %> </p>
   <!-- safari 不超出屏幕 不会隐藏 地址栏-->
   <br/>
   <br/>
@@ -248,19 +251,20 @@
 
 
   <div class="extra">
-    <p class="price">
-      <% if @goods["old_price"]%>
-          市场价:<del>￥<%= @goods["old_price"] %></del>
-      <% end%>
+    <p id='price' class="price">
+      <% if @goods["old_price"] %>
+          市场价:
+          <del>￥<%= @goods["old_price"] %></del>
+      <% end %>
 
-      <b>MM价: ￥<%= @goods["sale_price"] %></b></p>
+      <b>mm价: ￥<%= @goods["sale_price"] %></b>
+    </p>
     <p class="go-order">
-      <button class="button pink">点击体验试穿</button>
+      <button id='button' data-src="<%= @current_id%>" class="button pink">点击体验试穿</button>
     </p>
   </div>
 
 </section>
-
 <!-- loading -->
 <div id='loading' class='hide'>
   <style type="text/css">
@@ -390,15 +394,173 @@
 
 <script>
 
+    var scroll;
+
     (function () {
 
         var click_event = DeviceInfo.browser == 'ie' ? 'click' : 'tap';
 
+        $(".trigger a").bind(click_event, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $this = $(this);
+            var goods_id = $this.data('src')
+            $.getJSON('/home/next?id=' + goods_id, function (data) {
+
+                var state = { //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
+                    title : "HTML 5 History API simple demo",
+                    url : "http://www.baidu.com"
+                };
+
+                var state = {title:'',url:window.location.href.split("?")[0]};
+                history.pushState(state, "HTML 5 History API simple demo", '?id='+goods_id);
+
+                var current_id = data.id
+                var name = data.name
+                var albums = data.goods_albums;
+                var sale_price = data.sale_price;
+                var old_price = data.old_price;
+                var photo_pic = data.shop.photo;
+                var photos = [];
+                photos.push(data.detail_photo);
+                for (var i = 0; i < albums.length; i++) {
+                    var photo = albums[i].photo;
+                    photos.push(photo);
+                }
+
+                var albums = $('#img_wrap');
+                var albums_str = "<div>";
+                var active_str = '';
+
+                for (var i = 0; i < photos.length; i++) {
+                    var obj = photos[i];
+                    albums_str += ' <a class="pic" data-href=' + obj + ' data-src=' + obj + '></a>';
+
+                    if (i < 8) {
+                        active_str += ' <li></li>';
+                    }
+                }
+
+                albums.attr("data-width", photos.length);
+
+                albums_str += "</div>"
+                albums.html(albums_str);
+
+                $('#slide').html(active_str);
+                $('#pro_name').text(name);
+                $('head title').text(name);
+
+                var price_html = '';
+
+                if (old_price != null) {
+                    price_html += '市场价:<del>￥' + old_price + '</del> ';
+                }
+                price_html += '<b>mm价: ￥' + sale_price + '</b>';
+                $('#price').html(price_html);
+
+                $('#button').attr("data-src", goods_id);
+
+                if(data.pre_id == null){
+                    if(!$('#trigger_1').hasClass('hide')){
+                        $('#trigger_1').addClass('hide')
+                    }
+                }else{
+                    if($('#trigger_1').hasClass('hide')){
+                        $('#trigger_1').removeClass('hide')
+                    }
+
+                    $('#trigger_1').attr("data-src", data.pre_id);
+                }
+
+                if(data.next_id == null){
+                    if(!$('#trigger_2').hasClass('hide')){
+                        $('#trigger_2').addClass('hide')
+                    }
+                }else{
+                    if($('#trigger_2').hasClass('hide')){
+                        $('#trigger_2').removeClass('hide')
+                    }
+                    $('#trigger_2').attr("data-src", data.next_id);
+                }
+
+
+
+
+
+                var direction = 'landscape';
+
+                // 初始化图片slide
+                var $wrapper = $('.img_wrap'),
+                        $slide = $('.slide'),
+                        length = $wrapper.data('width') * 1,
+                        width = $wrapper.width(),
+                        $body = $('body');
+
+
+                $slide.find('li:nth-child(1)').addClass('active');  //提示点初始化
+                $wrapper.children('div').css('width', width * length); //iscroll内层动态计算宽度
+
+                $body.bind('touchstart', function (e) {
+                    var point = e.touches[0],
+                            startPageX = point.pageX,
+                            startPageY = point.pageY;
+                    $body.bind('touchmove', function (e) {
+                        var point = e.touches[0],
+                                movePageX = point.pageX,
+                                movePageY = point.pageY;
+                        if (Math.abs(movePageX - startPageX) < Math.abs(movePageY - startPageY)) {
+                            direction = 'portrait';
+                        } else {
+                            direction = 'landscape';
+                        }
+                        $body.unbind('touchmove');
+                    });
+                });
+                // 销毁原来的
+                scroll.destroy();
+
+                scroll = new iScroll($wrapper[0], {
+                    x: (0),
+                    currPageX: 0,
+                    snap: true,
+                    momentum: false,
+                    vScroll: false,
+                    hScrollbar: false,
+                    onBeforeScrollStart: function () {
+                    },
+                    onBeforeScrollMove: function () {
+                        if (direction == 'portrait') {
+                            this._unbind('touchmove', window);
+                            this._unbind('touchend', window);
+                            this._unbind('touchcancel', window);
+                            return;
+                        }
+                    },
+                    onScrollMove: function (e) {
+                        if (this.dirY == 0) e.preventDefault();
+                    },
+                    onScrollEnd: function () {
+                        var ci = this.currPageX + 1;
+                        indicator_update(ci);
+                        load_img(ci);
+                    }
+                });
+                $wrapper.find('a').bind('itap', function () {
+                    var $this = $(this);
+                    window.location.href = $this.data('href');
+                });
+
+                load_img(1)
+
+
+            });
+        });
 //        商品详情点击事件
         $('.button').bind(click_event, function (e) {
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = '/home/order?id=<%= @current_id%>';
+            var id =  $(this).data('src');
+            window.location.href = '/home/order?id='+id;
         });
 
         var direction = 'landscape';
@@ -431,7 +593,7 @@
             });
         });
 
-        var scroll = new iScroll($wrapper[0], {
+        scroll = new iScroll($wrapper[0], {
             x: (0),
             currPageX: 0,
             snap: true,
@@ -481,10 +643,10 @@
             if (!$a.find('img')[0]) {
                 $a.html($loading.html());
                 var img = document.createElement('img');
-                if(DeviceInfo.width <= 640){
+                if (DeviceInfo.width <= 640) {
                     img.width = '180';
                     img.height = '240';
-                }else{
+                } else {
                     img.width = '210';
                     img.height = '280';
                 }
