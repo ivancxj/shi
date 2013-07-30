@@ -74,12 +74,14 @@ class HomeController < ApplicationController
     @next_id = get_next_goods_id(params[:id])
     goods['pre_id'] = @pre_id
     goods['next_id'] = @next_id
-    respond_to do |format|
-      format.html
-      format.json {
-        render :json => goods
-      }
-    end
+
+    render :json => goods
+    #respond_to do |format|
+    #  format.html
+    #  format.json {
+    #    render :json => goods
+    #  }
+    #end
   end
 
   def order

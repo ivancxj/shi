@@ -400,7 +400,7 @@
             e.stopPropagation();
             var $this = $(this);
             var goods_id = $this.data('src')
-            $.getJSON('/home/next.json?id=' + goods_id, function (data) {
+            $.getJSON('/home/next?id=' + goods_id, function (data) {
 
                 var current_id = data.id
                 var name = data.name
