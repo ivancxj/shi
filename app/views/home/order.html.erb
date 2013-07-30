@@ -275,9 +275,16 @@
 
         $(".button").bind('click', function () {
             var phone = $('#mobile').val();
+            var measure = [], color = [];
+            $('#color .selected').each(function(){
+                color.push($(this).text())
+            });
+            $('#measure .selected').each(function() {
+                measure.push($(this).text())
+            });
             if (phone.length > 0) {
 //                if(confirm("确认您的电话号码是" + phone)){
-                $.getJSON('/home/confirm?mobile=' + phone + '&goods_id=' + "<%= @id%>", function (result) {
+                $.getJSON('/home/confirm?mobile=' + phone + '&goods_id=' + "<%= @id%>&color=" + color + "&size=" + measure, function (result) {
 //                        alert(2)
                     if (result['result'] == 'ok') {
                         if (confirm("提交成功~,我们会马上联系您！")) {
