@@ -173,11 +173,11 @@
             if (DeviceInfo.width <= 640) {
                 left = -90;
                 width = '180';
-                height = '240';
+                height = '270';
             } else {
                 left = -112;
                 width = '240';
-                height = '320';
+                height = '360';
             }
 
             var style = [
@@ -208,7 +208,7 @@
   <div class="product_img">
     <div id='img_wrap' class="img_wrap" data-width="<%= (@goods["goods_albums"].length + 1) %>">
       <div>
-        <a class="pic" data-src="<%= @goods['normal_photo'] %>">
+        <a data-width='720' data-height='960' class="pic" data-src="<%= @goods['normal_photo'] %>">
         </a>
         <% @goods['goods_albums'].each do |album| %>
             <a data-width='<%= album['width'] %>' data-height='<%= album['height'] %>' class="pic" data-src="<%= album['photo'] %>">
@@ -433,7 +433,7 @@
 
 
                 var albums = $('#img_wrap');
-                var albums_str = '<div> <a class="pic" data-src=' + data.normal_photo + '></a>';
+                var albums_str = '<div> <a data-width="720" data-height="960" class="pic" data-src=' + data.normal_photo + '></a>';
                 var active_str = '<li></li>';
 
 
@@ -660,15 +660,16 @@
 
                     if (DeviceInfo.width <= 640) {
                         width = 180;
-                        height = 240;
+                        height = 270;
 
                     } else {
                         width = 240;
-                        height = 320;
+                        height = 360;
                     }
 
                     var tmp = (width * l)/w
-                    var mtop =  height-2*tmp;
+                    var mtop =  (height-tmp)/2;
+
                     if(mtop > 0){
                         img.style.height= (width * l)/w+'px';
                         img.style.marginTop = mtop+'px'
