@@ -208,7 +208,7 @@
   <div class="product_img">
     <div id='img_wrap' class="img_wrap" data-width="<%= (@goods["goods_albums"].length + 1) %>">
       <div>
-        <a class="pic" data-href="<%= @goods['detail_photo'] %>" data-src="<%= @goods['normal_photo'] %>">
+        <a class="pic" data-href="<%= @goods['normal_photo'] %>" data-src="<%= @goods['normal_photo'] %>">
         </a>
         <% @goods['goods_albums'].each do |album| %>
             <a data-href="<%= album['photo'] %>" class="pic" data-src="<%= album['photo'] %>">
