@@ -80,10 +80,15 @@
 
     .trigger a {
         width: 40px;
-        height: 40px;
-        top: 50%;
+        height: 200px;
+        top: 30%;
+        text-align: center;
         display: block;
         position: fixed;
+    }
+
+    .trigger a img {
+        margin-top: 60px;
     }
 
     .trigger .prev {
@@ -171,8 +176,8 @@
                 height = '240';
             } else {
                 left = -112;
-                width = '210';
-                height = '280';
+                width = '240';
+                height = '320';
             }
 
             var style = [
@@ -255,10 +260,10 @@
     <p id='price' class="price">
       <% if @goods["old_price"] %>
           市场价:
-          <del>￥<%= @goods["old_price"] %></del>
+          <del>￥<%= @goods["old_price"].to_i %></del>
       <% end %>
 
-      <b>mm价: ￥<%= @goods["sale_price"] %></b>
+      <b>mm价: ￥<%= @goods["sale_price"].to_i %></b>
     </p>
     <p class="go-order">
       <button id='button' data-src="<%= @current_id%>" class="button pink">点击体验试穿</button>
@@ -449,14 +454,14 @@
 
                 $('#slide').html(active_str);
                 $('#pro_name').text(name);
-                $('head title').text(name);
+                $('head title').text('<%= Setting.app_name%>-'+name);
 
                 var price_html = '';
 
                 if (old_price != null) {
-                    price_html += '市场价:<del>￥' + old_price + '</del> ';
+                    price_html += '市场价:<del>￥' +Math.floor(old_price)  + '</del> ';
                 }
-                price_html += '<b>mm价: ￥' + sale_price + '</b>';
+                price_html += '<b>mm价: ￥' + Math.floor(sale_price) + '</b>';
                 $('#price').html(price_html);
 
                 $('#button').attr("data-src", goods_id);
@@ -648,8 +653,8 @@
                     img.width = '180';
                     img.height = '240';
                 } else {
-                    img.width = '210';
-                    img.height = '280';
+                    img.width = '240';
+                    img.height = '320';
                 }
 
                 $(img).bind('load',function () {

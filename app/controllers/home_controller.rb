@@ -41,12 +41,29 @@ class HomeController < ApplicationController
 
     # 当前商品id
     @current_id = params[:id]
-    resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => true}
-    @goods=ActiveSupport::JSON.decode(resp.body)
+    cache_key = "web_detail?id=#{params[:id]}"
+
+    result = nil
+    if Rails.env.production?
+      result = redis_cache_get(cache_key)
+    end
+
+    @goods = nil
+    if result
+      @goods = ActiveSupport::JSON.decode(result)
+    else
+      resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => true}
+      @goods=ActiveSupport::JSON.decode(resp.body)
+      if Rails.env.production?
+        redis_cache_set(cache_key,resp.body,2.hours)
+      end
+    end
 
     if @goods.present?
       set_seo_meta(@goods['name'])
     end
+
+
 
     # 获取下/上一个商品的 id
 
@@ -62,12 +79,27 @@ class HomeController < ApplicationController
   end
 
   def next
-    p params[:id]
-    resp=shiyi_conn3.get '/api/v2/goods/detail', {:id => params[:id] || 946, :is_wifi => true}
 
-    goods=ActiveSupport::JSON.decode(resp.body)
+    cache_key = "web_detail?id=#{params[:id]}"
 
-    if @goods.present?
+    result = nil
+    if Rails.env.production?
+      result = redis_cache_get(cache_key)
+    end
+
+    goods = nil
+    if result
+      goods = ActiveSupport::JSON.decode(result)
+    else
+      resp=shiyi_conn3.get '/api/v2/goods/detail', {:id => params[:id] || 946, :is_wifi => true}
+      goods=ActiveSupport::JSON.decode(resp.body)
+      if Rails.env.production?
+        redis_cache_set(cache_key,resp.body,2.hours)
+      end
+
+    end
+
+    if goods.present?
       set_seo_meta(goods['name'])
     end
     @pre_id = get_pre_goods_id(params[:id])
