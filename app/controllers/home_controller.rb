@@ -43,7 +43,10 @@ class HomeController < ApplicationController
     @current_id = params[:id]
     cache_key = "web_detail?id=#{params[:id]}"
 
-    result = redis_cache_get(cache_key)
+    result = nil
+    if Rails.env.production?
+      result = redis_cache_get(cache_key)
+    end
 
     @goods = nil
     if result
@@ -51,7 +54,9 @@ class HomeController < ApplicationController
     else
       resp=shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => true}
       @goods=ActiveSupport::JSON.decode(resp.body)
-      redis_cache_set(cache_key,resp.body,2.hours)
+      if Rails.env.production?
+        redis_cache_set(cache_key,resp.body,2.hours)
+      end
     end
 
     if @goods.present?
@@ -77,7 +82,10 @@ class HomeController < ApplicationController
 
     cache_key = "web_detail?id=#{params[:id]}"
 
-    result = redis_cache_get(cache_key)
+    result = nil
+    if Rails.env.production?
+      result = redis_cache_get(cache_key)
+    end
 
     goods = nil
     if result
@@ -85,7 +93,10 @@ class HomeController < ApplicationController
     else
       resp=shiyi_conn3.get '/api/v2/goods/detail', {:id => params[:id] || 946, :is_wifi => true}
       goods=ActiveSupport::JSON.decode(resp.body)
-      redis_cache_set(cache_key,resp.body,2.hours)
+      if Rails.env.production?
+        redis_cache_set(cache_key,resp.body,2.hours)
+      end
+
     end
 
     if goods.present?
