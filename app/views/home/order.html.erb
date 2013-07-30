@@ -280,11 +280,11 @@
                 $.getJSON('/home/confirm?mobile=' + phone + '&goods_id=' + "<%= @id%>", function (result) {
 //                        alert(2)
                     if (result['result'] == 'ok') {
-                        if (confirm("提交成功~,我们会马上联系您！")) {
-                            history.back()
-                        }
-//                        alert("提交成功~,我们会马上联系您！")
-//                        history.back()
+//                        if (confirm("提交成功~,我们会马上联系您！")) {
+//                            history.back()
+//                        }
+                        alert("提交成功~,我们会马上联系您！")
+                        history.back()
 //                            if(alert("提交成功~")){
 //                                window.close();
 //                            }
