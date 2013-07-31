@@ -260,8 +260,8 @@ header{
     z-index: 1;
 }
 .nav_body > a{
-    height: 45px;
-    line-height: 45px;
+    height: 37px;
+    line-height: 37px;
     position: relative;
     box-shadow: 0 1px 0 #efefef;
     -webkit-box-shadow: 0 1px 0 #efefef;
