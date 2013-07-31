@@ -284,12 +284,12 @@ header{
     background-size: 16px 8px;
 }
 
-.nav_home span{
-    width:17px;
-    height: 20px;
-    background: url(/assets/home.png) no-repeat;
-    background-size: 100%;
-}
+/*.nav_home span{*/
+    /*width:17px;*/
+    /*height: 20px;*/
+    /*background: url(/assets/home.png) no-repeat;*/
+    /*background-size: 100%;*/
+/*}*/
 
 .nav_body > a > div > span{
     position: absolute;

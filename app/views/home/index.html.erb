@@ -27,13 +27,13 @@
     .slide_bar {
         position: relative;
         width: 100%;
-        padding: 6px 0;
+        /*padding: 6px 0;*/
         overflow: hidden;
         box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
         -webkit-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
         -moz-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
-        margin: 7px 0 2px;
-        margin-bottom: 40px;
+        /*margin: 0px 0 2px;*/
+        margin-bottom: 30px;
         overflow: hidden;
     }
 
@@ -79,45 +79,85 @@
         float: left;
         border-right: 5px solid #F0F0F0;
     }
+
+    #jqt > * {
+        position: absolute;
+        display: -webkit-box;
+        display: box;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+        -webkit-box-flex: 1;
+        box-flex: 1;
+    }
+
+    #jqt.touchscroll {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #jqt.touchscroll > * {
+        height: 100%;
+    }
+
+    #jqt.touchscroll .scroll {
+        position: relative;
+        -webkit-box-flex: 1;
+        box-flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 </style>
 
+<div id="jqt" class="supports3d touchscroll">
+  <div>
+    <header>
+      <div class="navigation"></div>
 
-<header>
-  <div class="navigation"></div>
-
-  <div class="title"><%= Setting.app_name%></div>
-</header>
-<div class="main">
-  <div class="slide_bar">
-    <!-- 广告-->
-    <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
-      <a class="slide_width slide_height">
-        <img class="slide_width slide_height" src="<%= asset_path('d1.jpg') %>">
-      </a>
-    </div>
-    <!--品牌说明-->
-    <div class="ppsh">
-      <h2><strong>先试再说</strong><em></em><span>以下品牌支持宁波市区内免费送上门试穿</span></h2>
-    </div>
-    <!--品牌说明end-->
-    <!-- 品牌列表-->
-    <% get_brand.each do |key, value| %>
-        <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
-          <a href="/home/list?id=<%= key %>" class="slide_width2 slide_height2">
-            <img class="slide_width2 slide_height2" src="<%= asset_path("#{value[0]}") %>">
+      <div class="title"><%= Setting.app_name %></div>
+    </header>
+    <div class="main scroll">
+      <div class="slide_bar">
+        <!-- 广告-->
+        <div style="overflow: hidden;" class="slide_width slide_height scroll_box">
+          <a class="slide_width slide_height">
+            <img class="slide_width slide_height" src="<%= asset_path('d1.jpg') %>">
           </a>
         </div>
-    <% end %>
+        <!--品牌说明-->
+        <div class="ppsh">
+          <h2><strong>先试再说</strong><em></em><span>以下品牌支持宁波市区内免费送上门试穿</span></h2>
+        </div>
+        <!--品牌说明end-->
+        <!-- 品牌列表-->
+        <% get_brand.each do |key, value| %>
+            <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
+              <a href="/home/list?id=<%= key %>" class="slide_width2 slide_height2">
+                <img class="slide_width2 slide_height2" src="<%= asset_path("#{value[0]}") %>">
+              </a>
+            </div>
+        <% end %>
+
+      </div>
+
+      <footer style="height:52px">
+        <div>安装手机客户端 获得最新款品牌信息</div>
+        <p>© 2013-试衣mm</p>
+
+        <p><a href="http://d.shiyimm.com">android客户端</a></p>
+
+        <p><a href="http://itunes.apple.com/cn/app/id655655105">iphone客户端</a></p>
+      </footer>
+
+
+    </div>
 
   </div>
-
 </div>
 
-<footer style="height:52px">
-  <div>安装手机客户端 获得最新款品牌信息</div>
-  <p>© 2013-试衣mm</p>
-
-  <p><a href="http://d.shiyimm.com">android客户端</a></p>
-
-  <p><a href="http://itunes.apple.com/cn/app/id655655105">iphone客户端</a></p>
-</footer>
+<script>
+    $body = $('#jqt')
+    $body.css('minHeight', 1000);
+    scrollTo(0, 0);
+    var bodyHeight = window.innerHeight;
+    $body.css('minHeight', bodyHeight);
+</script>
