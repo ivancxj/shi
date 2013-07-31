@@ -4,7 +4,7 @@ module ApplicationHelper
   # 首页上展示的品牌 ids
   def get_brand
     array={
-        '240'=>['1.jpg','COCO DEAL 可可迪尔'],
+        '240'=>['1.jpg','COCO DEAL'],
 
         '217'=>['2.jpg', 'five plus'],
         '229'=>['13.jpg', 'GOELIA 歌莉娅'],
