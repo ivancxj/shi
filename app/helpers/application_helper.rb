@@ -4,11 +4,11 @@ module ApplicationHelper
   # 首页上展示的品牌 ids
   def get_brand
     array={
-        #'240'=>%w[,COCO DEA 可可迪尔],
+        '240'=>['1.jpg','COCO DEAL 可可迪尔'],
 
         '217'=>['2.jpg', 'five plus'],
         '229'=>['13.jpg', 'GOELIA 歌莉娅'],
-        #'148'=>['9.jpg', 'H&M'],
+        '245'=>['9.jpg', '诗凡黎'],
         '235'=>['8.jpg', 'LILY'],
 
         '238'=>['5.jpg', 'MANGO'],
@@ -16,7 +16,7 @@ module ApplicationHelper
         '221'=>['7.jpg', 'OCHIRLY 欧时力'],
         '237'=>['6.jpg', 'ONLY'],
 
-        #'75'=>['1.jpg', 'UNIQLO 优衣库'],
+        '242'=>['14.jpg', 'HPLY 荷比丽'],
         '239'=>['10.jpg', 'VERO MODA'],
         '232'=>['11.jpg', 'ZARA'],
         '241'=>['12.jpg', 'EIFINI 伊芙丽'],

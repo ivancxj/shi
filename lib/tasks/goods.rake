@@ -17,7 +17,7 @@ namespace :goods do
     #get_ids.each do |k,v|
     #  ids << k.to_i
     #end
-    ids = [217, 229, 235, 238, 236, 221, 237, 239, 232, 241, 233]
+    ids = [240,217, 229,245,235, 238, 236, 221, 237,242, 239, 232, 241, 233]
     arr = []
     ids.each do |id|
       page = 1

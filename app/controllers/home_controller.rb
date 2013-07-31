@@ -118,8 +118,24 @@ class HomeController < ApplicationController
 
   def order
     @id = params[:id]
-    resp = shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
-    goods = ActiveSupport::JSON.decode(resp.body)
+    cache_key = "web_detail?id=#{params[:id]}"
+
+    result = nil
+    if Rails.env.production?
+      result = redis_cache_get(cache_key)
+    end
+
+    goods = nil
+    if result
+      goods = ActiveSupport::JSON.decode(result)
+    else
+      resp = shiyi_conn2.get '/api/v2/goods/detail', {:id => params[:id], :is_wifi => false}
+      goods = ActiveSupport::JSON.decode(resp.body)
+      if Rails.env.production?
+        redis_cache_set(cache_key,resp.body,2.hours)
+      end
+    end
+
     if goods
       @color = Array.new;
       @measure = Hash.new;
