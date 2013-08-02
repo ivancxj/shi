@@ -52,9 +52,11 @@ class HomeController < ApplicationController
     if Rails.env.production?
       result = redis_cache_get(cache_key)
     end
-    #if(white_ips? request.remote_ip)
-    #  CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => true})
-    #end
+
+    if(white_ips? request.remote_ip)
+      CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => true})
+    end
+
     @goods = nil
     if result
       @goods = ActiveSupport::JSON.decode(result)
@@ -94,9 +96,9 @@ class HomeController < ApplicationController
       result = redis_cache_get(cache_key)
     end
 
-    #if(white_ips? request.remote_ip)
-    #  CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => false})
-    #end
+    if(white_ips? request.remote_ip)
+      CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => false})
+    end
 
     goods = nil
     if result
