@@ -21,9 +21,9 @@ class HomeController < ApplicationController
       redirect_to(:action => 'index')
     end
 
-    #if(white_ips? request.remote_ip)
-    #  CountList.create({:brand_id => params[:id],:ip => request.remote_ip})
-    #end
+    if(white_ips? request.remote_ip)
+      CountList.create({:brand_id => params[:id],:ip => request.remote_ip})
+    end
 
     resp=shiyi_conn.get '/api/v2/goods/brand_list', {:brand_id => @id, :page => @page, :per_page => 14, :is_wifi => false}
     @goods_list=ActiveSupport::JSON.decode(resp.body)
@@ -53,7 +53,7 @@ class HomeController < ApplicationController
       result = redis_cache_get(cache_key)
     end
     #if(white_ips? request.remote_ip)
-    #  CountDetail.create({:id => params[:id],:ip => request.remote_ip,:direct => true})
+    #  CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => true})
     #end
     @goods = nil
     if result
@@ -95,7 +95,7 @@ class HomeController < ApplicationController
     end
 
     #if(white_ips? request.remote_ip)
-    #  CountDetail.create({:id => params[:id],:ip => request.remote_ip,:direct => false})
+    #  CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => false})
     #end
 
     goods = nil
