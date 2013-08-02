@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CreateCountDetail < ActiveRecord::Migration
   def change
     create_table :count_details do |t|
