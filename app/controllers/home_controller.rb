@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   # 首页
   def index
-    p request.remote_ip
+    #p request.remote_ip
   end
 
   # 品牌下的商品列表
@@ -20,6 +20,11 @@ class HomeController < ApplicationController
     if @id.blank?
       redirect_to(:action => 'index')
     end
+
+    if(white_ips? request.remote_ip)
+      CountList.create({:brand_id => params[:id],:ip => request.remote_ip})
+    end
+
     resp=shiyi_conn.get '/api/v2/goods/brand_list', {:brand_id => @id, :page => @page, :per_page => 14, :is_wifi => false}
     @goods_list=ActiveSupport::JSON.decode(resp.body)
 
@@ -47,7 +52,9 @@ class HomeController < ApplicationController
     if Rails.env.production?
       result = redis_cache_get(cache_key)
     end
-
+    if(white_ips? request.remote_ip)
+      CountDetail.create({:id => params[:id],:ip => request.remote_ip,:direct => true})
+    end
     @goods = nil
     if result
       @goods = ActiveSupport::JSON.decode(result)
@@ -85,6 +92,10 @@ class HomeController < ApplicationController
     result = nil
     if Rails.env.production?
       result = redis_cache_get(cache_key)
+    end
+
+    if(white_ips? request.remote_ip)
+      CountDetail.create({:id => params[:id],:ip => request.remote_ip,:direct => false})
     end
 
     goods = nil
