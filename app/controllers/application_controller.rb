@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def white_ips?(ip)
-    black_ips = %w[125.114.9.172 60.179.186.236]
-    if (black_ips.include? ip)
-      false
-    else
-      true
-    end
+    #black_ips = %w[125.114.9.172 60.179.186.236]
+    #if (black_ips.include? ip)
+    #  false
+    #else
+    #  true
+    #end
 
     true
 
