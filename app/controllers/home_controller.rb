@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   # 首页
   def index
-    # 清楚 商品ids
+    p request.remote_ip
   end
 
   # 品牌下的商品列表
@@ -151,7 +151,7 @@ class HomeController < ApplicationController
         end
         @measure["#{@color[index]}"] = ms
       end
-      p @measure
+      #p @measure
       @goods_name = goods['name']
     end
   end
@@ -169,7 +169,7 @@ class HomeController < ApplicationController
     #params[:mobile] = '13958025410'
     resp=shiyi_conn4.post '/api/v2/order/simple_order', {:goods_id => params[:goods_id], :mobile => params[:mobile], :color => params[:color], :size => params[:size]}
     @result=ActiveSupport::JSON.decode(resp.body)
-    p @result
+    #p @result
 
     render :json => @result
 

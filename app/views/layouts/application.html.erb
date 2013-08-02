@@ -2,50 +2,55 @@
 <html>
 <head>
   <%= render_page_title %>
-  <meta name="keywords" content="<%= @meta_keywords %>" />
-  <meta name="description" content="<%= @meta_description %>" />
-  <meta charset='utf-8' />
+  <meta name="keywords" content="<%= @meta_keywords %>"/>
+  <meta name="description" content="<%= @meta_description %>"/>
+  <meta charset='utf-8'/>
   <% if mobile? %>
       <!--%= stylesheet_link_tag "mobile" %-->
       <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta content='True' name='HandheldFriendly' />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-      <link rel="apple-touch-icon-precomposed" href="<%= asset_path('ios-icon.png') %>" />
+      <meta content='True' name='HandheldFriendly'/>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+      <link rel="apple-touch-icon-precomposed" href="<%= asset_path('ios-icon.png') %>"/>
   <% end %>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= controller_stylesheet_link_tag %>
   <%= javascript_include_tag 'application' %>
   <%= controller_javascript_include_tag %>
-  <link rel="shortcut icon" href="<%= asset_path('small_logo.png') %>" />
+  <link rel="shortcut icon" href="<%= asset_path('small_logo.png') %>"/>
   <%= csrf_meta_tags %>
-
-  <script>
-      var _hmt = _hmt || [];
-      (function() {
-          var hm = document.createElement("script");
-          hm.src = "//hm.baidu.com/hm.js?7a9b62bd777d095ae2dac454056df853";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-      })();
-  </script>
+  <% if Rails.env.production? %>
+      <script>
+          var _hmt = _hmt || [];
+          (function () {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?7a9b62bd777d095ae2dac454056df853";
+              var s = document.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
+  <% end %>
 </head>
 <body>
 
 <%= yield %>
 
-<script type="text/javascript">
+<% if Rails.env.production? %>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-42561403-1']);
+        _gaq.push(['_trackPageview']);
 
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-42561403-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-</script>
+<% end %>
 
 </body>
 </html>
