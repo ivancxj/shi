@@ -101,7 +101,7 @@
     </div>
     <!--品牌说明end-->
     <!-- 品牌列表-->
-    <% get_brand.each do |key, value| %>
+    <% IndexBrand.get_brand.each do |key, value| %>
         <div style="overflow: hidden;" class="slide_width2 slide_height2 scroll_box">
           <a href="/home/list?id=<%= key %>" class="slide_width2 slide_height2">
             <img class="slide_width2 slide_height2" src="<%= asset_path("#{value[0]}") %>">

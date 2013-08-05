@@ -6,7 +6,7 @@
         <!--<span></span>-->
         <p>首页</p></div>
     </a>
-    <% get_brand.each do |key, value| %>
+    <% IndexBrand.get_brand.each do |key, value| %>
         <a data-href="/home/list?id=<%= key %>"class="nav_enter">
           <div class="nav_home">
             <!--<span></span>-->

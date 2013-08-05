@@ -1,4 +1,5 @@
 #encoding:utf-8
+require 'index_brand'
 namespace :goods do
   def conn
     conn = Faraday.new(:url => 'http://api.shiyimm.com') do |faraday|
@@ -9,19 +10,13 @@ namespace :goods do
     conn
   end
 
-  desc '获取全部goods id'
+  desc '获取全部要显示的 goods id'
 
-  task :get do
-    #ids2 = ids
-    #ids = []
-    #get_ids.each do |k,v|
-    #  ids << k.to_i
-    #end
-    ids = [240,217, 229,245,235, 238, 236, 221, 237,242, 239, 232, 241, 233]
+  task :all do
     arr = []
-    ids.each do |id|
+    IndexBrand.get_brand.each do |id,v|
       page = 1
-      p id
+      puts id
       while true do
         resp=conn.get '/api/v2/goods/brand_list', {:brand_id => id, :page => page, :is_wifi => false}
         @goods_list=ActiveSupport::JSON.decode(resp.body)
@@ -36,7 +31,10 @@ namespace :goods do
 
       end
     end
-    p '====='
+
+    puts '====='
+    puts '数量='+arr.count.to_s
+    # puts 会换行
     p arr
   end
 
