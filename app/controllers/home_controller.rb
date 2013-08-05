@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   # 首页
   def index
-    #p request.remote_ip
+    #p request.remote_ip.encode('utf-8')
   end
 
   # 品牌下的商品列表
@@ -21,8 +21,8 @@ class HomeController < ApplicationController
       redirect_to(:action => 'index')
     end
 
-    if(white_ips? request.remote_ip)
-      CountList.create({:brand_id => params[:id],:ip => request.remote_ip})
+    if(white_ips? request.remote_ip.encode('utf-8'))
+      CountList.create({:brand_id => params[:id],:ip => request.remote_ip.encode('utf-8')})
     end
 
     resp=shiyi_conn.get '/api/v2/goods/brand_list', {:brand_id => @id, :page => @page, :per_page => 14, :is_wifi => false}
@@ -53,8 +53,8 @@ class HomeController < ApplicationController
       result = redis_cache_get(cache_key)
     end
 
-    if(white_ips? request.remote_ip)
-      CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => true})
+    if(white_ips? request.remote_ip.encode('utf-8'))
+      CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip.encode('utf-8'),:direct => true})
     end
 
     @goods = nil
@@ -96,8 +96,8 @@ class HomeController < ApplicationController
       result = redis_cache_get(cache_key)
     end
 
-    if(white_ips? request.remote_ip)
-      CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip,:direct => false})
+    if(white_ips? request.remote_ip.encode('utf-8'))
+      CountDetail.create({:goods_id => params[:id],:ip => request.remote_ip.encode('utf-8'),:direct => false})
     end
 
     goods = nil
